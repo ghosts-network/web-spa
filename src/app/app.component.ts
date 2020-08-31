@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {PublicationService} from "./publications.service";
 
 interface Publication {
   content: string
@@ -15,21 +16,28 @@ export class AppComponent {
 
   form: FormGroup;
 
-  constructor(fb: FormBuilder) {
-    this.news = [
-      { content: 'My first news' },
-      { content: 'My second news' },
-      { content: 'My third news' }
-    ];
+  constructor(fb: FormBuilder, private publicationService: PublicationService) {
+    this.news = [];
 
     this.form = fb.group({
       'content': ['', [Validators.required]]
     });
+
+    this.loadPublications();
   }
 
   public sendPublication(): void {
-    console.log(this.form.get('content').value);
-    this.news.push({ content: this.form.get('content').value });
-    this.form.reset();
+    this.publicationService.insert({ content: this.form.get('content').value })
+      .subscribe(resp => {
+        console.log(resp);
+        this.form.reset();
+        this.loadPublications();
+      });
+  }
+
+  public loadPublications() {
+    this.publicationService.search().subscribe(resp => {
+      this.news = resp;
+    });
   }
 }

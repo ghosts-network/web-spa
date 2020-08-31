@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ghost-network-spa"
+    }
+  },
+  "defaultProject": "ghost-network-spa",
+  "cli": {
+    "analytics": false
+  }
 }
