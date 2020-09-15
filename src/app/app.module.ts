@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import {PublicationService} from "./publications.service";
 import {HttpClientModule} from "@angular/common/http";
+import {ApiModule} from "./shared/gateway-api";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ApiModule
   ],
   providers: [PublicationService],
   bootstrap: [AppComponent]

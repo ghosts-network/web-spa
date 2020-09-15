@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PublicationService} from "./publications.service";
+import {NewsFeedPublication, NewsFeedService} from "./shared/gateway-api";
 
 interface Publication {
   content: string
@@ -12,11 +13,11 @@ interface Publication {
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
-  news: Publication[];
+  news: NewsFeedPublication[];
 
   form: FormGroup;
 
-  constructor(fb: FormBuilder, private publicationService: PublicationService) {
+  constructor(fb: FormBuilder, private publicationService: PublicationService, private newsFeedService: NewsFeedService) {
     this.news = [];
 
     this.form = fb.group({
@@ -36,8 +37,8 @@ export class AppComponent {
   }
 
   public loadPublications() {
-    this.publicationService.search().subscribe(resp => {
+    this.newsFeedService.newsFeedGet().subscribe(resp => {
       this.news = resp;
-    });
+    })
   }
 }
