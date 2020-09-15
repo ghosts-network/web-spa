@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {PublicationService} from "./publications.service";
-import {NewsFeedPublication, NewsFeedService} from "./shared/gateway-api";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {PublicationService} from './providers/services/publications.service';
+import {NewsFeedPublication, NewsFeedService} from './modules/gateway-api';
 
 interface Publication {
-  content: string
+  content: string;
 }
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent {
     this.news = [];
 
     this.form = fb.group({
-      'content': ['', [Validators.required]]
+      content: ['', [Validators.required]]
     });
 
     this.loadPublications();
@@ -36,9 +36,9 @@ export class AppComponent {
       });
   }
 
-  public loadPublications() {
+  public loadPublications(): void {
     this.newsFeedService.newsFeedGet().subscribe(resp => {
       this.news = resp;
-    })
+    });
   }
 }
