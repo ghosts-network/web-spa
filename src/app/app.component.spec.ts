@@ -23,7 +23,6 @@ describe('AppComponent', () => {
   it(`should have as title 'ghost-network-spa'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ghost-network-spa');
   });
 
   it('should render title', () => {
