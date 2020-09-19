@@ -8,9 +8,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { NewsListComponent } from './components/news-list/news-list.component';
+import { NewsItemComponent } from './components/news-item/news-item.component';
 
 @NgModule({
-  declarations: [HomePage, NewsFormComponent],
+  declarations: [HomePage, NewsFormComponent, NewsListComponent, NewsItemComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
