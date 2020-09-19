@@ -1,4 +1,21 @@
-openapi-generator generate -i http://localhost:5000/swagger/v1/swagger.json \
--g typescript-angular \
--o ./src/app/shared/gateway-api
+services:
+  publications:
+    image: docker.pkg.github.com/gh-network/publications/ghostnetwork-publications:latest
+    ports:
+      - "5300:80"
+    environment:
+      - MONGO_ADDRESS=db:27017
+      - ASPNETCORE_ENVIRONMENT=Development
 
+  gateway:
+    image: docker.pkg.github.com/gh-network/gateway/ghostnetwork-gateway:latest
+    ports:
+      - "5000:80"
+    environment:
+      - PUBLICATIONS_ADDRESS=http://publications
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  db:
+    image: mvertes/alpine-mongo
+    ports:
+      - "27017:27017"
