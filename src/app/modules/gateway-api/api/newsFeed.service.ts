@@ -133,9 +133,9 @@ export class NewsFeedService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public newsFeedPost(createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<NewsFeedPublication>>;
-    public newsFeedPost(createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<NewsFeedPublication>>>;
-    public newsFeedPost(createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<NewsFeedPublication>>>;
+    public newsFeedPost(createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<NewsFeedPublication>;
+    public newsFeedPost(createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<NewsFeedPublication>>;
+    public newsFeedPost(createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<NewsFeedPublication>>;
     public newsFeedPost(createNewsFeedPublication?: CreateNewsFeedPublication, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -171,7 +171,7 @@ export class NewsFeedService {
             responseType = 'text';
         }
 
-        return this.httpClient.post<Array<NewsFeedPublication>>(`${this.configuration.basePath}/NewsFeed`,
+        return this.httpClient.post<NewsFeedPublication>(`${this.configuration.basePath}/NewsFeed`,
             createNewsFeedPublication,
             {
                 responseType: <any>responseType,
