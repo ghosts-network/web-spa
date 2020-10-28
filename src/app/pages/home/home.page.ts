@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NewsFeedPublication, NewsFeedService} from '../../modules/gateway-api';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  public news: NewsFeedPublication[];
+
+  constructor(private newsFeedService: NewsFeedService) { }
 
   ngOnInit(): void {
+    this.loadPublications();
   }
 
+  public onPublished(publication: NewsFeedPublication): void {
+    this.loadPublications();
+  }
+
+  public loadPublications(): void {
+    this.newsFeedService.newsFeedGet().subscribe(resp => {
+      this.news = resp;
+    });
+  }
 }

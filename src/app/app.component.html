@@ -1,9 +1,1 @@
-<h1>News feed</h1>
-<form [formGroup]="form" (ngSubmit)="sendPublication()">
-  <textarea formControlName="content"></textarea>
-  <button>Send</button>
-</form>
-<ul>
-  <li *ngFor="let n of news">{{ n.content }}</li>
-</ul>
 <router-outlet></router-outlet>
