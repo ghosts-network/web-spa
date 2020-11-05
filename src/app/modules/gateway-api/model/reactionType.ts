@@ -9,14 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { CommentsShort } from './commentsShort';
-import { ReactionShort } from './reactionShort';
 
 
-export interface NewsFeedPublication { 
-    readonly id?: string | null;
-    readonly content?: string | null;
-    comments?: CommentsShort;
-    reactions?: ReactionShort;
-}
+export type ReactionType = 0 | 1 | 2 | 3 | 4 | 5;
+
+export const ReactionType = {
+    NUMBER_0: 0 as ReactionType,
+    NUMBER_1: 1 as ReactionType,
+    NUMBER_2: 2 as ReactionType,
+    NUMBER_3: 3 as ReactionType,
+    NUMBER_4: 4 as ReactionType,
+    NUMBER_5: 5 as ReactionType
+};
 

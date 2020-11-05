@@ -9,14 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { CommentsShort } from './commentsShort';
-import { ReactionShort } from './reactionShort';
 
 
-export interface NewsFeedPublication { 
+export interface PublicationComment { 
     readonly id?: string | null;
     readonly content?: string | null;
-    comments?: CommentsShort;
-    reactions?: ReactionShort;
 }
 

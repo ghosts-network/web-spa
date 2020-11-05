@@ -1,1 +1,5 @@
 <p>{{publication.content}}</p>
+<p *ngFor="let comment of publication.comments.topComments">
+    {{comment.content}}
+</p>
+<p>{{publication.comments.totalCount}}</p>
