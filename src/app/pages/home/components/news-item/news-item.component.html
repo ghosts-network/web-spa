@@ -3,3 +3,11 @@
     {{comment.content}}
 </p>
 <p>{{publication.comments.totalCount}}</p>
+
+<form [formGroup]="form" (ngSubmit)="formSubmitted()">
+  <mat-form-field appearance="fill">
+    <mat-label>Textarea</mat-label>
+    <textarea formControlName="content" matInput></textarea>
+  </mat-form-field>
+  <button type="submit" mat-flat-button color="primary">Primary</button>
+</form>
