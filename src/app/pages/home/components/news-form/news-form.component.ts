@@ -5,7 +5,7 @@ import {NewsFeedPublication, NewsFeedService} from '../../../../modules/gateway-
 @Component({
   selector: 'app-news-form',
   templateUrl: './news-form.component.html',
-  styleUrls: ['./news-form.component.sass']
+  styleUrls: ['./news-form.component.scss']
 })
 export class NewsFormComponent implements OnInit {
 

@@ -4,7 +4,7 @@ import {NewsFeedPublication, NewsFeedService} from '../../modules/gateway-api';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
-  styleUrls: ['./home.page.sass']
+  styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
 
@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
     this.loadPublications();
   }
 
-  public loadPublications(): void {
+  public loadPublications = (): void => {
     this.newsFeedService.newsFeedGet().subscribe(resp => {
       this.news = resp;
     });

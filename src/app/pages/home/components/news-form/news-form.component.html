@@ -1,7 +1,7 @@
-<form [formGroup]="form" (ngSubmit)="formSubmitted()">
-  <mat-form-field appearance="fill">
-    <mat-label>Textarea</mat-label>
-    <textarea formControlName="content" matInput></textarea>
+<form class="news-form" [formGroup]="form" (ngSubmit)="formSubmitted()">
+  <mat-form-field class="news-form-input" appearance="fill">
+    <mat-label>Start a post</mat-label>
+    <input matInput formControlName="content">
   </mat-form-field>
-  <button type="submit" mat-flat-button color="primary">Primary</button>
+  <button class="news-form-button" type="submit" mat-flat-button color="primary">Post</button>
 </form>
