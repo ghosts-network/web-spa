@@ -1,6 +1,6 @@
 <mat-card class="publication-card">
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
+    <div mat-card-avatar class=""></div>
     <mat-card-title>*Author Name</mat-card-title>
     <mat-card-subtitle>*Company maybe</mat-card-subtitle>
   </mat-card-header>
@@ -17,16 +17,12 @@
 
 <mat-card class="comments-card">
   <mat-card-content>
-    <p *ngFor="let comment of publication.comments.topComments">
-      {{comment.content}}
-    </p>
+    <ul>
+      <li *ngFor="let comment of publication.comments.topComments">
+        {{comment.content}}
+      </li>
+    </ul>
     <p>{{publication.comments.totalCount}}</p>
   </mat-card-content>
-  <form class="comments-form" [formGroup]="form" (ngSubmit)="formSubmitted()">
-    <mat-form-field class="comments-form-input" appearance="fill">
-      <mat-label>Leave a comment</mat-label>
-      <input matInput formControlName="content">
-    </mat-form-field>
-    <button class="comment-button" type="submit" mat-flat-button color="primary">Send</button>
-  </form>
+  <app-news-form-comments [publication]="publication" (published)="onPublished($event)"></app-news-form-comments>
 </mat-card>

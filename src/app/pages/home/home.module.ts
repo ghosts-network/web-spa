@@ -15,9 +15,10 @@ import { NewsListComponent } from './components/news-list/news-list.component';
 import { NewsItemComponent } from './components/news-item/news-item.component';
 import { HomePage } from './home.page';
 import { NewsFormComponent } from './components/news-form/news-form.component';
+import { NewsFormCommentsComponent } from './components/news-form-comments/news-form-comments.component';
 
 @NgModule({
-  declarations: [HomePage, NewsFormComponent, NewsListComponent, NewsItemComponent],
+  declarations: [HomePage, NewsFormComponent, NewsListComponent, NewsItemComponent, NewsFormCommentsComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

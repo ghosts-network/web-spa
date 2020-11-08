@@ -1,7 +1,5 @@
-import {Component, EventEmitter, Output, Input} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NewsFeedPublication, NewsFeedService} from '../../../../modules/gateway-api';
-import {HomePage} from '../../home.page';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {NewsFeedPublication} from '../../../../modules/gateway-api';
 
 @Component({
   selector: 'app-news-item',
@@ -9,34 +7,12 @@ import {HomePage} from '../../home.page';
   styleUrls: ['./news-item.component.scss']
 })
 export class NewsItemComponent {
-  public form: FormGroup;
 
   @Input()
   public publication: NewsFeedPublication;
   @Input()
-  public loadPublications: any;
-  @Output()
-  public published = new EventEmitter<NewsFeedPublication>();
+  public onPublished: any;
 
-  constructor(private fb: FormBuilder,
-              private newsFeedService: NewsFeedService) {
-    this.form = fb.group({
-      content: ['', [Validators.required]]
-    });
-  }
-
-  public formSubmitted(): void {
-    if (!this.form.valid) {
-      return;
-    }
-
-    this.newsFeedService.newsFeedPublicationIdCommentPost(
-      this.publication.id, {content: this.form.get('content').value})
-    .subscribe(resp => {
-      this.form.reset();
-      this.published.emit(resp);
-      this.loadPublications();
-    });
-  }
+  constructor() { }
 
 }

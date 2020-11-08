@@ -1,5 +1,5 @@
 <ul>
   <li *ngFor="let publication of news">
-    <app-news-item [publication]="publication" [loadPublications]="loadPublications"></app-news-item>
+    <app-news-item [publication]="publication" [onPublished]="onPublished"></app-news-item>
   </li>
 </ul>

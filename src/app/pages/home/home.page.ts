@@ -16,11 +16,11 @@ export class HomePage implements OnInit {
     this.loadPublications();
   }
 
-  public onPublished(publication: NewsFeedPublication): void {
+  public onPublished = (publication: NewsFeedPublication): void => {
     this.loadPublications();
   }
 
-  public loadPublications = (): void => {
+  public loadPublications(): void {
     this.newsFeedService.newsFeedGet().subscribe(resp => {
       this.news = resp;
     });
