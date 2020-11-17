@@ -10,6 +10,7 @@
       {{publication.content}}
     </p>
   </mat-card-content>
+  <mat-card-content><p>Total comments:  {{publication.comments.totalCount}}</p></mat-card-content>
   <mat-card-actions>
     <button mat-button>LIKE</button>
   </mat-card-actions>
@@ -18,11 +19,15 @@
 <mat-card class="comments-card">
   <mat-card-content>
     <ul>
-      <li *ngFor="let comment of publication.comments.topComments">
-        {{comment.content}}
+      <li class="li-comments" *ngFor="let comment of publication.comments.topComments">
+        <div>
+          {{comment.content}}
+        </div>
+        <button class="delete-comment" color="primary" mat-flat-button type="submit" (click)="deleteComment(comment)">Delete</button>
+        <hr>
       </li>
     </ul>
-    <p>{{publication.comments.totalCount}}</p>
+    <button color="primary" mat-flat-button type="submit" (click)="loadComments()">Load more</button>
   </mat-card-content>
-  <app-news-form-comments [publication]="publication" (published)="onPublished($event)"></app-news-form-comments>
+  <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
 </mat-card>

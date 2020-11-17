@@ -10,8 +10,6 @@ export class NewsListComponent {
 
   @Input()
   public news: NewsFeedPublication[];
-  @Input()
-  public onPublished: any;
 
   constructor() { }
 

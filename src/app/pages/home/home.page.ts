@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
     this.loadPublications();
   }
 
-  public onPublished = (publication: NewsFeedPublication): void => {
+  public onPublished(publication: NewsFeedPublication): void {
     this.loadPublications();
   }
 
