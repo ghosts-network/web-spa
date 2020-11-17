@@ -1,10 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {NewsFeedPublication} from '../../../../modules/gateway-api';
 
 @Component({
   selector: 'app-news-list',
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.sass']
+  styleUrls: ['./news-list.component.scss']
 })
 export class NewsListComponent {
 
