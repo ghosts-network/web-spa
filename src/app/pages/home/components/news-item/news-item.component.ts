@@ -11,7 +11,6 @@ export class NewsItemComponent {
   private take = 10;
   private skip = 3;
   private index: number;
-  buttonVisible = false;
 
   @Input()
   public publication: NewsFeedPublication;
