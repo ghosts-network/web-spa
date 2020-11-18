@@ -27,7 +27,7 @@
         <hr>
       </li>
     </ul>
-    <button color="primary" mat-flat-button type="submit" (click)="loadComments()">Load more</button>
+    <button color="primary" mat-flat-button type="submit" *ngIf="isShown" (click)="loadComments()">Load more</button>
   </mat-card-content>
   <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
 </mat-card>

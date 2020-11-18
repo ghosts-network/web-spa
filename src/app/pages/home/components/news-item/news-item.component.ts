@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../modules/gateway-api';
 
 @Component({
@@ -21,7 +21,7 @@ export class NewsItemComponent {
     this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, this.skip, this.take)
     .subscribe(resp => {
       this.publication.comments.topComments = this.publication.comments.topComments.concat(resp);
-      this.take += 10;
+      this.skip += 10;
     });
   }
 
@@ -29,7 +29,7 @@ export class NewsItemComponent {
     this.newsFeedService.newsFeedCommentIdCommentDelete(comment.id)
     .subscribe(resp => {
       this.publication.comments.totalCount -= 1;
-      this.index = this.publication.comments.topComments.indexOf(resp);
+      this.index = this.publication.comments.topComments.findIndex(x => x.id === comment.id);
       this.publication.comments.topComments.splice(this.index, 1);
     });
   }
@@ -40,5 +40,12 @@ export class NewsItemComponent {
       this.publication.comments.topComments = resp;
       this.publication.comments.totalCount += 1;
     });
+  }
+
+  public get isShown(): boolean {
+    if (this.publication.comments.totalCount === this.publication.comments.topComments.length){
+      return false;
+    }
+    return true;
   }
 }
