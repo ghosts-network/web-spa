@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  basePath: 'http://boberneprotiv.com:5000'
 };
