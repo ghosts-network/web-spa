@@ -21,7 +21,6 @@ export class NewsItemComponent {
     this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, this.skip, this.take)
     .subscribe(resp => {
       this.publication.comments.topComments = this.publication.comments.topComments.concat(resp);
-      this.take += 10;
       this.skip += 10;
     });
   }
