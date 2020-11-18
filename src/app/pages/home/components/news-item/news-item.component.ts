@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../modules/gateway-api';
 
 @Component({
@@ -6,7 +6,7 @@ import {NewsFeedPublication, NewsFeedService, PublicationComment} from '../../..
   templateUrl: './news-item.component.html',
   styleUrls: ['./news-item.component.scss']
 })
-export class NewsItemComponent implements OnInit {
+export class NewsItemComponent {
 
   private take = 10;
   private skip = 3;
@@ -17,10 +17,6 @@ export class NewsItemComponent implements OnInit {
   public publication: NewsFeedPublication;
 
   constructor(private newsFeedService: NewsFeedService) { }
-
-  ngOnInit(): void {
-    this.isShown.valueOf();
-  }
 
   public loadComments(): void {
     this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, this.skip, this.take)
