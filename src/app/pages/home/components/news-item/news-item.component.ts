@@ -19,7 +19,7 @@ export class NewsItemComponent implements OnInit {
   constructor(private newsFeedService: NewsFeedService) { }
 
   ngOnInit(): void {
-    this.isShown();
+    this.isShown.valueOf();
   }
 
   public loadComments(): void {
@@ -28,7 +28,7 @@ export class NewsItemComponent implements OnInit {
       this.publication.comments.topComments = this.publication.comments.topComments.concat(resp);
       this.take += 10;
       this.skip += 10;
-      this.isShown();
+      this.isShown.valueOf();
     });
   }
 
@@ -49,13 +49,10 @@ export class NewsItemComponent implements OnInit {
     });
   }
 
-  public isShown(): void {
-    if (this.publication.comments.totalCount > 3 ){
-      this.buttonVisible = true;
-    }
-
+  public get isShown(): boolean {
     if (this.publication.comments.totalCount === this.publication.comments.topComments.length){
-      this.buttonVisible = false;
+      return false;
     }
+    return true;
   }
 }
