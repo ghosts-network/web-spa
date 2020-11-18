@@ -24,7 +24,6 @@ export class NewsItemComponent {
       this.publication.comments.topComments = this.publication.comments.topComments.concat(resp);
       this.take += 10;
       this.skip += 10;
-      this.isShown.valueOf();
     });
   }
 
