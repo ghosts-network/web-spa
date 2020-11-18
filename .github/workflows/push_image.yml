@@ -5,7 +5,7 @@ on:
     branches:
       - master
 env:
-  IMAGE_NAME: gateway
+  IMAGE_NAME: spa
   DOCKER_HUB_OWNER: ghostsnetwork
 
 jobs:
