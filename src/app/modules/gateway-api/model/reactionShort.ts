@@ -13,7 +13,7 @@ import { ReactionType } from './reactionType';
 
 
 export interface ReactionShort { 
-    readonly reactions?: Array<ReactionType> | null;
-    readonly totalCount?: number;
+    reactions?: Array<ReactionType> | null;
+    totalCount?: number;
 }
 

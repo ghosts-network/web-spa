@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../modules/gateway-api';
+import {Component, Input} from '@angular/core';
+import {AddNewsFeedReaction, NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../modules/gateway-api';
 
 @Component({
   selector: 'app-news-item',
   templateUrl: './news-item.component.html',
   styleUrls: ['./news-item.component.scss']
 })
-export class NewsItemComponent implements OnInit {
+export class NewsItemComponent {
 
   private take = 10;
   private skip = 3;
@@ -17,17 +17,11 @@ export class NewsItemComponent implements OnInit {
 
   constructor(private newsFeedService: NewsFeedService) { }
 
-  ngOnInit(): void {
-    this.isShown.valueOf();
-  }
-
   public loadComments(): void {
     this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, this.skip, this.take)
     .subscribe(resp => {
       this.publication.comments.topComments = this.publication.comments.topComments.concat(resp);
-      this.take += 10;
       this.skip += 10;
-      this.isShown.valueOf();
     });
   }
 
@@ -52,7 +46,6 @@ export class NewsItemComponent implements OnInit {
     if (this.publication.comments.totalCount === this.publication.comments.topComments.length){
       return false;
     }
-
     return true;
   }
 }
