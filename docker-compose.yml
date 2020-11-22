@@ -37,3 +37,10 @@ services:
       - PUBLICATIONS_ADDRESS=http://publications
       - REACTIONS_ADDRESS=http://reactions
       - ASPNETCORE_ENVIRONMENT=Development
+
+  spa:
+    build: .
+    ports:
+      - "4200:80"
+    depends_on:
+      - gateway

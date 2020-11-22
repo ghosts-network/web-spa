@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {AddNewsFeedReaction, NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../modules/gateway-api';
 
+
 @Component({
   selector: 'app-news-item',
   templateUrl: './news-item.component.html',
