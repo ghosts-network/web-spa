@@ -10,10 +10,9 @@
       {{publication.content}}
     </p>
   </mat-card-content>
-  <mat-card-content><p>{{publication.reactions.reactions}} {{publication.reactions.totalCount}}</p> <p>Total comments:  {{publication.comments.totalCount}}</p></mat-card-content>
+  <mat-card-content><p>Reactions: {{publication.reactions.reactions}} {{publication.reactions.totalCount}}</p> <p>Total comments:  {{publication.comments.totalCount}}</p></mat-card-content>
   <mat-card-actions>
-    <app-reactions [publication]="publication"></app-reactions>
-    <button mat-button>LIKE</button>
+      <app-news-reactions [publication]="publication"></app-news-reactions>
   </mat-card-actions>
 </mat-card>
 

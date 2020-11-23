@@ -1,0 +1,11 @@
+<div class="reactions-div" [class.mat-elevation-z2]="true"  [hidden]="hide" (mouseleave)="hidden()">
+    <mat-card>
+        <button color="primary" mat-button type="submit" (click)="addReaction(0)">Like</button>
+        <button color="primary" mat-button type="submit" (click)="addReaction(1)">Love</button>
+        <button color="primary" mat-button type="submit" (click)="addReaction(2)">Haha</button>
+        <button color="primary" mat-button type="submit" (click)="addReaction(3)">Wow</button>
+        <button color="primary" mat-button type="submit" (click)="addReaction(4)">Sad</button>
+        <button color="primary" mat-button type="submit" (click)="addReaction(5)">Angry</button>
+    </mat-card>
+</div>
+<button mat-button type="submit" (click)="addReaction(0)" (mouseenter)="hidden()">Like</button>
