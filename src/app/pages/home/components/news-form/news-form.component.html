@@ -1,7 +1,13 @@
-<form class="news-form" [formGroup]="form" (ngSubmit)="formSubmitted()">
-  <mat-form-field class="news-form-input" appearance="fill">
-    <mat-label>Start a post</mat-label>
-    <input matInput formControlName="content">
-  </mat-form-field>
-  <button class="news-form-button" type="submit" mat-flat-button color="primary">Post</button>
+<form [formGroup]="form" (ngSubmit)="formSubmitted()">
+  <mat-card>
+    <mat-card-content>
+        <mat-form-field class="news-form-input" appearance="fill">
+          <mat-label>Start a post</mat-label>
+          <textarea matInput formControlName="content"></textarea>
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">Post</button>
+    </mat-card-actions>
+  </mat-card>
 </form>

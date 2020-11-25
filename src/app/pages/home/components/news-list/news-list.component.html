@@ -1,5 +1,3 @@
-<ul>
-  <li *ngFor="let publication of news">
-    <app-news-item [publication]="publication"></app-news-item>
-  </li>
-</ul>
+<div class="news-item" *ngFor="let publication of news">
+  <app-news-item [publication]="publication"></app-news-item>
+</div>
