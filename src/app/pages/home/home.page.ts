@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
 
   public loadPublications(): void {
     this.newsFeedService.newsFeedGet().subscribe(resp => {
-      this.news = resp;
+      this.news = resp.reverse();
     });
   }
 }
