@@ -11,11 +11,8 @@ import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../m
 export class ReactionsComponent {
 
   hide = true;
-  arr: number[];
 
-  constructor(private newsFeedService: NewsFeedService) {
-  this.arr = [0, 1];
-   }
+  constructor(private newsFeedService: NewsFeedService) { }
 
   @Input()
   public publication: NewsFeedPublication;
