@@ -1,4 +1,4 @@
-import { reactionsUrl } from './reactions-url';
+import { ReactionsUrl } from './reactions-url';
 import { Component, Input } from '@angular/core';
 import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../modules/gateway-api';
 
@@ -11,8 +11,11 @@ import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../m
 export class ReactionsComponent {
 
   hide = true;
+  arr: number[];
 
-  constructor(private newsFeedService: NewsFeedService) { }
+  constructor(private newsFeedService: NewsFeedService) {
+  this.arr = [0, 1];
+   }
 
   @Input()
   public publication: NewsFeedPublication;
@@ -20,11 +23,15 @@ export class ReactionsComponent {
   public addReaction(reaction: ReactionType): void {
     this.newsFeedService.newsFeedPublicationIdReactionPost(this.publication.id, {reaction})
     .subscribe(resp => {
+      if (!this.publication.reactions.reactions.includes(reaction)){
+        this.publication.reactions.reactions.push(reaction);
+      }
+      this.publication.reactions.totalCount += 1;
     });
   }
 
   public get replaceReaction(): string[] {
-    return this.publication.reactions.reactions.map((value) => reactionsUrl[value]);
+    return this.publication.reactions.reactions.map((value) => ReactionsUrl[value]);
   }
 
   public hidden(): void {

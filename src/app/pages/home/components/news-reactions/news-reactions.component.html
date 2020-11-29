@@ -1,6 +1,10 @@
 <div>
-    <span ><img src="{{replaceReaction}}">  Total: {{publication.reactions.totalCount}}</span>
-    <br>
+  <div>
+    <span *ngFor="let reactions of replaceReaction">
+      <img src="{{reactions}}">
+    </span>
+    <span>Total reactions: {{publication.reactions.totalCount}}</span>
+  </div>
     <div class="reactions-div" [class.mat-elevation-z2]="true"  [hidden]="hide" (mouseleave)="hidden()">
         <mat-card>
             <button color="primary" mat-button type="submit" (click)="addReaction(0)">Like</button>
