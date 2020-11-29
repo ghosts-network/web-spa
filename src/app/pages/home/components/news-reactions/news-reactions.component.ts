@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {AddNewsFeedReaction, NewsFeedPublication, NewsFeedService, PublicationComment, ReactionType} from '../../../../modules/gateway-api';
+import { reactionsUrl } from './reactions-url';
+import { Component, Input } from '@angular/core';
+import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../modules/gateway-api';
+
 
 @Component({
   selector: 'app-news-reactions',
@@ -18,17 +20,19 @@ export class ReactionsComponent {
   public addReaction(reaction: ReactionType): void {
     this.newsFeedService.newsFeedPublicationIdReactionPost(this.publication.id, {reaction})
     .subscribe(resp => {
-      this.publication.reactions.reactions.push(resp);
-      this.publication.reactions.totalCount += 1;
     });
+  }
+
+  public get replaceReaction(): string[] {
+    return this.publication.reactions.reactions.map((value) => reactionsUrl[value]);
   }
 
   public hidden(): void {
     if (this.hide === true){
-      setTimeout(() => {this.hide = false; }, 500);
+      setTimeout(() => {this.hide = false; }, 300);
     }
     else {
-      setTimeout(() => {this.hide = true; }, 1000);
+      setTimeout(() => {this.hide = true; }, 600);
     }
   }
 }
