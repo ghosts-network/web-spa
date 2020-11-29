@@ -1,11 +1,6 @@
-<mat-toolbar class="nav-bar">
-    <span>Ghosts network test</span>
-    <span class="nav-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
-</mat-toolbar>
-<mat-drawer-container class="container">
+<div class="news-feed">
+  <div class="news-form">
     <app-news-form (published)="onPublished($event)"></app-news-form>
-    <app-news-list [news]="news"></app-news-list>
-</mat-drawer-container>
+  </div>
+  <app-news-list [news]="news"></app-news-list>
+</div>

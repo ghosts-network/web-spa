@@ -1,33 +1,21 @@
 <mat-card class="publication-card">
-  <mat-card-header>
-    <div mat-card-avatar class=""></div>
-    <mat-card-title>*Author Name</mat-card-title>
-    <mat-card-subtitle>*Company maybe</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
   <mat-card-content>
     <p>
       {{publication.content}}
     </p>
   </mat-card-content>
-  <mat-card-content><p>Reactions: {{publication.reactions.reactions}} {{publication.reactions.totalCount}}</p> <p>Total comments:  {{publication.comments.totalCount}}</p></mat-card-content>
-  <mat-card-actions>
-      <app-news-reactions [publication]="publication"></app-news-reactions>
-  </mat-card-actions>
-</mat-card>
-
-<mat-card class="comments-card">
   <mat-card-content>
-    <ul>
-      <li class="li-comments" *ngFor="let comment of publication.comments.topComments">
-        <div>
-          {{comment.content}}
-        </div>
-        <button class="delete-comment" color="primary" mat-flat-button type="submit" (click)="deleteComment(comment)">Delete</button>
-        <hr>
-      </li>
-    </ul>
-    <button color="primary" mat-flat-button type="submit" *ngIf="isShown" (click)="loadComments()">Load more</button>
+    <span>Total comments:  {{publication.comments.totalCount}}</span>
   </mat-card-content>
   <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
+  <mat-card-content *ngIf="publication.comments">
+
+    <div *ngFor="let comment of publication.comments.topComments">
+      {{comment.content}}
+      <!--<button class="delete-comment" color="primary" mat-flat-button type="submit" (click)="deleteComment(comment)">Delete</button>-->
+    </div>
+    <div>
+      <button color="primary" mat-flat-button type="submit" *ngIf="isShown" (click)="loadComments()">Load more</button>
+    </div>
+  </mat-card-content>
 </mat-card>
