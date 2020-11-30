@@ -6,13 +6,16 @@
   </mat-card-content>
   <mat-card-content>
     <span>Total comments:  {{publication.comments.totalCount}}</span>
+    <div class="reactions">
+      <app-news-reactions [publication]="publication"></app-news-reactions>
+    </div>
   </mat-card-content>
   <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
   <mat-card-content *ngIf="publication.comments">
 
     <div *ngFor="let comment of publication.comments.topComments">
       {{comment.content}}
-<!--      <button class="delete-comment" color="primary" mat-flat-button type="submit" (click)="deleteComment(comment)">Delete</button>-->
+      <!--<button class="delete-comment" color="primary" mat-flat-button type="submit" (click)="deleteComment(comment)">Delete</button>-->
     </div>
     <div>
       <button color="primary" mat-flat-button type="submit" *ngIf="isShown" (click)="loadComments()">Load more</button>
