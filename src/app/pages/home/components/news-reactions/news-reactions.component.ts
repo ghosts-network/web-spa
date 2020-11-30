@@ -20,10 +20,8 @@ export class ReactionsComponent {
   public addReaction(reaction: ReactionType): void {
     this.newsFeedService.newsFeedPublicationIdReactionPost(this.publication.id, {reaction})
     .subscribe(resp => {
-      if (!this.publication.reactions.reactions.includes(reaction)){
-        this.publication.reactions.reactions.push(reaction);
-      }
-      this.publication.reactions.totalCount += 1;
+      this.publication.reactions.reactions = resp[0].reactions;
+      this.publication.reactions.totalCount = resp[0].totalCount;
     });
   }
 
