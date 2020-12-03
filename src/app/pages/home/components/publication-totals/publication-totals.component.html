@@ -1,0 +1,6 @@
+<div class="reactions" *ngIf="!!publication.reactions.totalCount">
+  <img *ngFor="let reactions of displayedReactions" src="{{reactions}}">
+  <span>Total reactions: {{publication.reactions.totalCount}}</span>
+</div>
+<span class="separator">|</span>
+<span *ngIf="publication.comments.totalCount">{{publication.comments.totalCount}} comments</span>

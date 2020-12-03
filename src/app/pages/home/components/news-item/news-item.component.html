@@ -5,11 +5,9 @@
     </p>
   </mat-card-content>
   <mat-card-content>
-    <span>Total comments:  {{publication.comments.totalCount}}</span>
-    <div class="reactions">
-      <app-news-reactions [publication]="publication"></app-news-reactions>
-    </div>
+    <app-publication-totals [publication]="publication"></app-publication-totals>
   </mat-card-content>
+  <app-news-reactions [publication]="publication"></app-news-reactions>
   <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
   <mat-card-content *ngIf="publication.comments">
 

@@ -1,7 +1,6 @@
-import { ReactionsUrl } from './reactions-url';
 import { Component, Input } from '@angular/core';
 import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../modules/gateway-api';
-
+import {ReactionsEnum} from "../../entities/reactions.enum";
 
 @Component({
   selector: 'app-news-reactions',
@@ -25,8 +24,8 @@ export class ReactionsComponent {
     });
   }
 
-  public get replaceReaction(): string[] {
-    return this.publication.reactions.reactions.map((value) => ReactionsUrl[value]);
+  public get availableReactions() {
+    return [0, 1, 2, 3, 4, 5].map(v => { return {index: v, url: ReactionsEnum[v]} });
   }
 
   public hidden(): void {

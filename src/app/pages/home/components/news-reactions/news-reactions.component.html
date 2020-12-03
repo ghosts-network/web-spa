@@ -1,19 +1,12 @@
 <div>
-  <div>
-    <span *ngFor="let reactions of replaceReaction">
-      <img src="{{reactions}}">
-    </span>
-    <span>Total reactions: {{publication.reactions.totalCount}}</span>
-  </div>
     <div class="reactions-div" [class.mat-elevation-z2]="true"  [hidden]="hide" (mouseleave)="hidden()">
         <mat-card>
-            <button color="primary" mat-button type="submit" (click)="addReaction(0)">Like</button>
-            <button color="primary" mat-button type="submit" (click)="addReaction(1)">Love</button>
-            <button color="primary" mat-button type="submit" (click)="addReaction(2)">Haha</button>
-            <button color="primary" mat-button type="submit" (click)="addReaction(3)">Wow</button>
-            <button color="primary" mat-button type="submit" (click)="addReaction(4)">Sad</button>
-            <button color="primary" mat-button type="submit" (click)="addReaction(5)">Angry</button>
+            <button *ngFor="let ar of availableReactions" color="primary" mat-icon-button type="submit" (click)="addReaction(ar.index)">
+                <img src="{{ ar.url }}" />
+            </button>
         </mat-card>
     </div>
-    <button [class.mat-elevation-z2]="true" mat-stroked-button type="submit" (click)="addReaction(0)" (mouseenter)="hidden()">Like</button>
+    <button color="primary" mat-icon-button (click)="addReaction(0)" (mouseenter)="hidden()">
+      <img src="{{ availableReactions[0].url }}">
+    </button>
 </div>
