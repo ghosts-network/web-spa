@@ -8,10 +8,12 @@ import {HttpClientModule} from '@angular/common/http';
 import {ApiModule, Configuration} from './modules/gateway-api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {environment} from "../environments/environment";
+import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AuthCallbackComponent
   ],
   imports: [
     BrowserModule,
