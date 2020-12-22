@@ -1,4 +1,25 @@
 .reactions-div{
     position: absolute;
-    z-index: 2;
+    z-index: 1;
+    width: 325px;
+    top: 10px;
+}
+
+.img-reaction{
+  width: 80%;
+  filter: grayscale(10);
+}
+
+.img-reaction:hover{
+  filter: none;
+}
+
+.img-reaction-btn{
+  width: 70%;
+}
+
+.btn{
+  padding: 0;
+  border: none;
+  background: none;
 }

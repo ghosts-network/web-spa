@@ -1,12 +1,14 @@
 <div>
     <div class="reactions-div" [class.mat-elevation-z2]="true"  [hidden]="hide" (mouseleave)="hidden()">
         <mat-card>
-            <button *ngFor="let ar of availableReactions" color="primary" mat-icon-button type="submit" (click)="addReaction(ar.index)">
-                <img src="{{ ar.url }}" />
+            <button class="btn" *ngFor="let ar of availableReactions" type="submit" (click)="addReaction(ar.index)">
+                <span>
+                  <img class="img-reaction" src="{{ ar.url }}" />
+                </span>
             </button>
         </mat-card>
     </div>
-    <button color="primary" mat-icon-button (click)="addReaction(0)" (mouseenter)="hidden()">
-      <img src="{{ availableReactions[0].url }}">
+    <button mat-stroked-button (click)="addReaction(0)" (mouseenter)="hidden()">
+      <img class="img-reaction-btn" src="{{ userReaction }}">
     </button>
 </div>
