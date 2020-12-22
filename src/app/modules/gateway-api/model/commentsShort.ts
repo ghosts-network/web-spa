@@ -12,7 +12,7 @@
 import { PublicationComment } from './publicationComment';
 
 
-export interface CommentsShort {
+export interface CommentsShort { 
     topComments?: Array<PublicationComment> | null;
     totalCount?: number;
 }
