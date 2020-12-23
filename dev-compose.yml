@@ -21,6 +21,11 @@ services:
       - MONGO_ADDRESS=db:27017
       - ASPNETCORE_ENVIRONMENT=Development
 
+  account:
+    image: ghcr.io/ghosts-network/account:latest
+    ports:
+    - "6030:80"
+
   db:
     image: mvertes/alpine-mongo
     ports:
@@ -33,6 +38,7 @@ services:
     depends_on:
       - publications
       - reactions
+      - account
     environment:
       - PUBLICATIONS_ADDRESS=http://publications
       - REACTIONS_ADDRESS=http://reactions

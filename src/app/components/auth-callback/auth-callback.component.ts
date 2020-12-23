@@ -12,7 +12,7 @@ export class AuthCallbackComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.completeAuthentication(window.location.href)
-      .then(() => {
+      .then(user => {
         window.location.href = '/';
       });
   }

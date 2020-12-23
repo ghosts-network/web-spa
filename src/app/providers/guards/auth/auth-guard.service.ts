@@ -7,9 +7,9 @@ export class AuthGuardService implements CanActivate, CanLoad {
   constructor(private authService: AuthService) { }
 
   canActivate(): Promise<boolean> {
-    return this.authService.isLoggedIn()
-      .then(isLoggedIn => {
-        if (isLoggedIn) {
+    return this.authService.getUser()
+      .then(user => {
+        if (user) {
           return true;
         }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserManagerSettings, UserManager, User, Profile } from 'oidc-client';
+import {UserManagerSettings, UserManager, User, Profile} from 'oidc-client';
 
 @Injectable({
   providedIn: 'root'
@@ -12,26 +12,23 @@ export class AuthService {
     this.manager = new UserManager(AuthService.getClientSettings());
   }
 
-  isLoggedIn(): Promise<boolean> {
-    return this.getUser()
-      .then(user => {
-        return user != null && !user.expired
-      });
-  }
-
-  getUser(): Promise<User> {
+  getUser(): Promise<User | null> {
     return this.manager.getUser();
   }
 
-  getClaims(): Promise<Profile> {
-    return this.getUser()
-      .then(u => {
-        if (!u) {
-          return null;
+  getProfile(): Promise<Profile | null> {
+    return this.manager.getUser()
+      .then(user => {
+        if (user) {
+          return user.profile;
         }
 
-        return u.profile;
+        return null;
       });
+  }
+
+  logout(): Promise<void> {
+    return this.manager.signoutRedirect();
   }
 
   startAuthentication(): Promise<void> {
@@ -44,7 +41,7 @@ export class AuthService {
 
   private static getClientSettings(): UserManagerSettings {
     return {
-      authority: 'https://localhost:5001/',
+      authority: 'http://localhost:6030/',
       client_id: 'angular_spa',
       redirect_uri: 'http://localhost:4200/auth-callback',
       post_logout_redirect_uri: 'http://localhost:4200/',

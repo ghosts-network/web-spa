@@ -6,13 +6,13 @@ import {AuthService} from "./providers/services/auth/auth.service";
 
 const routes: Routes = [
   {
+    path: 'auth-callback',
+    component: AuthCallbackComponent
+  },
+  {
     path: '',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
     canLoad: [AuthGuardService]
-  },
-  {
-    path: 'auth-callback',
-    component: AuthCallbackComponent
   }
 ];
 
