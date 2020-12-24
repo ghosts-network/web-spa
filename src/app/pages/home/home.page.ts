@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NewsFeedPublication, NewsFeedService} from '../../modules/gateway-api';
+import {AuthService} from "../../providers/services/auth/auth.service";
+import {Profile} from "oidc-client";
 
 @Component({
   selector: 'app-home',
@@ -9,11 +11,17 @@ import {NewsFeedPublication, NewsFeedService} from '../../modules/gateway-api';
 export class HomePage implements OnInit {
 
   public news: NewsFeedPublication[];
+  public user: Profile;
 
-  constructor(private newsFeedService: NewsFeedService) { }
+  constructor(private newsFeedService: NewsFeedService,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loadPublications();
+    this.authService.getUser()
+      .then(user => {
+        this.user = user.profile;
+      });
   }
 
   public onPublished(publication: NewsFeedPublication): void {
@@ -24,5 +32,9 @@ export class HomePage implements OnInit {
     this.newsFeedService.newsFeedGet().subscribe(resp => {
       this.news = resp;
     });
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
