@@ -40,17 +40,15 @@ export class ReactionsComponent {
 
   public get userReaction() {
     if (this.publication.reactions.user == null) {
-      return;
+      return ReactionButtonEnum[0];
     }
     return ReactionButtonEnum[this.publication.reactions.user.type]
   }
 
-  public hidden(): void {
-    if (this.hide === true){
-      setTimeout(() => {this.hide = false; }, 300);
+  public get reactionName() {
+    if (this.publication.reactions.user == null) {
+      return ReactionType[0];
     }
-    else {
-      setTimeout(() => {this.hide = true; }, 600);
-    }
+    return ReactionType[this.publication.reactions.user.type]
   }
 }

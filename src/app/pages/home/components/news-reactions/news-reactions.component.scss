@@ -1,25 +1,32 @@
 .reactions-div{
-    position: absolute;
-    z-index: 1;
-    width: 325px;
-    top: 10px;
+  position: absolute;
+  visibility: hidden;
+  z-index: -2;
+  bottom: 155px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: 325px;
+}
+
+.popover:hover .reactions-div{
+  visibility: visible;
+  z-index: 2;
+  transition: all 1s cubic-bezier(0.75, -0.02, 0.2, 0.97);
 }
 
 .img-reaction{
   width: 80%;
-  filter: grayscale(10);
-}
-
-.img-reaction:hover{
-  filter: none;
 }
 
 .img-reaction-btn{
-  width: 70%;
+  width: 45%;
 }
 
 .btn{
   padding: 0;
   border: none;
   background: none;
+}
+
+.add-button{
+  filter: grayscale(10);
 }

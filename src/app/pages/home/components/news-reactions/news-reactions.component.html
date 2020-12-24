@@ -1,5 +1,5 @@
-<div>
-    <div class="reactions-div" [class.mat-elevation-z2]="true"  [hidden]="hide" (mouseleave)="hidden()">
+<div class="popover">
+    <div class="reactions-div">
         <mat-card>
             <button class="btn" *ngFor="let ar of availableReactions" type="submit" (click)="addReaction(ar.index)">
                 <span>
@@ -8,7 +8,16 @@
             </button>
         </mat-card>
     </div>
-    <button mat-stroked-button (click)="addReaction(0)" (mouseenter)="hidden()">
-      <img class="img-reaction-btn" src="{{ userReaction }}">
-    </button>
+    <div>
+      <div *ngIf="publication.reactions.user == null; else deleteButton">
+        <button class="btn add-button" mat-stroked-button (click)="addReaction(0)">
+          <img class="img-reaction-btn" src="{{ userReaction }}"> <span>{{reactionName}}</span>
+        </button>
+      </div>
+      <ng-template #deleteButton>
+        <button class="btn" mat-stroked-button (click)="deleteReaction()">
+          <img class="img-reaction-btn" src="{{ userReaction }}"> <span>{{reactionName}}</span>
+        </button>
+      </ng-template>
+    </div>
 </div>
