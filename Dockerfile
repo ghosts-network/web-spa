@@ -4,7 +4,7 @@ ARG configuration=production
 
 WORKDIR /app
 COPY . .
-RUN npm ci && npm run build -- --configuration=configuration
+RUN npm ci && npm run build -- --configuration=${configuration}
 
 FROM nginx:alpine
 COPY --from=build /app/dist/ghost-network-spa /usr/share/nginx/html/
