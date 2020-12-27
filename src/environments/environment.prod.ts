@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
-  basePath: 'http://boberneprotiv.com:5000',
+  basePath: 'https://api.gn.boberneprotiv.com',
   auth: {
-    authority: 'http://boberneprotiv.com:6030',
+    authority: 'https://account.gn.boberneprotiv.com',
     client_id: 'angular_spa_prod',
-    redirect_uri: 'http://boberneprotiv.com/auth-callback',
-    post_logout_redirect_uri: 'http://boberneprotiv.com/',
+    redirect_uri: 'https://gn.boberneprotiv.com/auth-callback',
+    post_logout_redirect_uri: 'https://gn.boberneprotiv.com/',
     response_type: "id_token token",
     scope: "openid profile",
     filterProtocolClaims: true,
