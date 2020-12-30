@@ -1,4 +1,37 @@
 .reactions-div{
-    position: absolute;
-    z-index: 2;
+  position: absolute;
+  visibility: hidden;
+  z-index: -2;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: 325px;
+}
+
+.popover{
+  position: relative;
+}
+
+.popover:hover .reactions-div{
+  top: 0;
+  visibility: visible;
+  z-index: 2;
+  transform: translateY(-100%);
+  transition: all 1s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+
+.img-reaction{
+  width: 80%;
+}
+
+.img-reaction-btn{
+  width: 45%;
+}
+
+.btn{
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.add-button{
+  filter: grayscale(10);
 }

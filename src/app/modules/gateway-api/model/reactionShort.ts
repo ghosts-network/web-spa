@@ -10,10 +10,12 @@
  * Do not edit the class manually.
  */
 import { ReactionType } from './reactionType';
+import { UserReaction } from './userReaction';
 
 
 export interface ReactionShort { 
     reactions?: Array<ReactionType> | null;
     totalCount?: number;
+    user?: UserReaction;
 }
 
