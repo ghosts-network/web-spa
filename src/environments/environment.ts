@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  basePath: 'http://localhost:5000',
+  basePath: 'https://api.gn.boberneprotiv.com',
   auth: {
-    authority: 'http://localhost:6030',
+    authority: 'https://account.gn.boberneprotiv.com',
     client_id: 'angular_spa',
     redirect_uri: 'http://localhost:4200/auth-callback',
     post_logout_redirect_uri: 'http://localhost:4200/',
