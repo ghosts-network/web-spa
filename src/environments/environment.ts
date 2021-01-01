@@ -4,14 +4,14 @@
 
 export const environment = {
   production: false,
-  basePath: 'https://api.gn.boberneprotiv.com',
+  basePath: 'http://localhost:5000',
   auth: {
     authority: 'https://account.gn.boberneprotiv.com',
     client_id: 'angular_spa',
     redirect_uri: 'http://localhost:4200/auth-callback',
     post_logout_redirect_uri: 'http://localhost:4200/',
     response_type: "id_token token",
-    scope: "openid profile",
+    scope: "openid profile api",
     filterProtocolClaims: true,
     loadUserInfo: true
   }

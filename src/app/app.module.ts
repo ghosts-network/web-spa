@@ -4,11 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ApiModule, Configuration} from './modules/gateway-api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {environment} from "../environments/environment";
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
+import {TokenInterceptor} from "./providers/interceptors/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,13 @@ import { AuthCallbackComponent } from './components/auth-callback/auth-callback.
     })),
     BrowserAnimationsModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ]
 })
 export class AppModule { }
