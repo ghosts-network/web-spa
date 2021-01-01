@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {UserManagerSettings, UserManager, User, Profile} from 'oidc-client';
 import {environment} from "../../../../environments/environment";
+import {from, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,12 @@ export class AuthService {
     this.manager = new UserManager(AuthService.getClientSettings());
   }
 
-  getUser(): Promise<User | null> {
-    return this.manager.getUser();
+  getUser(): Observable<User | null> {
+    return from(this.manager.getUser());
   }
 
-  getProfile(): Promise<Profile | null> {
-    return this.manager.getUser()
+  getProfile(): Observable<Profile | null> {
+    const prom = this.manager.getUser()
       .then(user => {
         if (user) {
           return user.profile;
@@ -26,18 +27,20 @@ export class AuthService {
 
         return null;
       });
+
+    return from(prom);
   }
 
-  logout(): Promise<void> {
-    return this.manager.signoutRedirect();
+  logout(): Observable<void> {
+    return from(this.manager.signoutRedirect());
   }
 
-  startAuthentication(): Promise<void> {
-    return this.manager.signinRedirect();
+  startAuthentication(): Observable<void> {
+    return from(this.manager.signinRedirect());
   }
 
-  completeAuthentication(url): Promise<User> {
-    return this.manager.signinRedirectCallback(url);
+  completeAuthentication(url): Observable<User> {
+    return from(this.manager.signinRedirectCallback(url));
   }
 
   private static getClientSettings(): UserManagerSettings {

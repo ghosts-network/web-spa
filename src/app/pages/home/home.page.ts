@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.loadPublications();
     this.authService.getUser()
-      .then(user => {
+      .subscribe(user => {
         this.user = user.profile;
       });
   }
