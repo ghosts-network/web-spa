@@ -17,12 +17,14 @@ export class ReactionsComponent {
   public publication: NewsFeedPublication;
 
   public addReaction(reaction: ReactionType): void {
-    this.newsFeedService.newsFeedPublicationIdReactionPost(this.publication.id, {reaction})
-    .subscribe(resp => {
+    if (this.publication.reactions.user == null || this.publication.reactions.user.type != reaction) {
+      this.newsFeedService.newsFeedPublicationIdReactionPost(this.publication.id, {reaction})
+      .subscribe(resp => {
       this.publication.reactions.reactions = resp.reactions;
       this.publication.reactions.totalCount = resp.totalCount;
       this.publication.reactions.user = resp.user;
     });
+    }
   }
 
   public deleteReaction(): void {
