@@ -5,3 +5,24 @@
 .news-form {
   margin-bottom: 15px;
 }
+
+#loadMore {
+  background-color: #33a93b;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+#loadMore:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#loadMore:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+

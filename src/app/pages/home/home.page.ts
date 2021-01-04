@@ -10,8 +10,10 @@ import {Profile} from "oidc-client";
 })
 export class HomePage implements OnInit {
 
-  public news: NewsFeedPublication[];
+  public news: NewsFeedPublication[] = [];
   public user: Profile;
+  private newsOnPage = 0;
+  public hasMore: boolean;
 
   constructor(private newsFeedService: NewsFeedService,
               private authService: AuthService) { }
@@ -25,13 +27,31 @@ export class HomePage implements OnInit {
   }
 
   public onPublished(publication: NewsFeedPublication): void {
+    this.newsOnPage = 0;
     this.loadPublications();
   }
 
   public loadPublications(): void {
-    this.newsFeedService.newsFeedGet().subscribe(resp => {
-      this.news = resp;
+    this.newsFeedService.newsFeedGet(this.newsOnPage, 20,  'response').subscribe(resp => {
+      this.newsOnPage += resp.body.length;
+      this.hasMore = (resp.headers.get('x-hasmore') === 'True');
+      this.news = resp.body;
     });
+  }
+
+  loadMore(): void {
+    if (this.hasMore) {
+      this.newsFeedService.newsFeedGet(this.newsOnPage, 20, 'response').subscribe(resp => {
+        this.newsOnPage += resp.body.length;
+        this.hasMore = (resp.headers.get('x-hasmore') === 'True');
+        if (this.news.length) {
+          const news = [].concat(this.news, resp.body);
+          this.news = news;
+        } else {
+          this.news = resp.body;
+        }
+      });
+    }
   }
 
   logout() {

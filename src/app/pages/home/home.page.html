@@ -5,4 +5,5 @@
     <app-news-form (published)="onPublished($event)"></app-news-form>
   </div>
   <app-news-list [news]="news"></app-news-list>
+  <button id="loadMore" [disabled]="!hasMore" (click)="loadMore()">Load more</button>
 </div>
