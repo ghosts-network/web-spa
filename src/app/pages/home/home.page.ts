@@ -45,8 +45,7 @@ export class HomePage implements OnInit {
         this.newsOnPage += resp.body.length;
         this.hasMore = (resp.headers.get('x-hasmore') === 'True');
         if (this.news.length) {
-          const news = [].concat(this.news, resp.body);
-          this.news = news;
+          this.news = [].concat(this.news, resp.body);
         } else {
           this.news = resp.body;
         }
