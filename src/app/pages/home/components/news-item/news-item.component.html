@@ -12,7 +12,7 @@
   <mat-card-content *ngIf="publication.comments">
     <div *ngFor="let comment of publication.comments.topComments">
       {{comment.content}}
-      <!--<button class="delete-comment" color="primary" mat-flat-button type="submit" (click)="deleteComment(comment)">Delete</button>-->
+      <button class="delete-comment" color="primary" mat-flat-button type="submit" (click)="deleteComment(comment)">Delete</button>
     </div>
     <div>
       <button color="primary" mat-flat-button type="submit" *ngIf="isShown" (click)="loadComments()">Load more</button>

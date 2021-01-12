@@ -1,3 +1,4 @@
+import { Profile } from 'oidc-client';
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {NewsFeedPublication} from '../../../../modules/gateway-api';
 
@@ -10,6 +11,8 @@ export class NewsListComponent {
 
   @Input()
   public news: NewsFeedPublication[];
+  @Input()
+  public user: Profile;
 
   constructor() { }
 

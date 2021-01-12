@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import { Profile } from 'oidc-client';
 import { NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../modules/gateway-api';
 
 @Component({
@@ -14,6 +15,8 @@ export class NewsItemComponent {
 
   @Input()
   public publication: NewsFeedPublication;
+  @Input()
+  public currentUser: Profile;
 
   constructor(private newsFeedService: NewsFeedService) { }
 
@@ -28,6 +31,7 @@ export class NewsItemComponent {
   public deleteComment(comment: PublicationComment): void {
     this.newsFeedService.newsFeedCommentsCommentIdDelete(comment.id)
     .subscribe(resp => {
+      console.log(this.publication.comments.topComments)
       this.publication.comments.totalCount -= 1;
       this.index = this.publication.comments.topComments.findIndex(x => x.id === comment.id);
       this.publication.comments.topComments.splice(this.index, 1);
@@ -47,5 +51,12 @@ export class NewsItemComponent {
       return false;
     }
     return true;
+  }
+
+  public get isAuthor(): boolean {
+    if (this.currentUser.sub === this.publication.comments){
+      return true;
+    }
+    return false;
   }
 }

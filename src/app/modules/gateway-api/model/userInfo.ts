@@ -11,6 +11,7 @@
  */
 
 
+
 export interface UserInfo {
     readonly id?: string;
     readonly fullName?: string | null;

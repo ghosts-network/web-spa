@@ -9,8 +9,6 @@ import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../m
 })
 export class ReactionsComponent {
 
-  hide = true;
-
   constructor(private newsFeedService: NewsFeedService) { }
 
   @Input()
@@ -37,14 +35,14 @@ export class ReactionsComponent {
   }
 
   public get userReaction() {
-    if (this.publication.reactions.user == null) {
+    if (this.publication.reactions.user === null) {
       return ReactionButtonEnum[0];
     }
     return ReactionButtonEnum[this.publication.reactions.user.type]
   }
 
   public get reactionName() {
-    if (this.publication.reactions.user == null) {
+    if (this.publication.reactions.user === null) {
       return ReactionType[0];
     }
     return ReactionType[this.publication.reactions.user.type]

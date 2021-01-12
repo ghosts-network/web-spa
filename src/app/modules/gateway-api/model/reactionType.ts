@@ -11,14 +11,12 @@
  */
 
 
-export type ReactionType = 0 | 1 | 2 | 3 | 4 | 5;
-
-export const ReactionType = {
-    NUMBER_0: 0 as ReactionType,
-    NUMBER_1: 1 as ReactionType,
-    NUMBER_2: 2 as ReactionType,
-    NUMBER_3: 3 as ReactionType,
-    NUMBER_4: 4 as ReactionType,
-    NUMBER_5: 5 as ReactionType
-};
+export enum ReactionType {
+  Like,
+  Love,
+  Haha,
+  Wow,
+  Sad,
+  Angry
+}
 

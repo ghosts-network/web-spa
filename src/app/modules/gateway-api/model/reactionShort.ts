@@ -14,8 +14,8 @@ import { UserReaction } from './userReaction';
 
 
 export interface ReactionShort {
-    readonly reactions?: Array<ReactionType> | null;
-    readonly totalCount?: number;
+    reactions?: Array<ReactionType> | null;
+    totalCount?: number;
     user?: UserReaction;
 }
 
