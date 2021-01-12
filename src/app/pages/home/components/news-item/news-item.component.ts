@@ -29,7 +29,7 @@ export class NewsItemComponent {
   }
 
   public deleteComment(comment: PublicationComment): void {
-    this.newsFeedService.newsFeedCommentsCommentIdDelete(comment.id)
+    this.newsFeedService.newsFeedCommentIdCommentDelete(comment.id)
     .subscribe(resp => {
       console.log(this.publication.comments.topComments)
       this.publication.comments.totalCount -= 1;
