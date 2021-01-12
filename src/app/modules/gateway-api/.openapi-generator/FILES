@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 README.md
 api.module.ts
 api/api.ts
@@ -17,5 +16,6 @@ model/newsFeedPublication.ts
 model/publicationComment.ts
 model/reactionShort.ts
 model/reactionType.ts
+model/userInfo.ts
 model/userReaction.ts
 variables.ts

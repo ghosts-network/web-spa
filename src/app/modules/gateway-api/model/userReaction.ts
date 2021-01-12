@@ -13,6 +13,6 @@ import { ReactionType } from './reactionType';
 
 
 export interface UserReaction {
-   type?: ReactionType;
+    type?: ReactionType;
 }
 

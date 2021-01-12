@@ -28,7 +28,7 @@ export class NewsFormCommentsComponent {
       return;
     }
 
-    this.newsFeedService.newsFeedPublicationIdCommentPost(
+    this.newsFeedService.newsFeedPublicationIdCommentsPost(
       this.publication.id, {content: this.form.get('content').value})
     .subscribe(resp => {
       this.form.reset();

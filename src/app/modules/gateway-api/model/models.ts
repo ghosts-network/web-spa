@@ -6,4 +6,5 @@ export * from './newsFeedPublication';
 export * from './publicationComment';
 export * from './reactionShort';
 export * from './reactionType';
+export * from './userInfo';
 export * from './userReaction';

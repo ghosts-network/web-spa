@@ -20,9 +20,7 @@ export class ReactionsComponent {
     if (this.publication.reactions.user == null || this.publication.reactions.user.type != reaction) {
       this.newsFeedService.newsFeedPublicationIdReactionPost(this.publication.id, {reaction})
       .subscribe(resp => {
-      this.publication.reactions.reactions = resp.reactions;
-      this.publication.reactions.totalCount = resp.totalCount;
-      this.publication.reactions.user = resp.user;
+      this.publication.reactions = resp;
     });
     }
   }
@@ -30,9 +28,7 @@ export class ReactionsComponent {
   public deleteReaction(): void {
     this.newsFeedService.newsFeedPublicationIdReactionDelete(this.publication.id)
     .subscribe(resp => {
-      this.publication.reactions.reactions = resp.reactions;
-      this.publication.reactions.totalCount = resp.totalCount;
-      this.publication.reactions.user = resp.user;
+      this.publication.reactions = resp
     });
   }
 

@@ -26,7 +26,7 @@ export class NewsItemComponent {
   }
 
   public deleteComment(comment: PublicationComment): void {
-    this.newsFeedService.newsFeedCommentIdCommentDelete(comment.id)
+    this.newsFeedService.newsFeedCommentsCommentIdDelete(comment.id)
     .subscribe(resp => {
       this.publication.comments.totalCount -= 1;
       this.index = this.publication.comments.topComments.findIndex(x => x.id === comment.id);
