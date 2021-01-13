@@ -1,0 +1,14 @@
+<app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
+<mat-card-content *ngIf="publication.comments">
+  <div class="comments" *ngFor="let comment of publication.comments.topComments">
+    {{comment.content}}
+    <div class="delete-comment">
+      <button class="delete-comment-btn" type="submit" *ngIf="currentUser.sub === comment.authorId" (click)="deleteComment(comment)">
+        <mat-icon aria-hidden="false" aria-label="delete icon">clear</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div>
+    <button color="primary" mat-flat-button type="submit" *ngIf="isShown" (click)="loadComments()">Load more</button>
+  </div>
+</mat-card-content>
