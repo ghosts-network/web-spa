@@ -21,10 +21,22 @@ services:
       - MONGO_ADDRESS=db:27017
       - ASPNETCORE_ENVIRONMENT=Development
 
+  profiles:
+    image: ghcr.io/ghosts-network/profiles:latest
+    ports:
+      - "5400:80"
+    depends_on:
+      - db
+    environment:
+      - MONGO_ADDRESS=db:27017
+      - ASPNETCORE_ENVIRONMENT=Development
+
   account:
     image: ghcr.io/ghosts-network/account:latest
     ports:
       - "6030:80"
+    depends_on:
+      - profiles
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
 
@@ -40,10 +52,12 @@ services:
     depends_on:
       - publications
       - reactions
+      - profiles
       - account
     environment:
       - PUBLICATIONS_ADDRESS=http://publications
       - REACTIONS_ADDRESS=http://reactions
+      - PROFILES_ADDRESS=http://profiles
       - ASPNETCORE_ENVIRONMENT=Development
 
   spa:
