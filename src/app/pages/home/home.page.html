@@ -4,6 +4,6 @@
   <div class="news-form">
     <app-news-form (published)="onPublished($event)"></app-news-form>
   </div>
-  <app-news-list [news]="news"></app-news-list>
+  <app-news-list [news]="news" [user]="user"></app-news-list>
   <button *ngIf="hasMore" mat-button class="load-more" (click)="loadMore()">Load more</button>
 </div>
