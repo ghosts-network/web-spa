@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  basePath: 'https://api.gn.boberneprotiv.com',
+  basePath: 'http://localhost:5000',
   auth: {
     authority: 'https://account.gn.boberneprotiv.com',
     client_id: 'angular_spa',
