@@ -1,4 +1,4 @@
-import { ReactionButtonEnum, ReactionsEnum } from './../../entities/reactions.enum';
+import { ReactionButtonEnum } from './../../entities/reactions.enum';
 import { Component, Input } from '@angular/core';
 import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../modules/gateway-api';
 
@@ -17,19 +17,19 @@ export class ReactionsComponent {
   public publication: NewsFeedPublication;
 
   public addReaction(reaction: ReactionType): void {
-    if (this.publication.reactions.user == null || this.publication.reactions.user.type != reaction) {
+    if (this.publication.reactions.user == null || this.publication.reactions.user.type !== reaction) {
       this.newsFeedService.newsFeedPublicationIdReactionPost(this.publication.id, {reaction})
-      .subscribe(resp => {
-      this.publication.reactions = resp;
-    });
+        .subscribe(resp => {
+          this.publication.reactions = resp;
+        });
     }
   }
 
   public deleteReaction(): void {
     this.newsFeedService.newsFeedPublicationIdReactionDelete(this.publication.id)
-    .subscribe(resp => {
-      this.publication.reactions = resp
-    });
+      .subscribe(resp => {
+        this.publication.reactions = resp
+      });
   }
 
   public get availableReactions() {
