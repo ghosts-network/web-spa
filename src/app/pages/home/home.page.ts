@@ -14,6 +14,7 @@ export class HomePage implements OnInit {
   public user: Profile;
   private newsOnPage = 0;
   public hasMore: boolean;
+  public showLoader = false;
 
   constructor(private newsFeedService: NewsFeedService,
               private authService: AuthService) { }
@@ -32,23 +33,23 @@ export class HomePage implements OnInit {
   }
 
   public loadPublications(): void {
+    this.showLoader = true;
     this.newsFeedService.newsFeedGet(this.newsOnPage, 20,  'response').subscribe(resp => {
-      this.newsOnPage += resp.body.length;
-      this.hasMore = (resp.headers.get('x-hasmore') === 'True');
-      this.news = resp.body;
+        this.newsOnPage += resp.body.length;
+        this.hasMore = (resp.headers.get('x-hasmore') === 'True');
+        this.news = resp.body;
+        this.showLoader = false;
     });
   }
 
   loadMore(): void {
     if (this.hasMore) {
+      this.showLoader = true;
       this.newsFeedService.newsFeedGet(this.newsOnPage, 20, 'response').subscribe(resp => {
         this.newsOnPage += resp.body.length;
         this.hasMore = (resp.headers.get('x-hasmore') === 'True');
-        if (this.news.length) {
-          this.news = [].concat(this.news, resp.body);
-        } else {
-          this.news = resp.body;
-        }
+        this.news = [].concat(this.news, resp.body);
+        this.showLoader = false;
       });
     }
   }
