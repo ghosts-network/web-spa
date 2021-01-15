@@ -8,7 +8,8 @@
       </button>
     </div>
   </div>
-  <div>
+  <footer class="footer">
+    <app-news-reactions [publication]="publication"></app-news-reactions>
     <button color="primary" mat-flat-button type="submit" *ngIf="isShown" (click)="loadComments()">Load more</button>
-  </div>
+  </footer>
 </mat-card-content>

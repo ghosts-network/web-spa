@@ -1,5 +1,5 @@
 <div class="popover">
-  <div  *ngIf="publication.reactions.user == null; else deleteButton">
+  <div *ngIf="publication.reactions.user == null; else deleteButton">
     <button class="btn add-button" mat-stroked-button (click)="addReaction(0)">
       <img class="img-reaction-btn" [src]="userReaction"> <span>{{reactionName}}</span>
     </button>
@@ -11,11 +11,9 @@
   </ng-template>
   <div class="reactions-div">
     <mat-card>
-        <button class="btn" *ngFor="let ar of availableReactions" type="submit" (click)="addReaction(ar.index)">
-            <span>
-              <img class="img-reaction" [src]="ar.url" />
-            </span>
-        </button>
+      <button class="btn" *ngFor="let ar of availableReactions" type="submit" (click)="addReaction(ar.index)">
+        <img class="img-reaction" [src]="ar.url" />
+      </button>
     </mat-card>
   </div>
 </div>

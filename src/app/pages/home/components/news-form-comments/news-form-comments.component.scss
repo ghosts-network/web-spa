@@ -1,7 +1,14 @@
 .comments-form {
-    width: 100%;
-  }
-  
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 .comments-form-input {
-    width: 100%;
+  width: 100%;
+}
+
+.comment-button {
+  margin-bottom: 18px;
+  margin-left: 10px;
 }
