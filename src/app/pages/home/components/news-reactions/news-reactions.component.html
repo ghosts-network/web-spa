@@ -1,19 +1,19 @@
 <div class="popover">
-  <div *ngIf="publication.reactions.user == null; else deleteButton">
-    <button class="btn add-button" mat-stroked-button (click)="addReaction(0)">
-      <img class="img-reaction-btn" [src]="userReaction"> <span>{{reactionName}}</span>
-    </button>
-  </div>
-  <ng-template #deleteButton>
-    <button class="btn" mat-stroked-button (click)="deleteReaction()">
-      <img class="img-reaction-btn" [src]="userReaction"> <span>{{reactionName}}</span>
-    </button>
-  </ng-template>
+  <button *ngIf="!publication.reactions.user"
+          class="btn add-button"
+          mat-button
+          (click)="addReaction(0)">
+    <img class="img-reaction-btn" [src]="userReaction"> <span>{{reactionName}}</span>
+  </button>
+  <button *ngIf="!!publication.reactions.user"
+          class="btn"
+          mat-button
+          (click)="deleteReaction()">
+    <img class="img-reaction-btn" [src]="userReaction"> <span>{{reactionName}}</span>
+  </button>
   <div class="reactions-div">
-    <mat-card>
-      <button class="btn" *ngFor="let ar of availableReactions" type="submit" (click)="addReaction(ar.index)">
-        <img class="img-reaction" [src]="ar.url" />
+      <button *ngFor="let ar of availableReactions" (click)="addReaction(ar.index)">
+        <img [src]="ar.url" />
       </button>
-    </mat-card>
   </div>
 </div>

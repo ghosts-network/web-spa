@@ -1,9 +1,8 @@
 <mat-card class="publication-card">
-  <h3 class="title">{{publication.content}}</h3>
-  <div class="totals">
-    <app-publication-totals [publication]="publication"></app-publication-totals>
-  </div>
-  <div class="comments">
-    <app-news-comments [publication]="publication" [currentUser]="currentUser"></app-news-comments>
-  </div>
+  <span>{{publication.content}}</span>
+  <app-publication-totals [publication]="publication"></app-publication-totals>
+  <app-publication-actions [publication]="publication"></app-publication-actions>
+<!--  <div class="comments">-->
+<!--    <app-news-comments [publication]="publication" [currentUser]="currentUser"></app-news-comments>-->
+<!--  </div>-->
 </mat-card>

@@ -20,9 +20,10 @@ import { ReactionsComponent } from './components/news-reactions/news-reactions.c
 import { PublicationTotalsComponent } from './components/publication-totals/publication-totals.component';
 import { NewsCommentsComponent } from './components/news-comments/news-comments.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PublicationActionsComponent } from './components/publication-actions/publication-actions.component';
 
 @NgModule({
-  declarations: [HomePage, NewsFormComponent, NewsListComponent, NewsItemComponent, NewsFormCommentsComponent, ReactionsComponent, PublicationTotalsComponent, NewsCommentsComponent],
+  declarations: [HomePage, NewsFormComponent, NewsListComponent, NewsItemComponent, NewsFormCommentsComponent, ReactionsComponent, PublicationTotalsComponent, NewsCommentsComponent, PublicationActionsComponent],
     imports: [
         CommonModule,
         HomeRoutingModule,

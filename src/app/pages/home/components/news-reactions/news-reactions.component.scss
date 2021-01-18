@@ -1,13 +1,38 @@
-.reactions-div{
+:host {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+}
+.reactions-div {
+  display: flex;
   position: absolute;
   visibility: hidden;
   z-index: -2;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-  width: 325px;
+  background: white;
+
+  button {
+    padding: 5px;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+
+    img {
+      width: 35px;
+    }
+  }
 }
 
 .popover{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
   position: relative;
+
+  button {
+    flex-grow: 1;
+  }
 }
 
 .popover:hover .reactions-div{
@@ -18,18 +43,8 @@
   transition: all 1s cubic-bezier(0.75, -0.02, 0.2, 0.97);
 }
 
-.img-reaction{
-  width: 80%;
-}
-
 .img-reaction-btn{
-  width: 45%;
-}
-
-.btn{
-  padding: 0;
-  border: none;
-  background: none;
+  width: 35px;
 }
 
 .add-button{
