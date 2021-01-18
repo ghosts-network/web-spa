@@ -1,16 +1,13 @@
-.reactions, .reactions-images {
-  display: flex;
-  align-items: center;
-}
-
-.reactions-images {
-  margin-right: 5px;
-}
-
 :host {
   display: flex;
+  justify-content: space-between;
 
-  .separator {
-    margin: 0 5px;
+  .reactions, .reactions-images {
+    display: flex;
+    align-items: center;
+  }
+
+  .reactions-images {
+    margin-right: 5px;
   }
 }
