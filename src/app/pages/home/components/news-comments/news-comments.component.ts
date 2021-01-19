@@ -1,6 +1,6 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import { Profile } from 'oidc-client';
-import { NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../modules/gateway-api';
+import { NewsFeedPublication, NewsFeedService, PublicationComment, CommentsShort} from '../../../../modules/gateway-api';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {AuthService} from "../../../../providers/services/auth/auth.service";
 
@@ -12,8 +12,10 @@ import {AuthService} from "../../../../providers/services/auth/auth.service";
 export class NewsCommentsComponent implements OnInit {
 
   private take = 10;
-  private skip = 3;
+  private skip = 0;
   private index: number;
+
+  public comments = new Array<PublicationComment>();
 
   public currentUser: Profile;
 
@@ -26,12 +28,13 @@ export class NewsCommentsComponent implements OnInit {
       .subscribe(user => {
         this.currentUser = user
       });
+    this.loadComments();
   }
 
   public loadComments(): void {
     this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, this.skip, this.take)
     .subscribe(resp => {
-      this.publication.comments.topComments = this.publication.comments.topComments.concat(resp);
+      this.comments = this.comments.concat(resp);
       this.skip += 10;
     });
   }
@@ -40,21 +43,21 @@ export class NewsCommentsComponent implements OnInit {
     this.newsFeedService.newsFeedCommentsCommentIdDelete(comment.id)
     .subscribe(resp => {
       this.publication.comments.totalCount -= 1;
-      this.index = this.publication.comments.topComments.findIndex(x => x.id === comment.id);
-      this.publication.comments.topComments.splice(this.index, 1);
+      this.index = this.comments.findIndex(x => x.id === comment.id);
+      this.comments.splice(this.index, 1);
     });
   }
 
   public loadAllComments(): void {
     this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, 0, 50)
     .subscribe(resp => {
-      this.publication.comments.topComments = resp;
+      this.comments = resp;
       this.publication.comments.totalCount += 1;
     });
   }
 
-  public get isShown(): boolean {
-    return this.publication.comments.totalCount !== this.publication.comments.topComments.length;
+  public get hasMore(): boolean {
+    return this.publication.comments.totalCount !== this.comments.length;
   }
 
 }

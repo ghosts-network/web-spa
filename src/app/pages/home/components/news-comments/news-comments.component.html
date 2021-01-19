@@ -1,6 +1,6 @@
 <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
-<mat-card-content *ngIf="publication.comments">
-  <div class="comments" *ngFor="let comment of publication.comments.topComments">
+<mat-card-content *ngIf="comments">
+  <div class="comments" *ngFor="let comment of comments">
     {{comment.content}}
     <div class="delete-comment">
       <button *ngIf="currentUser?.sub === comment.authorId"
@@ -10,6 +10,6 @@
     </div>
   </div>
   <footer class="footer">
-    <button color="primary" mat-flat-button type="submit" *ngIf="isShown" (click)="loadComments()">Load more</button>
+    <button color="primary" mat-flat-button type="submit" *ngIf="hasMore" (click)="loadComments()">Load more</button>
   </footer>
 </mat-card-content>
