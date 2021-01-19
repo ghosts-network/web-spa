@@ -18,9 +18,10 @@ import { NewsFormComponent } from './components/news-form/news-form.component';
 import { NewsFormCommentsComponent } from './components/news-form-comments/news-form-comments.component';
 import { ReactionsComponent } from './components/news-reactions/news-reactions.component';
 import { PublicationTotalsComponent } from './components/publication-totals/publication-totals.component';
-import { NewsCommentsComponent } from './components/news-comments/news-comments.component';
+import {NewsCommentsComponent} from './components/news-comments/news-comments.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PublicationActionsComponent } from './components/publication-actions/publication-actions.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [HomePage, NewsFormComponent, NewsListComponent, NewsItemComponent, NewsFormCommentsComponent, ReactionsComponent, PublicationTotalsComponent, NewsCommentsComponent, PublicationActionsComponent],
@@ -35,6 +36,7 @@ import { PublicationActionsComponent } from './components/publication-actions/pu
         MatIconModule,
         MatSidenavModule,
         MatCardModule,
+        MatDialogModule,
         MatProgressSpinnerModule
     ]
 })

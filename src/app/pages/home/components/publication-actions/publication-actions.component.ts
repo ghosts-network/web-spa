@@ -1,18 +1,23 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NewsFeedPublication} from "../../../../modules/gateway-api";
+import {MatDialog} from "@angular/material/dialog";
+import {NewsCommentsComponent} from "../news-comments/news-comments.component";
 
 @Component({
   selector: 'app-publication-actions',
   templateUrl: './publication-actions.component.html',
   styleUrls: ['./publication-actions.component.scss']
 })
-export class PublicationActionsComponent implements OnInit {
+export class PublicationActionsComponent {
 
   @Input() publication: NewsFeedPublication;
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  openDialog() {
+    this.dialog.open(NewsCommentsComponent, {
+      data: this.publication
+    });
   }
 
 }

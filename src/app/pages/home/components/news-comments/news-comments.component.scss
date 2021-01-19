@@ -1,13 +1,19 @@
-.comments{
+:host {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 550px;
+
+  button {
+    flex-grow: 1;
+  }
+}
+
+.comments {
   position: relative;
   display: flex;
   justify-content: space-between;
-}
-
-.delete-comment-btn{
-  outline: 0;
-  border: none;
-  background: none;
 }
 
 .footer {

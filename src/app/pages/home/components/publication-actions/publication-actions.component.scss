@@ -1,4 +1,14 @@
 :host {
   display: flex;
   justify-content: space-evenly;
+
+  .comments-button {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+
+    button {
+      flex-grow: 1;
+    }
+  }
 }
