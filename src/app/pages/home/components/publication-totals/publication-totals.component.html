@@ -1,6 +1,6 @@
 <div class="reactions" *ngIf="!!publication.reactions.totalCount">
   <div class="reactions-images">
-    <img *ngFor="let reactions of displayedReactions" [src]="reactions">
+    <span *ngFor="let reaction of displayedReactions">{{ reaction }}</span>
   </div>
   <span *ngIf="publication.reactions.totalCount > 1">{{publication.reactions.totalCount}}</span>
 </div>

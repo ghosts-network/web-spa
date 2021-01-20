@@ -1,6 +1,6 @@
-import { ReactionButtonEnum } from './../../entities/reactions.enum';
 import { Component, Input } from '@angular/core';
 import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../modules/gateway-api';
+import {ReactionsService} from "../../entities/reactions.enum";
 
 @Component({
   selector: 'app-news-reactions',
@@ -11,10 +11,12 @@ export class ReactionsComponent {
 
   hide = true;
 
-  constructor(private newsFeedService: NewsFeedService) { }
+  constructor(private newsFeedService: NewsFeedService,
+              public reactionsService: ReactionsService) { }
 
   @Input()
   public publication: NewsFeedPublication;
+  public ReactionType = ReactionType;
 
   public addReaction(reaction: ReactionType): void {
     if (this.publication.reactions.user == null || this.publication.reactions.user.type !== reaction) {
@@ -30,23 +32,5 @@ export class ReactionsComponent {
       .subscribe(resp => {
         this.publication.reactions = resp
       });
-  }
-
-  public get availableReactions() {
-    return [0, 1, 2, 3, 4, 5].map(v => { return {index: v, url: ReactionButtonEnum[v]} });
-  }
-
-  public get userReaction() {
-    if (this.publication.reactions.user == null) {
-      return ReactionButtonEnum[0];
-    }
-    return ReactionButtonEnum[this.publication.reactions.user.type]
-  }
-
-  public get reactionName() {
-    if (this.publication.reactions.user == null) {
-      return ReactionType[0];
-    }
-    return ReactionType[this.publication.reactions.user.type]
   }
 }

@@ -3,17 +3,17 @@
           class="btn add-button"
           mat-button
           (click)="addReaction(0)">
-    <img class="img-reaction-btn" [src]="userReaction"> <span>{{reactionName}}</span>
+    <mat-icon>{{reactionsService.asIcon(ReactionType.Like)}}</mat-icon>
   </button>
   <button *ngIf="!!publication.reactions.user"
           class="btn"
           mat-button
           (click)="deleteReaction()">
-    <img class="img-reaction-btn" [src]="userReaction"> <span>{{reactionName}}</span>
+    <mat-icon>{{reactionsService.asIcon(publication.reactions.user.type)}}</mat-icon>
   </button>
   <div class="reactions-div">
-      <button *ngFor="let ar of availableReactions" (click)="addReaction(ar.index)">
-        <img [src]="ar.url" />
+      <button *ngFor="let reaction of reactionsService.all" (click)="addReaction(reaction)">
+        <mat-icon>{{reactionsService.asIcon(reaction)}}</mat-icon>
       </button>
   </div>
 </div>

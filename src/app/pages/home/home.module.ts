@@ -22,22 +22,36 @@ import {NewsCommentsComponent} from './components/news-comments/news-comments.co
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PublicationActionsComponent } from './components/publication-actions/publication-actions.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {ReactionsService} from "./entities/reactions.enum";
 
 @NgModule({
-  declarations: [HomePage, NewsFormComponent, NewsListComponent, NewsItemComponent, NewsFormCommentsComponent, ReactionsComponent, PublicationTotalsComponent, NewsCommentsComponent, PublicationActionsComponent],
-    imports: [
-        CommonModule,
-        HomeRoutingModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatSidenavModule,
-        MatCardModule,
-        MatDialogModule,
-        MatProgressSpinnerModule
-    ]
+  declarations: [
+    HomePage,
+    NewsFormComponent,
+    NewsListComponent,
+    NewsItemComponent,
+    NewsFormCommentsComponent,
+    ReactionsComponent,
+    PublicationTotalsComponent,
+    NewsCommentsComponent,
+    PublicationActionsComponent
+  ],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatCardModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
+  ],
+  providers: [
+    ReactionsService
+  ]
 })
 export class HomeModule { }
