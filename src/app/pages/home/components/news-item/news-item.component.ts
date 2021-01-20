@@ -9,6 +9,8 @@ import { NewsFeedPublication, NewsFeedService, PublicationComment} from '../../.
 })
 export class NewsItemComponent {
 
+  public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
+
   @Input()
   public publication: NewsFeedPublication;
   @Input()
