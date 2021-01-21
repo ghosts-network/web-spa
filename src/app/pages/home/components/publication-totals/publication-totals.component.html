@@ -4,6 +4,7 @@
   </div>
   <span *ngIf="publication.reactions.totalCount > 1">{{publication.reactions.totalCount}}</span>
 </div>
-<span *ngIf="!!publication.comments.totalCount">
+<div></div>
+<div *ngIf="!!publication.comments.totalCount">
   {{publication.comments.totalCount}} comment<span *ngIf="publication.comments.totalCount != 1">s</span>
-</span>
+</div>
