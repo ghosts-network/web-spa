@@ -23,6 +23,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PublicationActionsComponent } from './components/publication-actions/publication-actions.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {ReactionsService} from "./entities/reactions.enum";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {ReactionsService} from "./entities/reactions.enum";
     MatSidenavModule,
     MatCardModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDividerModule
   ],
   providers: [
     ReactionsService
