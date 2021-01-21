@@ -3,13 +3,15 @@
           class="btn add-button"
           mat-button
           (click)="addReaction(0)">
-    <mat-icon>{{reactionsService.asIcon(ReactionType.Like)}}</mat-icon>
+    {{reactionsService.asIcon(ReactionType.Like)}}
+    {{reactionsService.asText(ReactionType.Like)}}
   </button>
   <button *ngIf="!!publication.reactions.user"
           class="btn"
           mat-button
           (click)="deleteReaction()">
-    <mat-icon>{{reactionsService.asIcon(publication.reactions.user.type)}}</mat-icon>
+    {{reactionsService.asIcon(publication.reactions.user.type)}}
+    {{reactionsService.asText(publication.reactions.user.type)}}
   </button>
   <div class="reactions-div">
       <button *ngFor="let reaction of reactionsService.all" (click)="addReaction(reaction)">
