@@ -3,6 +3,7 @@ README.md
 api.module.ts
 api/api.ts
 api/newsFeed.service.ts
+api/users.service.ts
 configuration.ts
 encoder.ts
 git_push.sh
@@ -16,6 +17,7 @@ model/newsFeedPublication.ts
 model/publicationComment.ts
 model/reactionShort.ts
 model/reactionType.ts
+model/user.ts
 model/userInfo.ts
 model/userReaction.ts
 variables.ts

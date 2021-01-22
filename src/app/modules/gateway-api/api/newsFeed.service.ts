@@ -399,10 +399,10 @@ export class NewsFeedService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public newsFeedPublicationIdDelete(publicationId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
-    public newsFeedPublicationIdDelete(publicationId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
-    public newsFeedPublicationIdDelete(publicationId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
-    public newsFeedPublicationIdDelete(publicationId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+    public newsFeedPublicationIdDelete(publicationId: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any>;
+    public newsFeedPublicationIdDelete(publicationId: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<any>>;
+    public newsFeedPublicationIdDelete(publicationId: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<any>>;
+    public newsFeedPublicationIdDelete(publicationId: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
         if (publicationId === null || publicationId === undefined) {
             throw new Error('Required parameter publicationId was null or undefined when calling newsFeedPublicationIdDelete.');
         }
@@ -420,6 +420,9 @@ export class NewsFeedService {
         if (httpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'text/plain',
+                'application/json',
+                'text/json'
             ];
             httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -450,10 +453,10 @@ export class NewsFeedService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public newsFeedPublicationIdPut(publicationId: string, createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
-    public newsFeedPublicationIdPut(publicationId: string, createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
-    public newsFeedPublicationIdPut(publicationId: string, createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
-    public newsFeedPublicationIdPut(publicationId: string, createNewsFeedPublication?: CreateNewsFeedPublication, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+    public newsFeedPublicationIdPut(publicationId: string, createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any>;
+    public newsFeedPublicationIdPut(publicationId: string, createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<any>>;
+    public newsFeedPublicationIdPut(publicationId: string, createNewsFeedPublication?: CreateNewsFeedPublication, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<any>>;
+    public newsFeedPublicationIdPut(publicationId: string, createNewsFeedPublication?: CreateNewsFeedPublication, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
         if (publicationId === null || publicationId === undefined) {
             throw new Error('Required parameter publicationId was null or undefined when calling newsFeedPublicationIdPut.');
         }
@@ -471,6 +474,9 @@ export class NewsFeedService {
         if (httpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'text/plain',
+                'application/json',
+                'text/json'
             ];
             httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }

@@ -1,3 +1,5 @@
 export * from './newsFeed.service';
 import { NewsFeedService } from './newsFeed.service';
-export const APIS = [NewsFeedService];
+export * from './users.service';
+import { UsersService } from './users.service';
+export const APIS = [NewsFeedService, UsersService];
