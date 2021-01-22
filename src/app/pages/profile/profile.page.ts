@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {User, UsersService} from "../../modules/gateway-api";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  public user: User;
+
+  constructor(private usersService: UsersService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.usersService.usersUserIdGet(params.id).subscribe(user => {
+        this.user = user;
+      });
+    });
   }
 
 }
