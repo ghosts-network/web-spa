@@ -3,7 +3,9 @@
     <div mat-card-avatar
          class="avatar"
          style="background-image: url({{publication.author.avatarUrl || DefaultAvatar}})"></div>
-    <mat-card-title>{{publication.author.fullName}}</mat-card-title>
+    <mat-card-title>
+      <a class="link" [routerLink]="['/', publication.author.id]">{{publication.author.fullName}}</a>
+    </mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
