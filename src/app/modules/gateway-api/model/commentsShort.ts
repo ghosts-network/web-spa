@@ -14,6 +14,6 @@ import { PublicationComment } from './publicationComment';
 
 export interface CommentsShort {
     readonly topComments?: Array<PublicationComment> | null;
-    readonly totalCount?: number;
+    totalCount?: number;
 }
 
