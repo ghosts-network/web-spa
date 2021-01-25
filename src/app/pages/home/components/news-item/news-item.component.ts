@@ -1,5 +1,5 @@
 import { Profile } from 'oidc-client';
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import { NewsFeedPublication } from '../../../../modules/gateway-api';
 
 @Component({
@@ -17,7 +17,13 @@ export class NewsItemComponent {
   @Output() 
   onDeleted = new EventEmitter<NewsFeedPublication>();
 
+  public isPostOfCurrentUser: boolean;
+
   constructor() {}
+
+  ngOnInit(): void {
+    this.isPostOfCurrentUser = this.currentUser.sub == this.publication.author.id;
+  }
 
   public menuItemHandler(itemMenu: string) : void {
     switch (itemMenu) {

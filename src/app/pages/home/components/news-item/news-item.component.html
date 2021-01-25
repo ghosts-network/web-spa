@@ -12,7 +12,7 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #postMenu="matMenu">
-        <button (click)="menuItemHandler('delete')" mat-menu-item >
+        <button [disabled]="!isPostOfCurrentUser" (click)="menuItemHandler('delete')" mat-menu-item>
           <mat-icon>delete</mat-icon>
           <span>Delete</span>
         </button>
