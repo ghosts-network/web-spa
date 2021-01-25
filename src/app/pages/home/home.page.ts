@@ -32,6 +32,12 @@ export class HomePage implements OnInit {
     this.loadPublications();
   }
 
+  public onDeleted(publication: NewsFeedPublication) : void {
+    this.newsFeedService.newsFeedPublicationIdDelete(publication.id).subscribe(resp => {
+      this.news = this.news.filter(pub => pub.id != publication.id);
+    });
+  }
+
   public loadPublications(): void {
     this.showLoader = true;
     this.newsFeedService.newsFeedGet(this.newsOnPage, 20,  'response').subscribe(resp => {
