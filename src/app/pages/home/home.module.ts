@@ -22,6 +22,7 @@ import {NewsCommentsComponent} from './components/news-comments/news-comments.co
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { PublicationActionsComponent } from './components/publication-actions/publication-actions.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatMenuModule} from '@angular/material/menu';
 import {ReactionsService} from "./entities/reactions.enum";
 import {MatDividerModule} from "@angular/material/divider";
 
@@ -50,7 +51,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatCardModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule
   ],
   providers: [
     ReactionsService
