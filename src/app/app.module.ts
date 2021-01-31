@@ -10,10 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {environment} from "../environments/environment";
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import {TokenInterceptor} from "./providers/interceptors/token.interceptor";
-import {MatToolbarModule} from "@angular/material/toolbar";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {MatMenuModule} from "@angular/material/menu";
+import {SharedModule} from "./modules/shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -29,10 +26,7 @@ import {MatMenuModule} from "@angular/material/menu";
       basePath: environment.basePath
     })),
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule
+    SharedModule
   ],
   bootstrap: [AppComponent],
   providers: [
