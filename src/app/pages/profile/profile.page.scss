@@ -1,4 +1,13 @@
 .profile {
   max-width: 560px;
   margin: 0 auto;
+
+  .header {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      margin: 0;
+    }
+  }
 }

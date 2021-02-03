@@ -22,4 +22,8 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  public setupInfo(): void {
+    console.log(123);
+  }
+
 }
