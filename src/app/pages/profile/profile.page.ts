@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {User, UsersService} from "../../modules/gateway-api";
 import {ActivatedRoute} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {NewsCommentsComponent} from "../home/components/news-comments/news-comments.component";
+import {ProfileFormComponent} from "./components/profile-form/profile-form.component";
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +15,8 @@ export class ProfilePage implements OnInit {
   public user: User;
 
   constructor(private usersService: UsersService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -23,7 +27,9 @@ export class ProfilePage implements OnInit {
   }
 
   public setupInfo(): void {
-    console.log(123);
+    this.dialog.open(ProfileFormComponent, {
+      data: this.user
+    });
   }
 
 }

@@ -6,10 +6,13 @@ import {ProfileRoutingModule} from "./profile-routing.module";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
-    ProfilePage
+    ProfilePage,
+    ProfileFormComponent
   ],
   imports: [
     CommonModule,
@@ -18,6 +21,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
+    MatDialogModule
   ]
 })
 export class ProfileModule { }

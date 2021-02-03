@@ -1,7 +1,7 @@
 <div *ngIf="user" class="profile">
   <div class="header">
     <h1>{{user.firstName}} {{user.lastName}}</h1>
-    <button mat-icon-button><mat-icon [inline]="true">edit</mat-icon></button>
+    <button mat-icon-button><mat-icon [inline]="true" (click)="setupInfo()">edit</mat-icon></button>
   </div>
   <p *ngIf="user.gender">Sex: {{user.gender}}</p>
   <p *ngIf="user.dateOfBirth">DOB: {{user.dateOfBirth}}</p>
