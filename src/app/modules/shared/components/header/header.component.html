@@ -1,7 +1,7 @@
 <mat-toolbar *ngIf="user" color="primary">
   <span>Ghost Network</span>
   <span class="spacer"></span>
-  <span>{{user.name}}</span>
+  <a class="link" [routerLink]="['/', user.sub]">{{user.name}}</a>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>

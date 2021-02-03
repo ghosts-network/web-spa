@@ -5,18 +5,20 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [HeaderComponent],
   exports: [
     HeaderComponent
   ],
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule
-  ]
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        RouterModule
+    ]
 })
 export class HeaderModule { }
