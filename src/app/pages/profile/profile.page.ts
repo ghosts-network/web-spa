@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {User, UsersService} from "../../modules/gateway-api";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {NewsCommentsComponent} from "../home/components/news-comments/news-comments.component";
 import {ProfileFormComponent} from "./components/profile-form/profile-form.component";
 
 @Component({
@@ -20,16 +19,32 @@ export class ProfilePage implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.usersService.usersUserIdGet(params.id).subscribe(user => {
-        this.user = user;
-      });
+      this.fetchUser(params.id);
+    });
+  }
+
+  private fetchUser(id: string) {
+    this.usersService.usersUserIdGet(id).subscribe(user => {
+      this.user = user;
     });
   }
 
   public setupInfo(): void {
-    this.dialog.open(ProfileFormComponent, {
+    const dialogRef = this.dialog.open(ProfileFormComponent, {
       data: this.user
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!!result) {
+        this.usersService.usersUserIdPut(this.user.id, {
+          gender: result.gender
+        }).subscribe(r => {
+          this.fetchUser(this.user.id);
+        });
+      }
+    });
   }
+
+
 
 }
