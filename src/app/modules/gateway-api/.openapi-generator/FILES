@@ -14,9 +14,11 @@ model/commentsShort.ts
 model/createNewsFeedPublication.ts
 model/models.ts
 model/newsFeedPublication.ts
+model/problemDetails.ts
 model/publicationComment.ts
 model/reactionShort.ts
 model/reactionType.ts
+model/updateUserInput.ts
 model/user.ts
 model/userInfo.ts
 model/userReaction.ts

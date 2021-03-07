@@ -12,6 +12,7 @@
 
 
 export interface User { 
+    readonly id?: string;
     readonly firstName?: string | null;
     readonly lastName?: string | null;
     readonly gender?: string | null;

@@ -9,13 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { ReactionType } from './reactionType';
-import { UserReaction } from './userReaction';
 
 
-export interface ReactionShort { 
-    readonly reactions?: Array<ReactionType> | null;
-    readonly totalCount?: number;
-    user?: UserReaction;
+export interface UpdateUserInput { 
+    gender?: string | null;
+    dateOfBirth?: string | null;
 }
 
