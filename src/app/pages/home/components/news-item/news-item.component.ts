@@ -14,22 +14,16 @@ export class NewsItemComponent {
   @Input()
   public currentUser: Profile;
 
-  @Output() 
+  @Output()
   onDeleted = new EventEmitter<NewsFeedPublication>();
-
-  public isPostOfCurrentUser: boolean;
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.isPostOfCurrentUser = this.currentUser.sub == this.publication.author.id;
+  public get isCurrentUserPost(): boolean {
+    return this.currentUser.sub == this.publication.author.id;
   }
 
-  public menuItemHandler(itemMenu: string) : void {
-    switch (itemMenu) {
-      case 'delete':
-        this.onDeleted.emit(this.publication)
-        break;
-    }
+  public deleteClick(): void {
+    this.onDeleted.emit(this.publication);
   }
 }
