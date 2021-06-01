@@ -1,6 +1,6 @@
 import { Profile } from 'oidc-client';
 import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
-import { NewsFeedPublication } from '../../../../modules/gateway-api';
+import { NewsFeedPublication } from '../../../../../gateway-api';
 
 @Component({
   selector: 'app-news-item',

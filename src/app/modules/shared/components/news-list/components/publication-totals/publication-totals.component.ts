@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {NewsFeedPublication} from "../../../../modules/gateway-api";
-import {ReactionsService} from "../../entities/reactions.enum";
+import {NewsFeedPublication} from "../../../../../gateway-api";
+import {ReactionsService} from "../../../../../../pages/home/entities/reactions.enum";
 
 @Component({
   selector: 'app-publication-totals',

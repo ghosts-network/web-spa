@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { Profile } from 'oidc-client';
-import { NewsFeedPublication, NewsFeedService, PublicationComment, CommentsShort} from '../../../../modules/gateway-api';
+import { NewsFeedPublication, NewsFeedService, PublicationComment, CommentsShort} from '../../../../../gateway-api';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {AuthService} from "../../../../providers/services/auth/auth.service";
+import {AuthService} from "../../../../../../providers/services/auth/auth.service";
 
 @Component({
   selector: 'app-news-comments',

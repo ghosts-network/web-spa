@@ -1,13 +1,13 @@
-.profile {
+.user-card {
   max-width: 560px;
-  margin: 0 auto;
+  margin: 15px auto 0 auto;
 
-  .header {
-    display: flex;
-    align-items: center;
-
-    h1 {
-      margin: 0;
-    }
+  .avatar {
+    background-size: cover;
   }
+}
+
+.news-feed {
+  max-width: 560px;
+  margin: 15px auto 0 auto;
 }

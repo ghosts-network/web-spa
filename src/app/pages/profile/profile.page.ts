@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {User, UsersService} from "../../modules/gateway-api";
+import {NewsFeedPublication, NewsFeedService, User, UsersService} from "../../modules/gateway-api";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ProfileFormComponent} from "./components/profile-form/profile-form.component";
+import {Profile} from "oidc-client";
 
 @Component({
   selector: 'app-profile',
@@ -10,16 +11,23 @@ import {ProfileFormComponent} from "./components/profile-form/profile-form.compo
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
+  public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
 
+  public news: NewsFeedPublication[] = [];
   public user: User;
+  private newsOnPage = 0;
+  public hasMore: boolean;
+  public showLoader = false;
 
   constructor(private usersService: UsersService,
+              private newsFeedService: NewsFeedService,
               private route: ActivatedRoute,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.fetchUser(params.id);
+      this.loadPublications(params.id);
     });
   }
 
@@ -45,6 +53,36 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  public onPublished(publication: NewsFeedPublication): void {
+    this.newsOnPage = 0;
+    this.loadPublications(this.user.id);
+  }
 
+  public onDeleted(publication: NewsFeedPublication) : void {
+    this.newsFeedService.newsFeedPublicationIdDelete(publication.id).subscribe(resp => {
+      this.news = this.news.filter(pub => pub.id != publication.id);
+    });
+  }
 
+  public loadPublications(id: string): void {
+    this.showLoader = true;
+    this.newsFeedService.newsFeedUsersUserIdGet(id, this.newsOnPage, 20,  'response').subscribe(resp => {
+      this.newsOnPage += resp.body.length;
+      this.hasMore = (resp.headers.get('x-hasmore') === 'True');
+      this.news = resp.body;
+      this.showLoader = false;
+    });
+  }
+
+  loadMore(): void {
+    if (this.hasMore) {
+      this.showLoader = true;
+      this.newsFeedService.newsFeedGet(this.newsOnPage, 20, 'response').subscribe(resp => {
+        this.newsOnPage += resp.body.length;
+        this.hasMore = (resp.headers.get('x-hasmore') === 'True');
+        this.news = [].concat(this.news, resp.body);
+        this.showLoader = false;
+      });
+    }
+  }
 }
