@@ -127,14 +127,14 @@ export class NewsFeedService {
         }
 
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.delete<any>(`${this.configuration.basePath}/NewsFeed/comments/${encodeURIComponent(String(commentId))}`,
             {
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -188,15 +188,15 @@ export class NewsFeedService {
         }
 
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.get<Array<NewsFeedPublication>>(`${this.configuration.basePath}/NewsFeed`,
             {
                 params: queryParameters,
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -250,15 +250,15 @@ export class NewsFeedService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.post<NewsFeedPublication>(`${this.configuration.basePath}/NewsFeed`,
             createNewsFeedPublication,
             {
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -313,15 +313,15 @@ export class NewsFeedService {
         }
 
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.get<any>(`${this.configuration.basePath}/NewsFeed/${encodeURIComponent(String(publicationId))}/comments`,
             {
                 params: queryParameters,
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -379,15 +379,15 @@ export class NewsFeedService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.post<PublicationComment>(`${this.configuration.basePath}/NewsFeed/${encodeURIComponent(String(publicationId))}/comments`,
             addNewsFeedComment,
             {
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -433,14 +433,14 @@ export class NewsFeedService {
         }
 
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.delete<any>(`${this.configuration.basePath}/NewsFeed/${encodeURIComponent(String(publicationId))}`,
             {
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -498,15 +498,15 @@ export class NewsFeedService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.put<any>(`${this.configuration.basePath}/NewsFeed/${encodeURIComponent(String(publicationId))}`,
             createNewsFeedPublication,
             {
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -549,14 +549,14 @@ export class NewsFeedService {
         }
 
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.delete<any>(`${this.configuration.basePath}/NewsFeed/${encodeURIComponent(String(publicationId))}/reaction`,
             {
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -614,15 +614,81 @@ export class NewsFeedService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        let responseType: 'text' | 'json' = 'json';
+        let responseType_: 'text' | 'json' = 'json';
         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
-            responseType = 'text';
+            responseType_ = 'text';
         }
 
         return this.httpClient.post<ReactionShort>(`${this.configuration.basePath}/NewsFeed/${encodeURIComponent(String(publicationId))}/reaction`,
             addNewsFeedReaction,
             {
-                responseType: <any>responseType,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param userId 
+     * @param skip 
+     * @param take 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<NewsFeedPublication>>;
+    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<NewsFeedPublication>>>;
+    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<NewsFeedPublication>>>;
+    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling newsFeedUsersUserIdGet.');
+        }
+
+        let queryParameters = new HttpParams({encoder: this.encoder});
+        if (skip !== undefined && skip !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>skip, 'skip');
+        }
+        if (take !== undefined && take !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>take, 'take');
+        }
+
+        let headers = this.defaultHeaders;
+
+        let credential: string | undefined;
+        // authentication (oauth2) required
+        credential = this.configuration.lookupCredential('oauth2');
+        if (credential) {
+            headers = headers.set('Authorization', 'Bearer ' + credential);
+        }
+
+        let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (httpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'text/plain',
+                'application/json',
+                'text/json'
+            ];
+            httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        let responseType_: 'text' | 'json' = 'json';
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+            responseType_ = 'text';
+        }
+
+        return this.httpClient.get<Array<NewsFeedPublication>>(`${this.configuration.basePath}/NewsFeed/users/${encodeURIComponent(String(userId))}`,
+            {
+                params: queryParameters,
+                responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

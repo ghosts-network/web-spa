@@ -11,32 +11,19 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import {ReactiveFormsModule} from '@angular/forms';
 
-import { NewsListComponent } from './components/news-list/news-list.component';
-import { NewsItemComponent } from './components/news-item/news-item.component';
 import { HomePage } from './home.page';
 import { NewsFormComponent } from './components/news-form/news-form.component';
-import { NewsFormCommentsComponent } from './components/news-form-comments/news-form-comments.component';
-import { ReactionsComponent } from './components/news-reactions/news-reactions.component';
-import { PublicationTotalsComponent } from './components/publication-totals/publication-totals.component';
-import {NewsCommentsComponent} from './components/news-comments/news-comments.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { PublicationActionsComponent } from './components/publication-actions/publication-actions.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatMenuModule} from '@angular/material/menu';
 import {ReactionsService} from "./entities/reactions.enum";
 import {MatDividerModule} from "@angular/material/divider";
+import {NewsListModule} from "../../modules/shared/components/news-list/news-list.module";
 
 @NgModule({
   declarations: [
     HomePage,
-    NewsFormComponent,
-    NewsListComponent,
-    NewsItemComponent,
-    NewsFormCommentsComponent,
-    ReactionsComponent,
-    PublicationTotalsComponent,
-    NewsCommentsComponent,
-    PublicationActionsComponent
+    NewsFormComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +39,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatDialogModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    NewsListModule
   ],
   providers: [
     ReactionsService

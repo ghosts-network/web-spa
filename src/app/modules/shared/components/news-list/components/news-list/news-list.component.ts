@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Profile } from 'oidc-client';
-import {NewsFeedPublication} from '../../../../modules/gateway-api';
+import {NewsFeedPublication} from '../../../../../gateway-api';
 
 @Component({
   selector: 'app-news-list',
@@ -14,9 +14,9 @@ export class NewsListComponent {
   @Input()
   public user: Profile;
 
-  @Output() 
+  @Output()
   onDeleted = new EventEmitter<NewsFeedPublication>();
-  
+
   constructor() { }
 
   public deleteEventHandler($event) {

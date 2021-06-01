@@ -10,6 +10,9 @@ import { ProfileFormComponent } from './components/profile-form/profile-form.com
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCardModule} from "@angular/material/card";
+import {NewsListModule} from "../../modules/shared/components/news-list/news-list.module";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ReactionsService} from "../home/entities/reactions.enum";
 
 @NgModule({
   declarations: [
@@ -25,7 +28,12 @@ import {MatCardModule} from "@angular/material/card";
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule,
+    NewsListModule
+  ],
+  providers: [
+    ReactionsService
   ]
 })
 export class ProfileModule { }

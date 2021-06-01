@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {NewsFeedPublication} from "../../../../modules/gateway-api";
+import {NewsFeedPublication} from "../../../../../gateway-api";
 import {MatDialog} from "@angular/material/dialog";
 import {NewsCommentsComponent} from "../news-comments/news-comments.component";
 
