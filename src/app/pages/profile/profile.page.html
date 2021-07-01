@@ -5,7 +5,7 @@
          style="background-image: url({{DefaultAvatar}})"></div>
     <mat-card-title>
       <span>{{user.firstName}} {{user.lastName}}</span>
-      <button mat-icon-button><mat-icon [inline]="true" (click)="setupInfo()">edit</mat-icon></button>
+      <button *ngIf="editable" mat-icon-button><mat-icon [inline]="true" (click)="setupInfo()">edit</mat-icon></button>
     </mat-card-title>
   </mat-card-header>
 </mat-card>

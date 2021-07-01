@@ -3,7 +3,7 @@ import {NewsFeedPublication, NewsFeedService, User, UsersService} from "../../mo
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ProfileFormComponent} from "./components/profile-form/profile-form.component";
-import {Profile} from "oidc-client";
+import {AuthService} from "../../providers/services/auth/auth.service";
 
 @Component({
   selector: 'app-profile',
@@ -19,16 +19,25 @@ export class ProfilePage implements OnInit {
   public hasMore: boolean;
   public showLoader = false;
 
+  private currentUserId: string;
+
   constructor(private usersService: UsersService,
               private newsFeedService: NewsFeedService,
+              private authService: AuthService,
               private route: ActivatedRoute,
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.fetchUser(params.id);
+      this.newsOnPage = 0;
       this.loadPublications(params.id);
     });
+
+    this.authService.getUser()
+      .subscribe(user => {
+        this.currentUserId = user.profile.sub;
+      });
   }
 
   private fetchUser(id: string) {
@@ -84,5 +93,9 @@ export class ProfilePage implements OnInit {
         this.showLoader = false;
       });
     }
+  }
+
+  public get editable() : boolean {
+    return this.currentUserId == this.user.id;
   }
 }
