@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NewsFeedPublication, NewsFeedService, User, UsersService} from "../../modules/gateway-api";
+import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService,RelationsService} from "../../modules/gateway-api";
 import {ActivatedRoute} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ProfileFormComponent} from "./components/profile-form/profile-form.component";
@@ -14,6 +14,10 @@ export class ProfilePage implements OnInit {
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
 
   public news: NewsFeedPublication[] = [];
+  public outgoingRequests: UserInfo[] = [];
+  public incomingRequests: UserInfo[] = [];
+  public friends: UserInfo[] = [];
+  public followers: UserInfo[] = [];
   public user: User;
   private newsOnPage = 0;
   public hasMore: boolean;
@@ -23,6 +27,7 @@ export class ProfilePage implements OnInit {
 
   constructor(private usersService: UsersService,
               private newsFeedService: NewsFeedService,
+              private relationsService: RelationsService,
               private authService: AuthService,
               private route: ActivatedRoute,
               private dialog: MatDialog) { }
@@ -32,6 +37,10 @@ export class ProfilePage implements OnInit {
       this.fetchUser(params.id);
       this.newsOnPage = 0;
       this.loadPublications(params.id);
+      this.loadFriends(params.id);
+      this.loadFollowers(params.id);
+      this.loadOutgoingRequests();
+      this.loadIncomingRequests();
     });
 
     this.authService.getUser()
@@ -83,6 +92,30 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  public loadOutgoingRequests(): void {
+    this.relationsService.relationsFriendsOutgoingRequestsGet(0, 20).subscribe(resp => {
+      this.outgoingRequests = resp;
+    });
+  }
+
+  public loadIncomingRequests(): void {
+    this.relationsService.relationsFriendsIncomingRequestsGet(0, 20).subscribe(resp => {
+      this.incomingRequests = resp;
+    });
+  }
+
+  public loadFriends(id: string): void {
+    this.relationsService.relationsUserIdFriendsGet(id, 0, 20).subscribe(resp => {
+      this.friends = resp;
+    });
+  }
+
+  public loadFollowers(id: string): void {
+    this.relationsService.relationsUserIdFollowersGet(id, 0, 20).subscribe(resp => {
+      this.followers = resp;
+    });
+  }
+
   loadMore(): void {
     if (this.hasMore) {
       this.showLoader = true;
@@ -97,5 +130,19 @@ export class ProfilePage implements OnInit {
 
   public get editable() : boolean {
     return this.currentUserId == this.user.id;
+  }
+
+  addFriend() {
+    this.relationsService.relationsFriendsToUserPost(this.user.id)
+      .subscribe(resp => {
+        console.log(resp);
+      });
+  }
+
+  approveFriend(id: string) {
+    this.relationsService.relationsFriendsRequesterApprovePut(id)
+      .subscribe(resp => {
+        console.log(resp);
+      });
   }
 }

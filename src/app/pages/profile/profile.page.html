@@ -8,6 +8,38 @@
       <button *ngIf="editable" mat-icon-button><mat-icon [inline]="true" (click)="setupInfo()">edit</mat-icon></button>
     </mat-card-title>
   </mat-card-header>
+  <mat-card-content>
+    <div>
+      <button *ngIf="!editable" mat-button (click)="addFriend()">Add friend</button>
+    </div>
+    <div>
+      <p>Friends</p>
+      <ul>
+        <li *ngFor="let friend of friends">
+          <a [routerLink]="['/', friend.id]">{{friend.fullName}}</a>
+        </li>
+      </ul>
+      <p>Followers</p>
+      <ul>
+        <li *ngFor="let follower of followers">
+          <a [routerLink]="['/', follower.id]">{{follower.fullName}}</a>
+        </li>
+      </ul>
+      <p *ngIf="editable">Outgoing requests</p>
+      <ul *ngIf="editable">
+        <li *ngFor="let outgoingRequest of outgoingRequests">
+          <a [routerLink]="['/', outgoingRequest.id]">{{outgoingRequest.fullName}}</a>
+        </li>
+      </ul>
+      <p *ngIf="editable">Incoming requests</p>
+      <ul *ngIf="editable">
+        <li *ngFor="let incomingRequest of incomingRequests">
+          <a [routerLink]="['/', incomingRequest.id]">{{incomingRequest.fullName}}</a>
+          <button mat-button (click)="approveFriend(incomingRequest.id)">Approve</button>
+        </li>
+      </ul>
+    </div>
+  </mat-card-content>
 </mat-card>
 
 <div class="news-feed">

@@ -140,9 +140,9 @@ export class RelationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public relationsFriendsIncomingRequestsGet(skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<User>;
-    public relationsFriendsIncomingRequestsGet(skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<User>>;
-    public relationsFriendsIncomingRequestsGet(skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<User>>;
+    public relationsFriendsIncomingRequestsGet(skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<User>>;
+    public relationsFriendsIncomingRequestsGet(skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<User>>>;
+    public relationsFriendsIncomingRequestsGet(skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<User>>>;
     public relationsFriendsIncomingRequestsGet(skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: this.encoder});
@@ -184,7 +184,7 @@ export class RelationsService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<User>(`${this.configuration.basePath}/Relations/friends/incoming-requests`,
+        return this.httpClient.get<Array<User>>(`${this.configuration.basePath}/Relations/friends/incoming-requests`,
             {
                 params: queryParameters,
                 responseType: <any>responseType_,
@@ -202,9 +202,9 @@ export class RelationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public relationsFriendsOutgoingRequestsGet(skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<User>;
-    public relationsFriendsOutgoingRequestsGet(skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<User>>;
-    public relationsFriendsOutgoingRequestsGet(skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<User>>;
+    public relationsFriendsOutgoingRequestsGet(skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<User>>;
+    public relationsFriendsOutgoingRequestsGet(skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<User>>>;
+    public relationsFriendsOutgoingRequestsGet(skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<User>>>;
     public relationsFriendsOutgoingRequestsGet(skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
 
         let queryParameters = new HttpParams({encoder: this.encoder});
@@ -246,7 +246,7 @@ export class RelationsService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<User>(`${this.configuration.basePath}/Relations/friends/outgoing-requests`,
+        return this.httpClient.get<Array<User>>(`${this.configuration.basePath}/Relations/friends/outgoing-requests`,
             {
                 params: queryParameters,
                 responseType: <any>responseType_,
@@ -418,9 +418,9 @@ export class RelationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public relationsUserIdFollowersGet(userId: string, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<User>;
-    public relationsUserIdFollowersGet(userId: string, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<User>>;
-    public relationsUserIdFollowersGet(userId: string, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<User>>;
+    public relationsUserIdFollowersGet(userId: string, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<User>>;
+    public relationsUserIdFollowersGet(userId: string, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<User>>>;
+    public relationsUserIdFollowersGet(userId: string, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<User>>>;
     public relationsUserIdFollowersGet(userId: string, skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
         if (userId === null || userId === undefined) {
             throw new Error('Required parameter userId was null or undefined when calling relationsUserIdFollowersGet.');
@@ -465,7 +465,7 @@ export class RelationsService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<User>(`${this.configuration.basePath}/Relations/${encodeURIComponent(String(userId))}/followers`,
+        return this.httpClient.get<Array<User>>(`${this.configuration.basePath}/Relations/${encodeURIComponent(String(userId))}/followers`,
             {
                 params: queryParameters,
                 responseType: <any>responseType_,
@@ -484,9 +484,9 @@ export class RelationsService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public relationsUserIdFriendsGet(userId: string, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<User>;
-    public relationsUserIdFriendsGet(userId: string, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<User>>;
-    public relationsUserIdFriendsGet(userId: string, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<User>>;
+    public relationsUserIdFriendsGet(userId: string, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<User>>;
+    public relationsUserIdFriendsGet(userId: string, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<User>>>;
+    public relationsUserIdFriendsGet(userId: string, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<User>>>;
     public relationsUserIdFriendsGet(userId: string, skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
         if (userId === null || userId === undefined) {
             throw new Error('Required parameter userId was null or undefined when calling relationsUserIdFriendsGet.');
@@ -531,7 +531,7 @@ export class RelationsService {
             responseType_ = 'text';
         }
 
-        return this.httpClient.get<User>(`${this.configuration.basePath}/Relations/${encodeURIComponent(String(userId))}/friends`,
+        return this.httpClient.get<Array<User>>(`${this.configuration.basePath}/Relations/${encodeURIComponent(String(userId))}/friends`,
             {
                 params: queryParameters,
                 responseType: <any>responseType_,
