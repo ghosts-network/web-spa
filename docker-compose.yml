@@ -8,17 +8,7 @@ services:
     depends_on:
       - db
     environment:
-      - MONGO_ADDRESS=db:27017
-      - ASPNETCORE_ENVIRONMENT=Development
-
-  reactions:
-    image: ghcr.io/ghosts-network/reactions:latest
-    ports:
-      - "5200:80"
-    depends_on:
-      - db
-    environment:
-      - MONGO_ADDRESS=db:27017
+      - MONGO_CONNECTION=mongodb://db:27017/gpublications
       - ASPNETCORE_ENVIRONMENT=Development
 
   profiles:
@@ -28,7 +18,7 @@ services:
     depends_on:
       - db
     environment:
-      - MONGO_ADDRESS=db:27017
+      - MONGO_CONNECTION=mongodb://db:27017/gprofiles
       - ASPNETCORE_ENVIRONMENT=Development
 
   account:
@@ -51,12 +41,10 @@ services:
       - "5000:80"
     depends_on:
       - publications
-      - reactions
       - profiles
       - account
     environment:
       - PUBLICATIONS_ADDRESS=http://publications
-      - REACTIONS_ADDRESS=http://reactions
       - PROFILES_ADDRESS=http://profiles
       - ASPNETCORE_ENVIRONMENT=Development
 
