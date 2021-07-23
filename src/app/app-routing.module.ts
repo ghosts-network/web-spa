@@ -10,6 +10,11 @@ const routes: Routes = [
     component: AuthCallbackComponent
   },
   {
+    path: 'style',
+    loadChildren: () => import('./pages/style/style.module').then(m => m.StyleModule),
+    canLoad: [AuthGuardService]
+  },
+  {
     path: ':id',
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
     canLoad: [AuthGuardService]

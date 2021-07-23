@@ -1,6 +1,7 @@
 import { Profile } from 'oidc-client';
 import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import { NewsFeedPublication } from '../../../../../gateway-api';
+import {Reactions} from "../../../reactions/reactions.component";
 
 @Component({
   selector: 'app-news-item',
@@ -25,5 +26,13 @@ export class NewsItemComponent {
 
   public deleteClick(): void {
     this.onDeleted.emit(this.publication);
+  }
+
+  public get reactions(): Reactions {
+    const r = this.publication.reactions;
+    return {
+      totalCount: r.totalCount,
+      types: r.reactions
+    };
   }
 }

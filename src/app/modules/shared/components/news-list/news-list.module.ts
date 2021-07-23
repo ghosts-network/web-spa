@@ -4,7 +4,6 @@ import {NewsListComponent} from "./components/news-list/news-list.component";
 import {NewsItemComponent} from "./components/news-item/news-item.component";
 import {NewsFormCommentsComponent} from "./components/news-form-comments/news-form-comments.component";
 import {ReactionsComponent} from "./components/news-reactions/news-reactions.component";
-import {PublicationTotalsComponent} from "./components/publication-totals/publication-totals.component";
 import {NewsCommentsComponent} from "./components/news-comments/news-comments.component";
 import {PublicationActionsComponent} from "./components/publication-actions/publication-actions.component";
 import {ReactiveFormsModule} from "@angular/forms";
@@ -20,6 +19,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatMenuModule} from "@angular/material/menu";
 import {RouterModule} from "@angular/router";
+import {ReactionsModule} from "../reactions/reactions.module";
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import {RouterModule} from "@angular/router";
     NewsItemComponent,
     NewsFormCommentsComponent,
     ReactionsComponent,
-    PublicationTotalsComponent,
     NewsCommentsComponent,
     PublicationActionsComponent
   ],
@@ -45,14 +44,14 @@ import {RouterModule} from "@angular/router";
     MatDialogModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+    ReactionsModule
   ],
   exports: [
     NewsListComponent,
     NewsItemComponent,
     NewsFormCommentsComponent,
     ReactionsComponent,
-    PublicationTotalsComponent,
     NewsCommentsComponent,
     PublicationActionsComponent
   ]
