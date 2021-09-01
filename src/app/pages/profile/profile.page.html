@@ -36,6 +36,7 @@
         <li *ngFor="let incomingRequest of incomingRequests">
           <a [routerLink]="['/', incomingRequest.id]">{{incomingRequest.fullName}}</a>
           <button mat-button (click)="approveFriend(incomingRequest.id)">Approve</button>
+          <button mat-button (click)="declineFriendRequest(incomingRequest.id)">Decline</button>
         </li>
       </ul>
     </div>
