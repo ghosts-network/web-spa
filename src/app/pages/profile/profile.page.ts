@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService,RelationsService} from "../../modules/gateway-api";
-import {ActivatedRoute} from "@angular/router";
-import {MatDialog} from "@angular/material/dialog";
-import {ProfileFormComponent} from "./components/profile-form/profile-form.component";
-import {AuthService} from "../../providers/services/auth/auth.service";
+import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService, RelationsService } from '../../modules/gateway-api';
+import {ActivatedRoute} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {ProfileFormComponent} from './components/profile-form/profile-form.component';
+import {AuthService} from '../../providers/services/auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -49,7 +49,7 @@ export class ProfilePage implements OnInit {
       });
   }
 
-  private fetchUser(id: string) {
+  private fetchUser(id: string): void {
     this.usersService.usersUserIdGet(id).subscribe(user => {
       this.user = user;
     });
@@ -76,9 +76,9 @@ export class ProfilePage implements OnInit {
     this.loadPublications(this.user.id);
   }
 
-  public onDeleted(publication: NewsFeedPublication) : void {
+  public onDeleted(publication: NewsFeedPublication): void {
     this.newsFeedService.newsFeedPublicationIdDelete(publication.id).subscribe(resp => {
-      this.news = this.news.filter(pub => pub.id != publication.id);
+      this.news = this.news.filter(pub => pub.id !== publication.id);
     });
   }
 
@@ -128,21 +128,30 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  public get editable() : boolean {
-    return this.currentUserId == this.user.id;
+  public get editable(): boolean {
+    return this.currentUserId === this.user.id;
   }
 
-  addFriend() {
+  addFriend(): void {
     this.relationsService.relationsFriendsToUserPost(this.user.id)
       .subscribe(resp => {
         console.log(resp);
       });
   }
 
-  approveFriend(id: string) {
+  approveFriend(id: string): void {
     this.relationsService.relationsFriendsRequesterApprovePut(id)
       .subscribe(resp => {
         console.log(resp);
+        this.loadIncomingRequests();
+      });
+  }
+
+  declineFriendRequest(id: string): void {
+    this.relationsService.relationsFriendsRequesterDeclinePost(id)
+      .subscribe(resp => {
+        console.log(resp);
+        this.loadIncomingRequests();
       });
   }
 }
