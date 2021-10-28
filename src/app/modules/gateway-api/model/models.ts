@@ -2,6 +2,7 @@ export * from './addNewsFeedComment';
 export * from './addNewsFeedReaction';
 export * from './commentsShort';
 export * from './createNewsFeedPublication';
+export * from './updateNewsFeedComment';
 export * from './newsFeedPublication';
 export * from './problemDetails';
 export * from './publicationComment';
