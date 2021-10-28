@@ -1,11 +1,25 @@
 <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
 <mat-card-content *ngIf="comments">
   <div class="comments" *ngFor="let comment of comments">
-    {{comment.content}}
-    <div class="delete-comment">
+    <div *ngIf="!isEditNow && currentEditedComment == null || currentEditedComment.id != comment.id">{{comment.content}}</div>
+    <form *ngIf="isEditNow && currentEditedComment.id == comment.id" [formGroup]="form" (ngSubmit)="editSubmitted()">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Edit your comment</mat-label>
+        <input formControlName="content" matInput>
+      </mat-form-field>
+      <button type="submit" *ngIf="currentUser?.sub === comment.authorId"
+                mat-icon-button (click)="editSubmitted()" color="primary">
+        Submit
+      </button>
+    </form>
+    <div class="action-comment">
+      <button *ngIf="currentUser?.sub === comment.authorId"
+              mat-icon-button (click)="editComment(comment)">
+        <mat-icon>edit</mat-icon>
+      </button>
       <button *ngIf="currentUser?.sub === comment.authorId"
               mat-icon-button (click)="deleteComment(comment)">
-        <mat-icon>clear</mat-icon>
+        <mat-icon>delete</mat-icon>
       </button>
     </div>
   </div>
