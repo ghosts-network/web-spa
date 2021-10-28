@@ -14,7 +14,7 @@ import { UserInfo } from './userInfo';
 
 export interface PublicationComment {
     readonly id?: string | null;
-    readonly content?: string | null;
+    content?: string | null;
     readonly publicationId?: string | null;
     readonly authorId?: string;
     author?: UserInfo;
