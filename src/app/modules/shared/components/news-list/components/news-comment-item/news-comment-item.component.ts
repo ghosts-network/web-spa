@@ -44,8 +44,13 @@ export class NewsCommentItemComponent implements OnInit {
 
   public editSubmitted() {
     if (this.form.valid) {
+      if (this.comment.content == this.form.get('content').value) {
+        this.isEditNow = false;
+        return;
+      }
       this.comment.content = this.form.get('content').value;
       this.onEdited.emit(this.comment);
+      this.isEditNow = false;
     }
   }
 }
