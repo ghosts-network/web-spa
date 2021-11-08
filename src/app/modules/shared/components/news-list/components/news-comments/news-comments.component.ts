@@ -1,9 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { Profile } from 'oidc-client';
-import { NewsFeedPublication, NewsFeedService, PublicationComment, CommentsShort, UpdateNewsFeedComment } from '../../../../../gateway-api';
+import { NewsFeedPublication, NewsFeedService, PublicationComment } from '../../../../../gateway-api';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {AuthService} from "../../../../../../providers/services/auth/auth.service";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-news-comments',
@@ -16,21 +15,13 @@ export class NewsCommentsComponent implements OnInit {
   private skip = 0;
   private index: number;
 
-  public isEditNow: Boolean = false;
   public comments = new Array<PublicationComment>();
-  public form: FormGroup;
   
   public currentUser: Profile;
-  public currentEditedComment: PublicationComment = null;
 
   constructor(private newsFeedService: NewsFeedService,
               @Inject(MAT_DIALOG_DATA) public publication: NewsFeedPublication,
-              private authService: AuthService,
-              private fb: FormBuilder) {
-    this.form = fb.group({
-      content: ['', [Validators.required]]
-    });
-  }
+              private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.getProfile()
@@ -48,7 +39,7 @@ export class NewsCommentsComponent implements OnInit {
     });
   }
 
-  public deleteComment(comment: PublicationComment): void {
+  public onDelete(comment: PublicationComment): void {
     this.newsFeedService.newsFeedCommentsCommentIdDelete(comment.id)
     .subscribe(resp => {
       this.publication.comments.totalCount -= 1;
@@ -57,20 +48,10 @@ export class NewsCommentsComponent implements OnInit {
     });
   }
 
-  public editComment(comment: PublicationComment): void {
-    this.isEditNow = !this.isEditNow;
-    this.currentEditedComment = comment;
-
-    this.form.get('content').setValue(this.currentEditedComment.content);
-  }
-
-  public editSubmitted(): void {
-    this.newsFeedService.newsFeedCommentsCommentIdPut(this.currentEditedComment.id, { content : this.form.get('content').value })
+  public onEdit(comment: PublicationComment): void {
+    this.newsFeedService.newsFeedCommentsCommentIdPut(comment.id, { content : comment.content })
       .subscribe(() => {
-        this.comments.find(x => x.id == this.currentEditedComment.id).content = this.form.get('content').value;
-
-        this.currentEditedComment = null;
-        this.isEditNow = false;
+        this.comments.find(x => x.id == comment.id).content = comment.content;
       });
   }
 
