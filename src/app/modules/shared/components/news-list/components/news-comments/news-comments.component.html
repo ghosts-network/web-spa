@@ -1,5 +1,5 @@
 <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
-<mat-card-content *ngIf="comments">
+<div *ngIf="comments">
   <div class="comments" *ngFor="let comment of comments">
     <app-news-comment-item 
       [comment]="comment"
@@ -7,8 +7,8 @@
       (onEdited)="onEdit(comment)"
       (onDeleted)="onDelete(comment)">
     </app-news-comment-item>
-  </div>
-  <footer class="footer">
-    <button color="primary" mat-flat-button type="submit" *ngIf="hasMore" (click)="loadComments()">Load more</button>
-  </footer>
-</mat-card-content>
+  </div>  
+</div>
+<footer class="footer">
+  <button color="primary" mat-flat-button type="submit" *ngIf="hasMore" (click)="loadComments()">Load more</button>
+</footer>

@@ -1,5 +1,6 @@
-<div *ngIf="!isEditNow">{{comment.content}}</div>
-	<form *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
+<div class="comment-container">
+	<div class="content-section content" *ngIf="!isEditNow">{{comment.content}}</div>
+	<form class="content-section" *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
 			<mat-form-field class="example-full-width" appearance="fill">
 			<mat-label>Edit your comment</mat-label>
 			<input formControlName="content" matInput>
@@ -9,13 +10,14 @@
 			Submit
 			</button>
 	</form>
-	<div class="action-comment">
-			<button *ngIf="currentUser?.sub === comment.author.id && timeLimitChecker.isCommentEnabledToEdit(comment)"
-							mat-icon-button (click)="editComment()">
-			<mat-icon>edit</mat-icon>
-			</button>
-			<button *ngIf="currentUser?.sub === comment.author.id"
-							mat-icon-button (click)="deleteComment()">
-			<mat-icon>delete</mat-icon>
-			</button>
+	<div>
+		<button [disabled]="currentUser?.sub !== comment.author.id && !timeLimitChecker.isCommentEnabledToEdit(comment)"
+						mat-icon-button (click)="editComment()">
+		<mat-icon>edit</mat-icon>
+		</button>
+		<button [disabled]="currentUser?.sub !== comment.author.id"
+						mat-icon-button (click)="deleteComment()">
+		<mat-icon>delete</mat-icon>
+		</button>
 	</div>
+</div>

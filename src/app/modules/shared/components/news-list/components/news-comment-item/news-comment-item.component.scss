@@ -1,9 +1,12 @@
-.main {
-  position: relative;
+.comment-container {
   display: flex;
   justify-content: space-between;
 }
 
-.action-comment {
-  margin-left:auto;
+.content-section {
+  flex-grow: 9;
+}
+
+.content {
+  font-size: 14pt;
 }
