@@ -10,7 +10,8 @@ import {TimeLimitCheker} from '../../classes/timeLimitCheker';
   styleUrls: ['./news-comment-item.component.scss']
 })
 export class NewsCommentItemComponent implements OnInit {
-
+  public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
+  
   public isEditNow: Boolean = false;
   public form: FormGroup;
   public timeLimitChecker: TimeLimitCheker = new TimeLimitCheker();
