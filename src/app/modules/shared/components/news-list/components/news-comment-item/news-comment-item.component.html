@@ -11,11 +11,11 @@
 			</button>
 	</form>
 	<div>
-		<button [disabled]="currentUser?.sub !== comment.author.id && !timeLimitChecker.isCommentEnabledToEdit(comment)"
+		<button *ngIf="currentUser?.sub === comment.author.id && timeLimitChecker.isCommentEnabledToEdit(comment)"
 						mat-icon-button (click)="editComment()">
 		<mat-icon>edit</mat-icon>
 		</button>
-		<button [disabled]="currentUser?.sub !== comment.author.id"
+		<button *ngIf="currentUser?.sub === comment.author.id"
 						mat-icon-button (click)="deleteComment()">
 		<mat-icon>delete</mat-icon>
 		</button>
