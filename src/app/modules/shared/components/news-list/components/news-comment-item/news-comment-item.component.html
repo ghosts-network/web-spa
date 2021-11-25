@@ -1,15 +1,24 @@
 <div class="comment-container">
-	<div class="content-section content" *ngIf="!isEditNow">{{comment.content}}</div>
-	<form class="content-section" *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
-			<mat-form-field class="example-full-width" appearance="fill">
-			<mat-label>Edit your comment</mat-label>
-			<input formControlName="content" matInput>
-			</mat-form-field>
-			<button type="submit" *ngIf="currentUser?.sub === comment.authorId"
-							mat-icon-button (click)="editSubmitted()" color="primary">
-			Submit
-			</button>
-	</form>
+	<div class="content-section">
+		<div>
+			<div class="user">
+				<img src="{{comment.author.avatarUrl || DefaultAvatar}}" class="avatar"><img/>
+				<h3 class="user-text">{{comment.author.fullName}}</h3>
+				<h3 class="user-text">{{comment.createdOn | dateAgo}}</h3>
+			</div>
+			<p class="content" *ngIf="!isEditNow">{{comment.content}}</p>
+			<form *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
+				<mat-form-field class="example-full-width" appearance="fill">
+				<mat-label>Edit your comment</mat-label>
+				<input formControlName="content" matInput>
+				</mat-form-field>
+				<button style="margin-left: 1%;" type="submit" *ngIf="currentUser?.sub === comment.authorId"
+								mat-icon-button (click)="editSubmitted()" color="primary">
+				Submit
+				</button>
+			</form>
+		</div>
+	</div>
 	<div>
 		<button *ngIf="currentUser?.sub === comment.author.id && timeLimitChecker.isCommentEnabledToEdit(comment)"
 						mat-icon-button (click)="editComment()">
