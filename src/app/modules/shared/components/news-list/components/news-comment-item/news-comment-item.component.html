@@ -12,21 +12,31 @@
 				<mat-label>Edit your comment</mat-label>
 				<input formControlName="content" matInput>
 				</mat-form-field>
-				<button style="margin-left: 1%;" type="submit" *ngIf="currentUser?.sub === comment.authorId"
-								mat-icon-button (click)="editSubmitted()" color="primary">
-				Submit
+				<button style="margin-left: 1%;" 
+						type="submit"
+						mat-icon-button
+						*ngIf="currentUser?.sub === comment.authorId" (click)="editSubmitted()" 
+						color="primary">
+					Submit
 				</button>
 			</form>
 		</div>
 	</div>
-	<div>
-		<button *ngIf="currentUser?.sub === comment.author.id && timeLimitChecker.isCommentEnabledToEdit(comment)"
-						mat-icon-button (click)="editComment()">
-		<mat-icon>edit</mat-icon>
+	<button mat-button [matMenuTriggerFor]="menu">
+		<mat-icon>more_vert</mat-icon>
+	</button>
+	<mat-menu class="action-menu" #menu="matMenu">
+		<button mat-menu-item
+				[disabled]="!(currentUser?.sub === comment.author.id && editIsEnabled)"
+				(click)="editComment()">
+			<mat-icon>edit</mat-icon>
+			Edit
 		</button>
-		<button *ngIf="currentUser?.sub === comment.author.id"
-						mat-icon-button (click)="deleteComment()">
-		<mat-icon>delete</mat-icon>
+		<button mat-menu-item
+				[disabled]="currentUser?.sub !== comment.author.id"
+				(click)="deleteComment()">
+			<mat-icon>delete</mat-icon>
+			Delete
 		</button>
-	</div>
+	</mat-menu>
 </div>
