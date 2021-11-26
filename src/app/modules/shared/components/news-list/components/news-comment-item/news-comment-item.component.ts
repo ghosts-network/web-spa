@@ -38,8 +38,12 @@ export class NewsCommentItemComponent implements OnInit {
   }
 
   public editComment() {
-    this.isEditNow = true;
-    this.form.get('content').setValue(this.comment.content);
+    if (this.isEditNow) {
+      this.isEditNow = false;
+    } else {
+      this.isEditNow = true;
+      this.form.get('content').setValue(this.comment.content);
+    }
   }
 
   public editSubmitted() {
