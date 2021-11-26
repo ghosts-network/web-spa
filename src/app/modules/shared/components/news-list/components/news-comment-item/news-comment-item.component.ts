@@ -14,17 +14,19 @@ export class NewsCommentItemComponent implements OnInit {
   
   public isEditNow: Boolean = false;
   public form: FormGroup;
-  public timeLimitChecker: TimeLimitCheker = new TimeLimitCheker();
-
+  public editIsEnabled: Boolean = false;
+  
   @Input()
   public currentUser: Profile;
   @Input()
   public comment: PublicationComment;
-
+  
   @Output()
   onDeleted = new EventEmitter<PublicationComment>();
   @Output()
   onEdited = new EventEmitter<PublicationComment>();
+  
+  private timeLimitChecker: TimeLimitCheker = new TimeLimitCheker();
 
   constructor(private fb: FormBuilder) {
     this.form = fb.group({
@@ -32,7 +34,9 @@ export class NewsCommentItemComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.editIsEnabled = this.timeLimitChecker.isCommentEnabledToEdit(this.comment);
+  }
 
   public deleteComment() {
     this.onDeleted.emit(this.comment);
