@@ -4,7 +4,7 @@
 			<div class="user">
 				<img src="{{comment.author.avatarUrl || DefaultAvatar}}" class="avatar"><img/>
 				<h3 class="user-text">{{comment.author.fullName}}</h3>
-				<h3 class="user-text">{{comment.createdOn | dateAgo}}</h3>
+				<h3 class="created-on-text">{{comment.createdOn | dateAgo}}</h3>
 			</div>
 			<p class="content" *ngIf="!isEditNow">{{comment.content}}</p>
 			<form *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
