@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { Profile } from 'oidc-client';
-import { NewsFeedPublication, NewsFeedService, PublicationComment, CommentsShort} from '../../../../../gateway-api';
+import { NewsFeedPublication, NewsFeedService, PublicationComment } from '../../../../../gateway-api';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {AuthService} from "../../../../../../providers/services/auth/auth.service";
 
@@ -16,7 +16,7 @@ export class NewsCommentsComponent implements OnInit {
   private index: number;
 
   public comments = new Array<PublicationComment>();
-
+  
   public currentUser: Profile;
 
   constructor(private newsFeedService: NewsFeedService,
@@ -39,13 +39,20 @@ export class NewsCommentsComponent implements OnInit {
     });
   }
 
-  public deleteComment(comment: PublicationComment): void {
+  public onDelete(comment: PublicationComment): void {
     this.newsFeedService.newsFeedCommentsCommentIdDelete(comment.id)
     .subscribe(resp => {
       this.publication.comments.totalCount -= 1;
       this.index = this.comments.findIndex(x => x.id === comment.id);
       this.comments.splice(this.index, 1);
     });
+  }
+
+  public onEdit(comment: PublicationComment): void {
+    this.newsFeedService.newsFeedCommentsCommentIdPut(comment.id, { content : comment.content })
+      .subscribe(() => {
+        this.comments.find(x => x.id == comment.id).content = comment.content;
+      });
   }
 
   public loadAllComments(): void {
@@ -59,5 +66,4 @@ export class NewsCommentsComponent implements OnInit {
   public get hasMore(): boolean {
     return this.publication.comments.totalCount !== this.comments.length;
   }
-
 }

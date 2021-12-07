@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  basePath: 'https://api.gn.boberneprotiv.com',
+  basePath: 'https://api.ghost-network.boberneprotiv.com',
   auth: {
-    authority: 'https://account.gn.boberneprotiv.com',
+    authority: 'https://accounts.ghost-network.boberneprotiv.com',
     client_id: 'angular_spa',
     redirect_uri: 'http://localhost:4200/auth-callback',
     post_logout_redirect_uri: 'http://localhost:4200/',
@@ -14,6 +14,10 @@ export const environment = {
     scope: "openid profile api",
     filterProtocolClaims: true,
     loadUserInfo: true
+  },
+  time_limit_to_update: {
+    publications: 900,
+    comments: 900
   }
 };
 

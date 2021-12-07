@@ -20,6 +20,8 @@ import {MatDividerModule} from "@angular/material/divider";
 import {MatMenuModule} from "@angular/material/menu";
 import {RouterModule} from "@angular/router";
 import {ReactionsModule} from "../reactions/reactions.module";
+import { NewsCommentItemComponent } from './components/news-comment-item/news-comment-item.component';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import {ReactionsModule} from "../reactions/reactions.module";
     NewsFormCommentsComponent,
     ReactionsComponent,
     NewsCommentsComponent,
+    NewsCommentItemComponent,
     PublicationActionsComponent
   ],
   imports: [
@@ -53,6 +56,7 @@ import {ReactionsModule} from "../reactions/reactions.module";
     NewsFormCommentsComponent,
     ReactionsComponent,
     NewsCommentsComponent,
+    NewsCommentItemComponent,
     PublicationActionsComponent
   ]
 })

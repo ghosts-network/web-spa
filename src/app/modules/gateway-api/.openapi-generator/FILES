@@ -12,6 +12,7 @@ model/addNewsFeedComment.ts
 model/addNewsFeedReaction.ts
 model/commentsShort.ts
 model/createNewsFeedPublication.ts
+model/updateNewsFeedComments.ts
 model/models.ts
 model/newsFeedPublication.ts
 model/problemDetails.ts

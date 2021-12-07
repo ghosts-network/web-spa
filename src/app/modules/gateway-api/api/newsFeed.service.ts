@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { AddNewsFeedComment } from '../model/models';
 import { AddNewsFeedReaction } from '../model/models';
 import { CreateNewsFeedPublication } from '../model/models';
+import { UpdateNewsFeedComment } from '../model/models';
 import { NewsFeedPublication } from '../model/models';
 import { ProblemDetails } from '../model/models';
 import { PublicationComment } from '../model/models';
@@ -133,6 +134,55 @@ export class NewsFeedService {
         }
 
         return this.httpClient.delete<any>(`${this.configuration.basePath}/NewsFeed/comments/${encodeURIComponent(String(commentId))}`,
+            {
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    public newsFeedCommentsCommentIdPut(commentId: string, updateNewsFeedComment: UpdateNewsFeedComment, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any>;
+    public newsFeedCommentsCommentIdPut(commentId: string, updateNewsFeedComment: UpdateNewsFeedComment, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<any>>;
+    public newsFeedCommentsCommentIdPut(commentId: string, updateNewsFeedComment: UpdateNewsFeedComment, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<any>>;
+    public newsFeedCommentsCommentIdPut(commentId: string, updateNewsFeedComment: UpdateNewsFeedComment, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+        if (commentId === null || commentId === undefined) {
+            throw new Error('Required parameter commentId was null or undefined when calling newsFeedCommentsCommentIdDelete.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        let credential: string | undefined;
+        // authentication (oauth2) required
+        credential = this.configuration.lookupCredential('oauth2');
+        if (credential) {
+            headers = headers.set('Authorization', 'Bearer ' + credential);
+        }
+
+        let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (httpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'text/plain',
+                'application/json',
+                'text/json'
+            ];
+            httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        let responseType_: 'text' | 'json' = 'json';
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+            responseType_ = 'text';
+        }
+
+        return this.httpClient.put<any>(`${this.configuration.basePath}/NewsFeed/comments/${encodeURIComponent(String(commentId))}`,
+            updateNewsFeedComment,
             {
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
