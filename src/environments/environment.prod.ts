@@ -10,5 +10,9 @@ export const environment = {
     scope: "openid profile api",
     filterProtocolClaims: true,
     loadUserInfo: true
+  },
+  time_limit_to_update: {
+    publications: 900,
+    comments: 900
   }
 };
