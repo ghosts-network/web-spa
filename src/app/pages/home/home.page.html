@@ -2,7 +2,8 @@
   <div class="news-form">
     <app-news-form (published)="onPublished($event)"></app-news-form>
   </div>
-  <app-news-list [news]="news" [user]="user" (onDeleted)="onDeleted($event)"></app-news-list>
-  <button *ngIf="hasMore && !showLoader" mat-button class="load-more" (click)="loadMore()">Load more</button>
+  <div class="" infinite-scroll (scrolled)="loadMore()">
+    <app-news-list [news]="news" [user]="user" (onDeleted)="onDeleted($event)"></app-news-list>
+  </div>
   <mat-spinner style="margin:0 auto;" *ngIf="showLoader"></mat-spinner>
 </div>
