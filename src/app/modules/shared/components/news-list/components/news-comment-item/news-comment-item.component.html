@@ -7,15 +7,15 @@
 				<h3 class="created-on-text">{{comment.createdOn | dateAgo}}</h3>
 			</div>
 			<p class="content" *ngIf="!isEditNow">{{comment.content}}</p>
-			<form *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
-				<mat-form-field class="example-full-width" appearance="fill">
+			<form class="edit-form" *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
+				<mat-form-field appearance="fill">
 				<mat-label>Edit your comment</mat-label>
-				<input formControlName="content" matInput>
+				<textarea formControlName="content" matInput></textarea>
 				</mat-form-field>
-				<button style="margin-left: 1%;" 
+				<button id="button-submit"
 						type="submit"
-						mat-icon-button
-						*ngIf="currentUser?.sub === comment.authorId" (click)="editSubmitted()" 
+						mat-stroked-button
+						(click)="editSubmitted()" 
 						color="primary">
 					Submit
 				</button>
