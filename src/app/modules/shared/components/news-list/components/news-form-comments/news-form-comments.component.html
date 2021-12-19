@@ -1,6 +1,7 @@
 <form class="comments-form" [formGroup]="form" (ngSubmit)="formSubmitted()">
   <mat-form-field class="comments-form-input" appearance="fill">
     <mat-label>Leave a comment</mat-label>
-    <input matInput formControlName="content">
+    <textarea matInput formControlName="content"></textarea>
   </mat-form-field>
+  <button id="button-submit" [disabled]="!form.valid" type="submit" mat-stroked-button color="primary">Leave comment</button>
 </form>

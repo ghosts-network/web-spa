@@ -1,23 +1,42 @@
 <div class="comment-container">
-	<div class="content-section content" *ngIf="!isEditNow">{{comment.content}}</div>
-	<form class="content-section" *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
-			<mat-form-field class="example-full-width" appearance="fill">
-			<mat-label>Edit your comment</mat-label>
-			<input formControlName="content" matInput>
-			</mat-form-field>
-			<button type="submit" *ngIf="currentUser?.sub === comment.authorId"
-							mat-icon-button (click)="editSubmitted()" color="primary">
-			Submit
-			</button>
-	</form>
-	<div>
-		<button *ngIf="currentUser?.sub === comment.author.id && timeLimitChecker.isCommentEnabledToEdit(comment)"
-						mat-icon-button (click)="editComment()">
-		<mat-icon>edit</mat-icon>
-		</button>
-		<button *ngIf="currentUser?.sub === comment.author.id"
-						mat-icon-button (click)="deleteComment()">
-		<mat-icon>delete</mat-icon>
-		</button>
+	<div class="content-section">
+		<div>
+			<div class="user">
+				<img src="{{comment.author.avatarUrl || DefaultAvatar}}" class="avatar"><img/>
+				<h3 class="user-text">{{comment.author.fullName}}</h3>
+				<h3 class="created-on-text">{{comment.createdOn | dateAgo}}</h3>
+			</div>
+			<p class="content" *ngIf="!isEditNow">{{comment.content}}</p>
+			<form class="edit-form" *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
+				<mat-form-field appearance="fill">
+				<mat-label>Edit your comment</mat-label>
+				<textarea formControlName="content" matInput></textarea>
+				</mat-form-field>
+				<button id="button-submit"
+						type="submit"
+						mat-stroked-button
+						(click)="editSubmitted()" 
+						color="primary">
+					Submit
+				</button>
+			</form>
+		</div>
 	</div>
+	<button mat-button [matMenuTriggerFor]="menu">
+		<mat-icon>more_vert</mat-icon>
+	</button>
+	<mat-menu class="action-menu" #menu="matMenu">
+		<button mat-menu-item
+				[disabled]="!(currentUser?.sub === comment.author.id && editIsEnabled)"
+				(click)="editComment()">
+			<mat-icon>edit</mat-icon>
+			Edit
+		</button>
+		<button mat-menu-item
+				[disabled]="currentUser?.sub !== comment.author.id"
+				(click)="deleteComment()">
+			<mat-icon>delete</mat-icon>
+			Delete
+		</button>
+	</mat-menu>
 </div>

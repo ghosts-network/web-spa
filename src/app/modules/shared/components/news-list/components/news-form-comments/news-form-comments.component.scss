@@ -2,8 +2,13 @@
   width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 
 .comments-form-input {
   width: 100%;
+}
+
+#button-submit {
+  margin-left: 74%;
 }
