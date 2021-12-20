@@ -21,6 +21,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {RouterModule} from "@angular/router";
 import {ReactionsModule} from "../reactions/reactions.module";
 import { NewsCommentItemComponent } from './components/news-comment-item/news-comment-item.component';
+import { DateAgoPipe } from './pipes/date-ago-pipe/date-ago.pipe';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NewsCommentItemComponent } from './components/news-comment-item/news-co
     ReactionsComponent,
     NewsCommentsComponent,
     NewsCommentItemComponent,
-    PublicationActionsComponent
+    PublicationActionsComponent,
+    DateAgoPipe
   ],
   imports: [
     CommonModule,
