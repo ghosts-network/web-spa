@@ -3,8 +3,8 @@ import {ReactionType} from "../../../modules/gateway-api";
 export class ReactionsService {
   public get all(): Array<ReactionType> {
     return [
-      ReactionType.Like,
       ReactionType.Love,
+      ReactionType.Like,
       ReactionType.Haha,
       ReactionType.Wow,
       ReactionType.Sad,
@@ -14,8 +14,8 @@ export class ReactionsService {
 
   public asIcon(reaction: ReactionType): string {
     const dict = {
-      0: '👍',
       1: '❤️',
+      0: '👍',
       2: '😂',
       3: '😮',
       4: '😔',
@@ -27,8 +27,8 @@ export class ReactionsService {
 
   public asText(reaction: ReactionType): string {
     const dict = {
-      0: 'Like',
       1: 'Awesome️',
+      0: 'Like',
       2: 'Lol',
       3: 'Wow',
       4: 'Sad',
