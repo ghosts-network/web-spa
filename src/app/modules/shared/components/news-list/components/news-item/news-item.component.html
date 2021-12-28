@@ -3,17 +3,25 @@
     <div mat-card-avatar
          class="avatar"
          style="background-image: url({{publication.author.avatarUrl || DefaultAvatar}})"></div>
-    <mat-card-title>
+    <mat-card-title class="user-name">
       <a class="link" [routerLink]="['/', publication.author.id]">{{publication.author.fullName}}</a>
     </mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
     <div class="postMenu">
-      <button *ngIf="isCurrentUserPost" mat-icon-button (click)="deleteClick()">
-        <mat-icon>delete</mat-icon>
-      </button>
+      <button mat-button [matMenuTriggerFor]="menu">
+		<mat-icon>more_vert</mat-icon>
+	</button>
+	<mat-menu class="action-menu" #menu="matMenu">
+		<button mat-menu-item
+				[disabled]="currentUser?.sub !== publication.author.id"
+				(click)="deleteClick()">
+			<mat-icon>delete</mat-icon>
+			Delete
+		</button>
+	</mat-menu>
     </div>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content class="content">
     <p>{{publication.content}}</p>
   </mat-card-content>
   <mat-divider *ngIf="!!publication.reactions.totalCount || !!publication.comments.totalCount"></mat-divider>
