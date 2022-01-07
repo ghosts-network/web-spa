@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import {NewsFeedPublication, NewsFeedService} from '../../modules/gateway-api';
-import {AuthService} from "../../providers/services/auth/auth.service";
-import {Profile} from "oidc-client";
+import {AuthService} from '../../providers/services/auth/auth.service';
+import {Profile} from 'oidc-client';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +15,8 @@ export class HomePage implements OnInit {
   private newsOnPage = 0;
   public hasMore: boolean;
   public showLoader = false;
+  private maxScroll: number;
+  private currentScroll: number;
 
   constructor(private newsFeedService: NewsFeedService,
               private authService: AuthService) { }
@@ -32,9 +34,9 @@ export class HomePage implements OnInit {
     this.loadPublications();
   }
 
-  public onDeleted(publication: NewsFeedPublication) : void {
+  public onDeleted(publication: NewsFeedPublication): void {
     this.newsFeedService.newsFeedPublicationIdDelete(publication.id).subscribe(resp => {
-      this.news = this.news.filter(pub => pub.id != publication.id);
+      this.news = this.news.filter(pub => pub.id !== publication.id);
     });
   }
 
@@ -57,6 +59,16 @@ export class HomePage implements OnInit {
         this.news = [].concat(this.news, resp.body);
         this.showLoader = false;
       });
+    }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(): void {
+    this.currentScroll = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    this.maxScroll = document.documentElement.scrollHeight;
+
+    if (this.currentScroll === this.maxScroll )   {
+      this.loadMore();
     }
   }
 }
