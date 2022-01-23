@@ -26,14 +26,14 @@ export class DateAgoPipe implements PipeTransform {
             ['second', 1]
         ]);
 
-        const twoDaysInSecond = intervals['day'] * 2;
+        const twoDaysInSecond = intervals.get('day') * 2;
         
         for (let item of intervals) {
             let counter = Math.floor(seconds / item[1]);
             if (counter > 0) {
-                if (args && args.some(a => a == 'publication') && seconds >= twoDaysInSecond) {
+                if (args && args == 'publication' && seconds >= twoDaysInSecond) {
                     let datePipe = new DatePipe(`en-US`);
-                    return datePipe.transform(value, 'yyyy-MM-dd');
+                    return datePipe.transform(value, 'd-MMM-yyyy');
                 }
 
                 value = `${counter} ${item[0]}${ counter === 1 ? ' ago' : '`s ago' }`;
