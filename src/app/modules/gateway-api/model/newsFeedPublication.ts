@@ -20,5 +20,7 @@ export interface NewsFeedPublication {
     comments?: CommentsShort;
     reactions?: ReactionShort;
     author?: UserInfo;
+    readonly createdOn?: string;
+    updatedOn?: string;
 }
 
