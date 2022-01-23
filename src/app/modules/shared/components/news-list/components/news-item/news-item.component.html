@@ -6,7 +6,9 @@
     <mat-card-title class="user-name">
       <a class="link" [routerLink]="['/', publication.author.id]">{{publication.author.fullName}}</a>
     </mat-card-title>
-    <mat-card-subtitle></mat-card-subtitle>
+    <div class="created-on-text">
+      <p>{{publication.updatedOn == null ? publication.createdOn : publication.updatedOn | dateAgo : 'publication'}}</p>
+    </div>
     <div class="postMenu">
       <button mat-button [matMenuTriggerFor]="menu">
 		<mat-icon>more_vert</mat-icon>
