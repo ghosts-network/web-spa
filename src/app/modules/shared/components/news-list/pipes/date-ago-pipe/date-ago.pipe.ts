@@ -36,7 +36,7 @@ export class DateAgoPipe implements PipeTransform {
                     return datePipe.transform(value, 'd-MMM-yyyy');
                 }
 
-                value = `${counter} ${item[0]}${ counter === 1 ? ' ago' : '`s ago' }`;
+                value = `${counter} ${item[0]}${ counter === 1 ? ' ago' : 's ago' }`;
                 break;
             } 
         }
