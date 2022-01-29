@@ -16,7 +16,7 @@ import { UserInfo } from './userInfo';
 
 export interface NewsFeedPublication { 
     readonly id?: string | null;
-    readonly content?: string | null;
+    content?: string | null;
     comments?: CommentsShort;
     reactions?: ReactionShort;
     author?: UserInfo;
