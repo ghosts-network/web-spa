@@ -1,4 +1,4 @@
-import { PublicationComment } from "src/app/modules/gateway-api";
+import { NewsFeedPublication, PublicationComment } from "src/app/modules/gateway-api";
 import {environment} from "../../../../../../environments/environment";
 
 export class TimeLimitCheker {
@@ -13,6 +13,13 @@ export class TimeLimitCheker {
     public isCommentEnabledToEdit(comment: PublicationComment): Boolean {
         let createdOnWithTimeLimit = new Date(comment.createdOn);
         createdOnWithTimeLimit.setSeconds(createdOnWithTimeLimit.getSeconds() + this.timeLimitComment)
+
+        return createdOnWithTimeLimit > new Date();
+    }
+
+    public isPublicationEnabledToEdit(publication: NewsFeedPublication): Boolean {
+        let createdOnWithTimeLimit = new Date(publication.createdOn);
+        createdOnWithTimeLimit.setSeconds(createdOnWithTimeLimit.getSeconds() + this.timeLimitPublication)
 
         return createdOnWithTimeLimit > new Date();
     }
