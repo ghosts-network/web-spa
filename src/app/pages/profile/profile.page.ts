@@ -22,6 +22,7 @@ export class ProfilePage implements OnInit {
   private newsOnPage = 0;
   public hasMore: boolean;
   public showLoader = false;
+  public isFriend: boolean;
 
   private currentUserId: string;
 
@@ -107,6 +108,7 @@ export class ProfilePage implements OnInit {
   public loadFriends(id: string): void {
     this.relationsService.relationsUserIdFriendsGet(id, 0, 20).subscribe(resp => {
       this.friends = resp;
+      this.isFriend = this.friends.some(f => f.id == this.currentUserId);
     });
   }
 

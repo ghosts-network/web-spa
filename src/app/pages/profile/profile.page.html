@@ -9,8 +9,8 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div>
-      <button *ngIf="!editable" mat-button (click)="addFriend()">Add friend</button>
+    <div class="add-friend">
+      <button *ngIf="!editable && !isFriend" mat-raised-button (click)="addFriend()">Add friend</button>
     </div>
     <div>
       <p>Friends</p>
