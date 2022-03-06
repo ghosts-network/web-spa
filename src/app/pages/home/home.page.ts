@@ -40,6 +40,12 @@ export class HomePage implements OnInit {
     });
   }
 
+  public onEdited(publication: NewsFeedPublication): void {
+    this.newsFeedService.newsFeedPublicationIdPut(publication.id, { content : publication.content }).subscribe(resp => {
+      
+    });
+  }
+
   public loadPublications(): void {
     this.showLoader = true;
     this.newsFeedService.newsFeedGet(this.newsOnPage, 20,  'response').subscribe(resp => {

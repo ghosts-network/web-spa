@@ -82,6 +82,12 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  public onEdited(publication: NewsFeedPublication): void {
+    this.newsFeedService.newsFeedPublicationIdPut(publication.id, { content : publication.content }).subscribe(resp => {
+      
+    });
+  }
+
   public loadPublications(id: string): void {
     this.showLoader = true;
     this.newsFeedService.newsFeedUsersUserIdGet(id, this.newsOnPage, 20,  'response').subscribe(resp => {
