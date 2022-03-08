@@ -11,7 +11,7 @@
   <mat-card-content>
     <div class="user-action">
       <button class="action-button" [disabled]="true" mat-stroked-button color="primary">Send message</button>
-      <button class="action-button" [disabled]="editable || (isFriend && isMySubscription)" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
+      <button class="action-button" [disabled]="(editable || (isFriend || isMySubscription))" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
     </div>
     <div>
       <p>Friends</p>
