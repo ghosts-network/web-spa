@@ -23,6 +23,7 @@ export class ProfilePage implements OnInit {
   public hasMore: boolean;
   public showLoader = false;
   public isFriend: boolean;
+  public isMySubscription: boolean; 
 
   private currentUserId: string;
 
@@ -121,6 +122,7 @@ export class ProfilePage implements OnInit {
   public loadFollowers(id: string): void {
     this.relationsService.relationsUserIdFollowersGet(id, 0, 20).subscribe(resp => {
       this.followers = resp;
+      this.isMySubscription = this.followers.some(f => f.id == this.currentUserId);
     });
   }
 
@@ -143,6 +145,7 @@ export class ProfilePage implements OnInit {
   addFriend(): void {
     this.relationsService.relationsFriendsToUserPost(this.user.id)
       .subscribe(resp => {
+        this.loadFollowers(this.user.id);
         console.log(resp);
       });
   }
@@ -152,6 +155,8 @@ export class ProfilePage implements OnInit {
       .subscribe(resp => {
         console.log(resp);
         this.loadIncomingRequests();
+        this.loadFriends(this.user.id);
+        this.loadFollowers(this.user.id);
       });
   }
 
