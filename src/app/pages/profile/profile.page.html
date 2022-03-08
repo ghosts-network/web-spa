@@ -3,14 +3,15 @@
     <div mat-card-avatar
          class="avatar"
          style="background-image: url({{DefaultAvatar}})"></div>
-    <mat-card-title>
-      <span>{{user.firstName}} {{user.lastName}}</span>
-      <button *ngIf="editable" mat-icon-button><mat-icon [inline]="true" (click)="setupInfo()">edit</mat-icon></button>
-    </mat-card-title>
+    <span id="user-name">{{user.firstName}} {{user.lastName}}</span>
+    <button id="profile-edit" *ngIf="editable" mat-icon-button>
+      <mat-icon id="icon-edit" [inline]="true" (click)="setupInfo()">edit</mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-content>
-    <div class="add-friend">
-      <button *ngIf="!editable && !isFriend" mat-raised-button (click)="addFriend()">Add friend</button>
+    <div class="user-action">
+      <button class="action-button" [disabled]="true" mat-stroked-button color="primary">Send message</button>
+      <button class="action-button" [disabled]="editable || (isFriend && isMySubscription)" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
     </div>
     <div>
       <p>Friends</p>

@@ -4,12 +4,36 @@
 
   .avatar {
     background-size: cover;
+    height: 80px;
+    width: 80px;
+  }
+
+  #user-name {
+    margin-top: 1.7rem;
+    font-size: 20pt;
+    font-weight: 400;
+  }
+
+  #profile-edit {
+    margin-top: 1rem;
+    margin-left: 1%;
+  }
+
+  #icon-edit {
+    transform: scale(1.5);
   }
 }
 
-.add-friend {
-  padding-top: 3%;
+.user-action {
+  padding-top: 5%;
   padding-bottom: 3%;
+  display: flex;
+  justify-content: center;
+
+  .action-button {
+    margin: 1%;
+    width: 15rem;
+  }
 }
 
 .news-feed {
