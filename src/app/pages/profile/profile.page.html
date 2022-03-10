@@ -11,43 +11,33 @@
   <mat-card-content>
     <div class="user-action">
       <button class="action-button" [disabled]="true" mat-stroked-button color="primary">Send message</button>
-      <button class="action-button" [disabled]="(editable || (isFriend || isMySubscription))" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
+      <button class="action-button" *ngIf="!editable && (!isFriend && !isMySubscription)" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
+      <button class="action-button" *ngIf="!editable && isFriend" mat-flat-button color="primary">Your friend</button>
     </div>
-    <div>
-      <p>Friends</p>
-      <ul>
-        <li *ngFor="let friend of friends">
-          <a [routerLink]="['/', friend.id]">{{friend.fullName}}</a>
-        </li>
-      </ul>
-      <p>Followers</p>
-      <ul>
-        <li *ngFor="let follower of followers">
-          <a [routerLink]="['/', follower.id]">{{follower.fullName}}</a>
-        </li>
-      </ul>
-      <p *ngIf="editable">Outgoing requests</p>
-      <ul *ngIf="editable">
-        <li *ngFor="let outgoingRequest of outgoingRequests">
-          <a [routerLink]="['/', outgoingRequest.id]">{{outgoingRequest.fullName}}</a>
-        </li>
-      </ul>
-      <p *ngIf="editable">Incoming requests</p>
-      <ul *ngIf="editable">
-        <li *ngFor="let incomingRequest of incomingRequests">
-          <a [routerLink]="['/', incomingRequest.id]">{{incomingRequest.fullName}}</a>
-          <button mat-button (click)="approveFriend(incomingRequest.id)">Approve</button>
-          <button mat-button (click)="declineFriendRequest(incomingRequest.id)">Decline</button>
-        </li>
-      </ul>
+    <div class="user-list">
+      <app-profiles-list
+        [label]="'Friends'"  
+        [(users)]="friends">
+      </app-profiles-list>
+      <br>
+      <app-profiles-list
+        [label]="'Followers'"  
+        [(users)]="followers">
+      </app-profiles-list>
+      <br>
+      <app-profiles-list
+        [label]="'Outgoing requests'"  
+        [(users)]="outgoingRequests">
+      </app-profiles-list>
+      <br>
+      <app-profiles-list
+        [label]="'Incoming requests'"  
+        [(users)]="incomingRequest">
+      </app-profiles-list>
     </div>
   </mat-card-content>
 </mat-card>
-
 <div class="news-feed">
-<!--  <div class="news-form">-->
-<!--    <app-news-form (published)="onPublished($event)"></app-news-form>-->
-<!--  </div>-->
   <app-news-list [news]="news" [user]="user" (onEdited)="onEdited($event)" (onDeleted)="onDeleted($event)"></app-news-list>
   <button *ngIf="hasMore && !showLoader" mat-button class="load-more" (click)="loadMore()">Load more</button>
   <mat-spinner style="margin:0 auto;" *ngIf="showLoader"></mat-spinner>

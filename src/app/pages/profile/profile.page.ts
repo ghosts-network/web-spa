@@ -1,29 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService, RelationsService } from '../../modules/gateway-api';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ProfileFormComponent} from './components/profile-form/profile-form.component';
 import {AuthService} from '../../providers/services/auth/auth.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss']
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
 
-  public news: NewsFeedPublication[] = [];
-  public outgoingRequests: UserInfo[] = [];
-  public incomingRequests: UserInfo[] = [];
-  public friends: UserInfo[] = [];
-  public followers: UserInfo[] = [];
+  public news: NewsFeedPublication[];
+  public outgoingRequests: UserInfo[];
+  public incomingRequests: UserInfo[];
+  public friends: UserInfo[];
+  public followers: UserInfo[];
+
   public user: User;
-  private newsOnPage = 0;
   public hasMore: boolean;
-  public showLoader = false;
   public isFriend: boolean;
-  public isMySubscription: boolean; 
+  public isMySubscription: boolean;
+
+  public showLoader = false;
+  private newsOnPage = 0;
 
   private currentUserId: string;
 
@@ -34,6 +37,7 @@ export class ProfilePage implements OnInit {
               private route: ActivatedRoute,
               private dialog: MatDialog) { }
 
+              
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.fetchUser(params.id);
@@ -44,11 +48,20 @@ export class ProfilePage implements OnInit {
       this.loadOutgoingRequests();
       this.loadIncomingRequests();
     });
+    
+    this.authService.getUser().subscribe(user => {
+      this.currentUserId = user.profile.sub;
+    });
 
-    this.authService.getUser()
-      .subscribe(user => {
-        this.currentUserId = user.profile.sub;
-      });
+    console.log("ngOnInit " + this.friends);
+  }
+  
+  ngAfterContentInit(): void {
+    console.log("ngAfterContentInit " + this.friends);
+  }
+              
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("ngOnChanges " + this.friends);
   }
 
   private fetchUser(id: string): void {
@@ -112,12 +125,12 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  public loadFriends(id: string): void {
+  public async loadFriends(id: string): Promise<void> {
     this.relationsService.relationsUserIdFriendsGet(id, 0, 20).subscribe(resp => {
       this.friends = resp;
       this.isFriend = this.friends.some(f => f.id == this.currentUserId);
     });
-  }
+  }w
 
   public loadFollowers(id: string): void {
     this.relationsService.relationsUserIdFollowersGet(id, 0, 20).subscribe(resp => {
