@@ -1,0 +1,17 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <span class="empty" *ngIf="!users || users && users.length == 0">There are empty</span>
+        <span class="empty" *ngIf="users && users.length > 0">{{users.length}} {{label.toLowerCase()}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+        <span class="label">{{label}}</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngFor="let user of users">
+        <div class="user-item">
+            <img src="{{DefaultAvatar}}" alt="{{user.fullName}}" class="avatar">
+            <a class="user-link" [routerLink]="['/', user.id]"><span class="username">{{user.fullName}}</span></a>
+        </div>
+    </div>
+</mat-expansion-panel>
