@@ -163,21 +163,29 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
       });
   }
 
-  approveFriend(id: string): void {
-    this.relationsService.relationsFriendsRequesterApprovePut(id)
+  approveFriend(user: UserInfo): void {
+    this.relationsService.relationsFriendsRequesterApprovePut(user.id)
       .subscribe(resp => {
         console.log(resp);
-        this.loadIncomingRequests();
-        this.loadFriends(this.user.id);
-        this.loadFollowers(this.user.id);
+        this.incomingRequests = this.incomingRequests.filter(r => r.id != user.id);
+        this.followers = this.followers.filter(f => f.id != user.id);
+        this.friends.push(user);
       });
   }
 
-  declineFriendRequest(id: string): void {
-    this.relationsService.relationsFriendsRequesterDeclinePost(id)
+  declineFriendRequest(user: UserInfo): void {
+    this.relationsService.relationsFriendsRequesterDeclinePost(user.id)
       .subscribe(resp => {
         console.log(resp);
-        this.loadIncomingRequests();
+        this.incomingRequests = this.incomingRequests.filter(r => r.id != user.id);
       });
+  }
+
+  removeFriend(user: UserInfo) {
+    this.relationsService.relationsFriendsFriendDelete(user.id).subscribe(resp => {
+      console.log(resp);
+      this.friends = this.friends.filter(f => f.id != user.id);
+      this.followers.push(user);
+    })
   }
 }

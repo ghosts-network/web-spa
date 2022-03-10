@@ -16,8 +16,10 @@
     </div>
     <div class="user-list">
       <app-profiles-list
-        [label]="'Friends'"  
-        [(users)]="friends">
+        [label]="'Friends'"
+        [removing]="currentUserId == route.params._value.id"
+        [(users)]="friends"
+        (removed)="removeFriend($event)">
       </app-profiles-list>
       <br>
       <app-profiles-list
@@ -25,14 +27,18 @@
         [(users)]="followers">
       </app-profiles-list>
       <br>
-      <app-profiles-list
+      <app-profiles-list *ngIf="currentUserId == route.params._value.id"
         [label]="'Outgoing requests'"  
         [(users)]="outgoingRequests">
       </app-profiles-list>
-      <br>
+      <br *ngIf="currentUserId == route.params._value.id">
       <app-profiles-list
+        *ngIf="currentUserId == route.params._value.id"
         [label]="'Incoming requests'"  
-        [(users)]="incomingRequest">
+        [approving]="currentUserId == route.params._value.id"
+        [(users)]="incomingRequests"
+        (approved)="approveFriend($event)"
+        (declined)="declineFriendRequest($event)">
       </app-profiles-list>
     </div>
   </mat-card-content>
