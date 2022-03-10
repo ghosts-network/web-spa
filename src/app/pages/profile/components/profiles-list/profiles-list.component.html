@@ -10,8 +10,17 @@
     </mat-expansion-panel-header>
     <div *ngFor="let user of users">
         <div class="user-item">
+          <div class="user-card">
             <img src="{{DefaultAvatar}}" alt="{{user.fullName}}" class="avatar">
-            <a class="user-link" [routerLink]="['/', user.id]"><span class="username">{{user.fullName}}</span></a>
+            <a [routerLink]="['/', user.id]"><span class="username">{{user.fullName}}</span></a>
+          </div>
+          <div class="user-action">
+            <button *ngIf="!approving && removing" mat-icon-button color="warn" aria-label="Unfriend" (click)="onRemove(user)">
+              <mat-icon>close</mat-icon>
+            </button>
+            <button *ngIf="approving" mat-stroked-button color="primary" (click)="onApprove(user)">Approve</button>
+            <button *ngIf="approving" mat-stroked-button color="primary" (click)="onDecline(user)">Decline</button>
+          </div>
         </div>
     </div>
 </mat-expansion-panel>

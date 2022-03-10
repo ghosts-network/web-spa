@@ -8,10 +8,14 @@
 .user-item {
     display: flex;
     padding-top: 1rem;
+    justify-content: space-between;
+}
 
+.user-card {
+    display: flex;
     a {
         margin-left: 1rem;
-        padding-top: 0.3rem;
+        padding-top: 0.2rem;
     }
 
     a:link {
@@ -32,6 +36,12 @@
     a:active {
         text-decoration: none;
         color: black;
+    }
+}
+
+.user-action {
+    button {
+        margin-left: 0.5rem;
     }
 }
 
