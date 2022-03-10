@@ -11,13 +11,15 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatSelectModule} from "@angular/material/select";
 import {MatCardModule} from "@angular/material/card";
 import {NewsListModule} from "../../modules/shared/components/news-list/news-list.module";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatExpansionModule} from "@angular/material/expansion"
 import {ReactionsService} from "../home/entities/reactions.enum";
+import { ProfilesListComponent } from './components/profiles-list/profiles-list.component';
 
 @NgModule({
   declarations: [
     ProfilePage,
-    ProfileFormComponent
+    ProfileFormComponent,
+    ProfilesListComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,7 @@ import {ReactionsService} from "../home/entities/reactions.enum";
     MatDialogModule,
     MatSelectModule,
     MatCardModule,
-    MatProgressSpinnerModule,
+    MatExpansionModule,
     NewsListModule
   ],
   providers: [
