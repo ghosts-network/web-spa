@@ -14,6 +14,24 @@
       <button class="action-button" *ngIf="!editable && (!isFriend && !isMySubscription)" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
       <button class="action-button" *ngIf="!editable && isFriend" mat-flat-button color="primary">Your friend</button>
     </div>
+    <mat-expansion-panel 
+      *ngIf="user.city || user.dateOfBirth || user.gender"
+      (opened)="bioIsOpened = true"
+      (closed)="bioIsOpened = false">
+      <mat-expansion-panel-header>
+        <mat-panel-description>
+          <span class="bio-label" *ngIf="currentUserId == route.params._value.id">Your info:</span>
+          <span class="bio-label" *ngIf="currentUserId != route.params._value.id">User info:</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="bio-content">
+        <span *ngIf="user.city">Location: {{user.city}}</span>
+        <span *ngIf="user.dateOfBirth">Birth date: {{user.dateOfBirth}}</span>
+        <span *ngIf="user.gender">Gender: {{user.gender}}</span>
+      </div>
+    </mat-expansion-panel>
+    <br>
+    <br>
     <div class="user-list">
       <app-profiles-list
         [label]="'Friends'"
@@ -29,7 +47,9 @@
       <br>
       <app-profiles-list *ngIf="currentUserId == route.params._value.id"
         [label]="'Outgoing requests'"  
-        [(users)]="outgoingRequests">
+        [(users)]="outgoingRequests"
+        [removing]="currentUserId == route.params._value.id"
+        (removed)="removeOutgoingRequest($event)">
       </app-profiles-list>
       <br *ngIf="currentUserId == route.params._value.id">
       <app-profiles-list
@@ -37,7 +57,7 @@
         [label]="'Incoming requests'"  
         [approving]="currentUserId == route.params._value.id"
         [(users)]="incomingRequests"
-        (approved)="approveFriend($event)"
+        (approved)="approveFriendRequest($event)"
         (declined)="declineFriendRequest($event)">
       </app-profiles-list>
     </div>

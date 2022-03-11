@@ -22,6 +22,18 @@
   #icon-edit {
     transform: scale(1.5);
   }
+
+  .bio-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 12pt;
+    font-weight: 400;
+    padding-left: 1.7rem;
+  }
+
+  .bio-label {
+    font-size: 13pt;
+  }
 }
 
 .user-action {

@@ -13,6 +13,7 @@ import { delay } from 'rxjs/operators';
 })
 export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
+  public bioIsOpened: boolean;
 
   public news: NewsFeedPublication[];
   public outgoingRequests: UserInfo[];
@@ -163,7 +164,7 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
       });
   }
 
-  approveFriend(user: UserInfo): void {
+  approveFriendRequest(user: UserInfo): void {
     this.relationsService.relationsFriendsRequesterApprovePut(user.id)
       .subscribe(resp => {
         console.log(resp);
@@ -187,5 +188,9 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
       this.friends = this.friends.filter(f => f.id != user.id);
       this.followers.push(user);
     })
+  }
+
+  removeOutgoingRequest(user: UserInfo) {
+    console.log('Try to remove request: ' + user)
   }
 }
