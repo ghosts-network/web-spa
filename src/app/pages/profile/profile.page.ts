@@ -191,6 +191,9 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
   }
 
   removeOutgoingRequest(user: UserInfo) {
-    console.log('Try to remove request: ' + user)
+    this.relationsService.relationsOutgoingRequestDelete(user.id).subscribe(resp => {
+      console.log(resp);
+      this.outgoingRequests = this.outgoingRequests.filter(f => f.id != user.id);
+    })
   }
 }
