@@ -25,9 +25,9 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="bio-content">
-        <span *ngIf="user.city">Location: {{user.city}}</span>
-        <span *ngIf="user.dateOfBirth">Birth date: {{user.dateOfBirth}}</span>
-        <span *ngIf="user.gender">Gender: {{user.gender}}</span>
+        <span class="bio-content-item" *ngIf="user.gender">Gender: {{user.gender}}</span>
+        <span class="bio-content-item" *ngIf="user.city">Location: {{user.city}}</span>
+        <span class="bio-content-item" *ngIf="user.dateOfBirth">Birth date: {{user.dateOfBirth | date : 'longDate'}}</span>
       </div>
     </mat-expansion-panel>
     <br>
