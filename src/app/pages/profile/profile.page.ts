@@ -4,7 +4,6 @@ import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ProfileFormComponent} from './components/profile-form/profile-form.component';
 import {AuthService} from '../../providers/services/auth/auth.service';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -131,7 +130,7 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
       this.friends = resp;
       this.isFriend = this.friends.some(f => f.id == this.currentUserId);
     });
-  }w
+  }
 
   public loadFollowers(id: string): void {
     this.relationsService.relationsUserIdFollowersGet(id, 0, 20).subscribe(resp => {
