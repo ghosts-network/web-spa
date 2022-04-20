@@ -2,7 +2,7 @@
   <mat-card-header>
     <div mat-card-avatar
          class="avatar"
-         style="background-image: url({{DefaultAvatar}})"></div>
+         style="background-image: url({{user.profilePicture || DefaultAvatar}})"></div>
     <span id="user-name">{{user.firstName}} {{user.lastName}}</span>
     <button id="profile-edit" *ngIf="editable" mat-icon-button>
       <mat-icon id="icon-edit" [inline]="true" (click)="setupInfo()">edit</mat-icon>
