@@ -4,12 +4,53 @@
 
   .avatar {
     background-size: cover;
+    height: 80px;
+    width: 80px;
+  }
+
+  #user-name {
+    margin-top: 1.7rem;
+    font-size: 20pt;
+    font-weight: 400;
+  }
+
+  #profile-edit {
+    margin-top: 1rem;
+    margin-left: 1%;
+  }
+
+  #icon-edit {
+    transform: scale(1.5);
+  }
+
+  .bio-content {
+    display: flex;
+    flex-direction: column;
+    font-size: 13pt;
+    font-weight: 400;
+    padding-left: 0.5rem;
+
+    .bio-content-item {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .bio-label {
+    font-size: 13pt;
   }
 }
 
-.add-friend {
-  padding-top: 3%;
+.user-action {
+  padding-top: 5%;
   padding-bottom: 3%;
+  display: flex;
+  justify-content: center;
+
+  .action-button {
+    margin: 1%;
+    width: 15rem;
+    margin-bottom: 1rem;
+  }
 }
 
 .news-feed {

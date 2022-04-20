@@ -135,6 +135,56 @@ export class RelationsService {
     }
 
     /**
+     * @param friend 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+     public relationsOutgoingRequestDelete(friend: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
+     public relationsOutgoingRequestDelete(friend: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
+     public relationsOutgoingRequestDelete(friend: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
+     public relationsOutgoingRequestDelete(friend: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+         if (friend === null || friend === undefined) {
+             throw new Error('Required parameter friend was null or undefined when calling relationsOutgoingRequestDelete.');
+         }
+ 
+         let headers = this.defaultHeaders;
+ 
+         let credential: string | undefined;
+         // authentication (oauth2) required
+         credential = this.configuration.lookupCredential('oauth2');
+         if (credential) {
+             headers = headers.set('Authorization', 'Bearer ' + credential);
+         }
+ 
+         let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+         if (httpHeaderAcceptSelected === undefined) {
+             // to determine the Accept header
+             const httpHeaderAccepts: string[] = [
+             ];
+             httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+         }
+         if (httpHeaderAcceptSelected !== undefined) {
+             headers = headers.set('Accept', httpHeaderAcceptSelected);
+         }
+ 
+ 
+         let responseType_: 'text' | 'json' = 'json';
+         if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+             responseType_ = 'text';
+         }
+ 
+         return this.httpClient.delete<any>(`${this.configuration.basePath}/Relations/outgoing/${encodeURIComponent(String(friend))}`,
+             {
+                 responseType: <any>responseType_,
+                 withCredentials: this.configuration.withCredentials,
+                 headers: headers,
+                 observe: observe,
+                 reportProgress: reportProgress
+             }
+         );
+     }
+
+    /**
      * @param skip 
      * @param take 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

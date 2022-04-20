@@ -1,0 +1,59 @@
+.avatar {
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.user-item {
+    display: flex;
+    padding-top: 1rem;
+    justify-content: space-between;
+}
+
+.user-card {
+    display: flex;
+    a {
+        margin-left: 1rem;
+        padding-top: 0.2rem;
+    }
+
+    a:link {
+        text-decoration: none;
+        color: black;
+    }
+    
+    a:visited {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:active {
+        text-decoration: none;
+        color: black;
+    }
+}
+
+.user-action {
+    button {
+        margin-left: 0.5rem;
+    }
+}
+
+.username {
+    font-size: 13pt;
+    font-weight: 400;
+}
+
+.empty {
+    font-size: 11pt;
+}
+
+.label {
+    font-size: 13pt;
+}
