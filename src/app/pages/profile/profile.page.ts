@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService, RelationsService } from '../../modules/gateway-api';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
@@ -12,6 +12,7 @@ import {AuthService} from '../../providers/services/auth/auth.service';
 })
 export class ProfilePage implements OnInit {
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
+  public itemsPerRequest = 20;
 
   public news: NewsFeedPublication[] = [];
   public outgoingRequests: UserInfo[] = [];
@@ -23,9 +24,11 @@ export class ProfilePage implements OnInit {
   public hasMore: boolean;
   public showLoader = false;
   public isFriend: boolean;
-  public isMySubscription: boolean; 
+  public isMySubscription: boolean;
 
   private currentUserId: string;
+  private maxScroll: number;
+  private currentScroll: number;
 
   constructor(private usersService: UsersService,
               private newsFeedService: NewsFeedService,
@@ -73,11 +76,6 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  public onPublished(publication: NewsFeedPublication): void {
-    this.newsOnPage = 0;
-    this.loadPublications(this.user.id);
-  }
-
   public onDeleted(publication: NewsFeedPublication): void {
     this.newsFeedService.newsFeedPublicationIdDelete(publication.id).subscribe(resp => {
       this.news = this.news.filter(pub => pub.id !== publication.id);
@@ -86,16 +84,16 @@ export class ProfilePage implements OnInit {
 
   public onEdited(publication: NewsFeedPublication): void {
     this.newsFeedService.newsFeedPublicationIdPut(publication.id, { content : publication.content }).subscribe(resp => {
-      
+
     });
   }
 
   public loadPublications(id: string): void {
     this.showLoader = true;
-    this.newsFeedService.newsFeedUsersUserIdGet(id, this.newsOnPage, 20,  'response').subscribe(resp => {
+    this.newsFeedService.newsFeedUsersUserIdGet(id, this.newsOnPage, this.itemsPerRequest,  'response').subscribe(resp => {
       this.newsOnPage += resp.body.length;
       this.hasMore = (resp.headers.get('x-hasmore') === 'True');
-      this.news = resp.body;
+      this.news = [].concat(this.news, resp.body);
       this.showLoader = false;
     });
   }
@@ -115,27 +113,15 @@ export class ProfilePage implements OnInit {
   public loadFriends(id: string): void {
     this.relationsService.relationsUserIdFriendsGet(id, 0, 20).subscribe(resp => {
       this.friends = resp;
-      this.isFriend = this.friends.some(f => f.id == this.currentUserId);
+      this.isFriend = this.friends.some(f => f.id === this.currentUserId);
     });
   }
 
   public loadFollowers(id: string): void {
     this.relationsService.relationsUserIdFollowersGet(id, 0, 20).subscribe(resp => {
       this.followers = resp;
-      this.isMySubscription = this.followers.some(f => f.id == this.currentUserId);
+      this.isMySubscription = this.followers.some(f => f.id === this.currentUserId);
     });
-  }
-
-  loadMore(): void {
-    if (this.hasMore) {
-      this.showLoader = true;
-      this.newsFeedService.newsFeedGet(this.newsOnPage, 20, 'response').subscribe(resp => {
-        this.newsOnPage += resp.body.length;
-        this.hasMore = (resp.headers.get('x-hasmore') === 'True');
-        this.news = [].concat(this.news, resp.body);
-        this.showLoader = false;
-      });
-    }
   }
 
   public get editable(): boolean {
@@ -146,14 +132,12 @@ export class ProfilePage implements OnInit {
     this.relationsService.relationsFriendsToUserPost(this.user.id)
       .subscribe(resp => {
         this.loadFollowers(this.user.id);
-        console.log(resp);
       });
   }
 
   approveFriend(id: string): void {
     this.relationsService.relationsFriendsRequesterApprovePut(id)
       .subscribe(resp => {
-        console.log(resp);
         this.loadIncomingRequests();
         this.loadFriends(this.user.id);
         this.loadFollowers(this.user.id);
@@ -163,8 +147,17 @@ export class ProfilePage implements OnInit {
   declineFriendRequest(id: string): void {
     this.relationsService.relationsFriendsRequesterDeclinePost(id)
       .subscribe(resp => {
-        console.log(resp);
         this.loadIncomingRequests();
       });
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(): void {
+    this.currentScroll = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
+    this.maxScroll = document.documentElement.scrollHeight;
+
+    if (this.currentScroll === this.maxScroll && this.hasMore) {
+      this.loadPublications(this.user.id);
+    }
   }
 }
