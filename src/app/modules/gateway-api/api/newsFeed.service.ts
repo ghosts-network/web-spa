@@ -690,13 +690,14 @@ export class NewsFeedService {
      * @param userId
      * @param skip
      * @param take
+     * @param cursor
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<NewsFeedPublication>>;
-    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<NewsFeedPublication>>>;
-    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<NewsFeedPublication>>>;
-    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
+    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, cursor?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<Array<NewsFeedPublication>>;
+    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, cursor?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpResponse<Array<NewsFeedPublication>>>;
+    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, cursor?: string, observe?: 'evenzts', reportProgress?: boolean, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<HttpEvent<Array<NewsFeedPublication>>>;
+    public newsFeedUsersUserIdGet(userId: string, skip?: number, take?: number, cursor?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'text/plain' | 'application/json' | 'text/json'}): Observable<any> {
         if (userId === null || userId === undefined) {
             throw new Error('Required parameter userId was null or undefined when calling newsFeedUsersUserIdGet.');
         }
@@ -709,6 +710,10 @@ export class NewsFeedService {
         if (take !== undefined && take !== null) {
           queryParameters = this.addToHttpParams(queryParameters,
             <any>take, 'take');
+        }
+        if (cursor !== undefined && cursor !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>cursor, 'cursor');
         }
 
         let headers = this.defaultHeaders;

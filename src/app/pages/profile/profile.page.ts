@@ -27,8 +27,8 @@ export class ProfilePage implements OnInit {
   public isMySubscription: boolean;
 
   public showLoader = false;
-  private newsOnPage = 0;
 
+  private cursor: string;
   private currentUserId: string;
   private maxScroll: number;
   private currentScroll: number;
@@ -44,7 +44,7 @@ export class ProfilePage implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.fetchUser(params.id);
-      this.newsOnPage = 0;
+      this.cursor = null;
       this.loadPublications(params.id);
       this.loadFriends(params.id);
       this.loadFollowers(params.id);
@@ -93,9 +93,9 @@ export class ProfilePage implements OnInit {
 
   public loadPublications(id: string): void {
     this.showLoader = true;
-    this.newsFeedService.newsFeedUsersUserIdGet(id, this.newsOnPage, this.itemsPerRequest,  'response').subscribe(resp => {
-      this.newsOnPage += resp.body.length;
-      this.hasMore = (resp.headers.get('x-hasmore') === 'True');
+    this.newsFeedService.newsFeedUsersUserIdGet(id, null,  this.itemsPerRequest, this.cursor,  'response').subscribe(resp => {
+      this.cursor = resp.headers.get('x-cursor');
+      this.hasMore = resp.body.length === this.itemsPerRequest;
       this.news = [].concat(this.news, resp.body);
       this.showLoader = false;
     });
