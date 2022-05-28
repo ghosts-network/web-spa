@@ -9,8 +9,8 @@ import {Profile} from 'oidc-client';
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
+  private itemsPerRequest = 20;
 
-  public itemsPerRequest = 20;
   public news: NewsFeedPublication[] = [];
   public user: Profile;
   public cursor: string;
@@ -42,7 +42,8 @@ export class HomePage implements OnInit {
   }
 
   public onEdited(publication: NewsFeedPublication): void {
-    this.newsFeedService.newsFeedPublicationIdPut(publication.id, { content : publication.content }).subscribe(resp => {
+    const body = { content : publication.content };
+    this.newsFeedService.newsFeedPublicationIdPut(publication.id, body).subscribe(resp => {
 
     });
   }
@@ -52,7 +53,7 @@ export class HomePage implements OnInit {
     this.newsFeedService.newsFeedGet(null, this.itemsPerRequest, this.cursor,  'response').subscribe(resp => {
         this.cursor = resp.headers.get('x-cursor');
         this.hasMore = resp.body.length === this.itemsPerRequest;
-        this.news = resp.body;
+        this.news = [].concat(this.news, resp.body);
         this.showLoader = false;
     });
   }

@@ -1,9 +1,9 @@
-import { Profile } from 'oidc-client';
+import {Profile} from 'oidc-client';
 import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
-import { NewsFeedPublication } from '../../../../../gateway-api';
-import {Reactions} from "../../../reactions/reactions.component";
-import { TimeLimitCheker } from '../../classes/timeLimitCheker';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {NewsFeedPublication} from '../../../../../gateway-api';
+import {Reactions} from '../../../reactions/reactions.component';
+import {TimeLimitChecker} from '../../classes/timeLimitCheker';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-news-item',
@@ -11,22 +11,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./news-item.component.scss']
 })
 export class NewsItemComponent implements OnInit {
-  private timeLimitChecker: TimeLimitCheker = new TimeLimitCheker();
-  
-  public isEditNow: Boolean = false;
+  private timeLimitChecker: TimeLimitChecker = new TimeLimitChecker();
+
+  public isEditNow = false;
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
-  public editIsEnabled: Boolean = false;
+  public editIsEnabled = false;
   public form: FormGroup;
-  
+
   @Input()
   public publication: NewsFeedPublication;
   @Input()
   public currentUser: Profile;
 
   @Output()
-  onDeleted = new EventEmitter<NewsFeedPublication>();
+  public OnDeleted = new EventEmitter<NewsFeedPublication>();
   @Output()
-  onEdited = new EventEmitter<NewsFeedPublication>();
+  public OnEdited = new EventEmitter<NewsFeedPublication>();
 
   constructor(private fb: FormBuilder) {
     this.form = fb.group({
@@ -38,15 +38,11 @@ export class NewsItemComponent implements OnInit {
     this.editIsEnabled = this.timeLimitChecker.isPublicationEnabledToEdit(this.publication);
   }
 
-  public get isCurrentUserPost(): boolean {
-    return this.currentUser.sub == this.publication.author.id;
-  }
-
   public deleteClick(): void {
-    this.onDeleted.emit(this.publication);
+    this.OnDeleted.emit(this.publication);
   }
 
-  public editPublication() {
+  public editPublication(): void {
     if (this.isEditNow) {
       this.isEditNow = false;
     } else {
@@ -55,14 +51,14 @@ export class NewsItemComponent implements OnInit {
     }
   }
 
-  public editSubmitted() {
+  public editSubmitted(): void {
     if (this.form.valid) {
-      if (this.publication.content == this.form.get('content').value) {
+      if (this.publication.content === this.form.get('content').value) {
         this.isEditNow = false;
         return;
       }
       this.publication.content = this.form.get('content').value;
-      this.onEdited.emit(this.publication);
+      this.OnEdited.emit(this.publication);
       this.isEditNow = false;
     }
   }

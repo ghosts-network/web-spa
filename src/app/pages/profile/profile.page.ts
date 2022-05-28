@@ -1,6 +1,5 @@
-import { AfterContentInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {Component, HostListener, OnInit} from '@angular/core';
-import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService, RelationsService } from '../../modules/gateway-api';
+import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService, RelationsService} from '../../modules/gateway-api';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ProfileFormComponent} from './components/profile-form/profile-form.component';
@@ -11,12 +10,12 @@ import {AuthService} from '../../providers/services/auth/auth.service';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss']
 })
-export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
+export class ProfilePage implements OnInit {
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
   public itemsPerRequest = 20;
   public bioIsOpened: boolean;
 
-  public news: NewsFeedPublication[];
+  public news: NewsFeedPublication[] = [];
   public outgoingRequests: UserInfo[];
   public incomingRequests: UserInfo[];
   public friends: UserInfo[];
@@ -56,16 +55,6 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
     this.authService.getUser().subscribe(user => {
       this.currentUserId = user.profile.sub;
     });
-
-    console.log("ngOnInit " + this.friends);
-  }
-
-  ngAfterContentInit(): void {
-    console.log("ngAfterContentInit " + this.friends);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngOnChanges " + this.friends);
   }
 
   private fetchUser(id: string): void {
@@ -124,7 +113,7 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
     });
   }
 
-  public async loadFriends(id: string): Promise<void> {
+  public loadFriends(id: string): void {
     this.relationsService.relationsUserIdFriendsGet(id, 0, 20).subscribe(resp => {
       this.friends = resp;
       this.isFriend = this.friends.some(f => f.id === this.currentUserId);
@@ -155,9 +144,8 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
         this.loadIncomingRequests();
         this.loadFriends(this.user.id);
         this.loadFollowers(this.user.id);
-        console.log(resp);
-        this.incomingRequests = this.incomingRequests.filter(r => r.id != user.id);
-        this.followers = this.followers.filter(f => f.id != user.id);
+        this.incomingRequests = this.incomingRequests.filter(r => r.id !== user.id);
+        this.followers = this.followers.filter(f => f.id !== user.id);
         this.friends.push(user);
       });
   }
@@ -165,10 +153,22 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
   declineFriendRequest(user: UserInfo): void {
     this.relationsService.relationsFriendsRequesterDeclinePost(user.id)
       .subscribe(resp => {
-        console.log(resp);
-        this.incomingRequests = this.incomingRequests.filter(r => r.id != user.id);
+        this.incomingRequests = this.incomingRequests.filter(r => r.id !== user.id);
         this.loadIncomingRequests();
       });
+  }
+
+  removeFriend(user: UserInfo): void {
+    this.relationsService.relationsFriendsFriendDelete(user.id).subscribe(resp => {
+      this.friends = this.friends.filter(f => f.id !== user.id);
+      this.followers.push(user);
+    });
+  }
+
+  removeOutgoingRequest(user: UserInfo): void {
+    this.relationsService.relationsOutgoingRequestDelete(user.id).subscribe(resp => {
+      this.outgoingRequests = this.outgoingRequests.filter(f => f.id !== user.id);
+    });
   }
 
   @HostListener('window:scroll', ['$event'])
@@ -179,20 +179,5 @@ export class ProfilePage implements OnInit, AfterContentInit, OnChanges {
     if (this.currentScroll === this.maxScroll && this.hasMore) {
       this.loadPublications(this.user.id);
     }
-  }
-
-  removeFriend(user: UserInfo) {
-    this.relationsService.relationsFriendsFriendDelete(user.id).subscribe(resp => {
-      console.log(resp);
-      this.friends = this.friends.filter(f => f.id != user.id);
-      this.followers.push(user);
-    })
-  }
-
-  removeOutgoingRequest(user: UserInfo) {
-    this.relationsService.relationsOutgoingRequestDelete(user.id).subscribe(resp => {
-      console.log(resp);
-      this.outgoingRequests = this.outgoingRequests.filter(f => f.id != user.id);
-    })
   }
 }

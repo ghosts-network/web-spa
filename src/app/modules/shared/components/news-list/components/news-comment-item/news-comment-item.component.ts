@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Profile } from 'oidc-client';
 import { PublicationComment } from '../../../../../gateway-api';
-import {TimeLimitCheker} from '../../classes/timeLimitCheker';
+import {TimeLimitChecker} from '../../classes/timeLimitCheker';
 
 @Component({
   selector: 'app-news-comment-item',
@@ -11,22 +11,22 @@ import {TimeLimitCheker} from '../../classes/timeLimitCheker';
 })
 export class NewsCommentItemComponent implements OnInit {
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
-  
-  public isEditNow: Boolean = false;
+
+  public isEditNow = false;
   public form: FormGroup;
-  public editIsEnabled: Boolean = false;
-  
+  public editIsEnabled = false;
+
   @Input()
   public currentUser: Profile;
   @Input()
   public comment: PublicationComment;
-  
+
   @Output()
-  onDeleted = new EventEmitter<PublicationComment>();
+  public OnDeleted = new EventEmitter<PublicationComment>();
   @Output()
-  onEdited = new EventEmitter<PublicationComment>();
-  
-  private timeLimitChecker: TimeLimitCheker = new TimeLimitCheker();
+  public OnEdited = new EventEmitter<PublicationComment>();
+
+  private timeLimitChecker: TimeLimitChecker = new TimeLimitChecker();
 
   constructor(private fb: FormBuilder) {
     this.form = fb.group({
@@ -38,11 +38,11 @@ export class NewsCommentItemComponent implements OnInit {
     this.editIsEnabled = this.timeLimitChecker.isCommentEnabledToEdit(this.comment);
   }
 
-  public deleteComment() {
-    this.onDeleted.emit(this.comment);
+  public deleteComment(): void {
+    this.OnDeleted.emit(this.comment);
   }
 
-  public editComment() {
+  public editComment(): void {
     if (this.isEditNow) {
       this.isEditNow = false;
     } else {
@@ -51,14 +51,14 @@ export class NewsCommentItemComponent implements OnInit {
     }
   }
 
-  public editSubmitted() {
+  public editSubmitted(): void {
     if (this.form.valid) {
-      if (this.comment.content == this.form.get('content').value) {
+      if (this.comment.content === this.form.get('content').value) {
         this.isEditNow = false;
         return;
       }
       this.comment.content = this.form.get('content').value;
-      this.onEdited.emit(this.comment);
+      this.OnEdited.emit(this.comment);
       this.isEditNow = false;
     }
   }
