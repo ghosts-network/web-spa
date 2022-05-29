@@ -326,13 +326,14 @@ export class NewsFeedService {
      * @param publicationId
      * @param skip
      * @param take
+     * @param cursor
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public newsFeedPublicationIdCommentsGet(publicationId: string, skip?: number, take?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
-    public newsFeedPublicationIdCommentsGet(publicationId: string, skip?: number, take?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
-    public newsFeedPublicationIdCommentsGet(publicationId: string, skip?: number, take?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
-    public newsFeedPublicationIdCommentsGet(publicationId: string, skip?: number, take?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+    public newsFeedPublicationIdCommentsGet(publicationId: string, skip?: number, take?: number, cursor?: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
+    public newsFeedPublicationIdCommentsGet(publicationId: string, skip?: number, take?: number, cursor?: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
+    public newsFeedPublicationIdCommentsGet(publicationId: string, skip?: number, take?: number, cursor?: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
+    public newsFeedPublicationIdCommentsGet(publicationId: string, skip?: number, take?: number, cursor?: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
         if (publicationId === null || publicationId === undefined) {
             throw new Error('Required parameter publicationId was null or undefined when calling newsFeedPublicationIdCommentsGet.');
         }
@@ -345,6 +346,10 @@ export class NewsFeedService {
         if (take !== undefined && take !== null) {
           queryParameters = this.addToHttpParams(queryParameters,
             <any>take, 'take');
+        }
+        if (cursor !== undefined && cursor !== null) {
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>cursor, 'cursor');
         }
 
         let headers = this.defaultHeaders;

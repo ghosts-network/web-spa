@@ -2,14 +2,14 @@
   <app-news-form-comments [publication]="publication" (published)="loadAllComments()"></app-news-form-comments>
   <div *ngIf="comments">
     <div class="comments" *ngFor="let comment of comments">
-      <app-news-comment-item 
+      <app-news-comment-item
         [comment]="comment"
         [currentUser]="currentUser"
-        (onEdited)="onEdit(comment)"
-        (onDeleted)="onDelete(comment)">
+        (OnEdited)="onEdit(comment)"
+        (OnDeleted)="onDelete(comment)">
       </app-news-comment-item>
       <mat-divider></mat-divider>
-    </div>  
+    </div>
   </div>
   <footer class="footer">
     <button color="primary" mat-flat-button type="submit" *ngIf="hasMore" (click)="loadComments()">Load more</button>

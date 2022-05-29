@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import { Profile } from 'oidc-client';
-import { NewsFeedPublication, NewsFeedService, PublicationComment } from '../../../../../gateway-api';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {AuthService} from "../../../../../../providers/services/auth/auth.service";
+import {Profile} from 'oidc-client';
+import {NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../../gateway-api';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {AuthService} from '../../../../../../providers/services/auth/auth.service';
 
 @Component({
   selector: 'app-news-comments',
@@ -11,12 +11,12 @@ import {AuthService} from "../../../../../../providers/services/auth/auth.servic
 })
 export class NewsCommentsComponent implements OnInit {
 
+  private cursor: string;
   private take = 10;
-  private skip = 0;
   private index: number;
 
   public comments = new Array<PublicationComment>();
-  
+
   public currentUser: Profile;
 
   constructor(private newsFeedService: NewsFeedService,
@@ -26,22 +26,22 @@ export class NewsCommentsComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getProfile()
       .subscribe(user => {
-        this.currentUser = user
+        this.currentUser = user;
       });
     this.loadComments();
   }
 
   public loadComments(): void {
-    this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, this.skip, this.take)
+    this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, null, this.take, this.cursor, 'response')
     .subscribe(resp => {
-      this.comments = this.comments.concat(resp);
-      this.skip += 10;
+      this.comments = this.comments.concat(resp.body);
+      this.cursor = resp.headers.get('x-cursor');
     });
   }
 
   public onDelete(comment: PublicationComment): void {
     this.newsFeedService.newsFeedCommentsCommentIdDelete(comment.id)
-    .subscribe(resp => {
+    .subscribe(_ => {
       this.publication.comments.totalCount -= 1;
       this.index = this.comments.findIndex(x => x.id === comment.id);
       this.comments.splice(this.index, 1);
@@ -51,7 +51,7 @@ export class NewsCommentsComponent implements OnInit {
   public onEdit(comment: PublicationComment): void {
     this.newsFeedService.newsFeedCommentsCommentIdPut(comment.id, { content : comment.content })
       .subscribe(() => {
-        this.comments.find(x => x.id == comment.id).content = comment.content;
+        this.comments.find(x => x.id === comment.id).content = comment.content;
       });
   }
 
