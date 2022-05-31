@@ -12,7 +12,7 @@ export class NewsFormComponent implements OnInit {
   public form: FormGroup;
 
   @Output()
-  public published = new EventEmitter<NewsFeedPublication>();
+  public OnPublished = new EventEmitter<NewsFeedPublication>();
 
   constructor(private fb: FormBuilder,
               private newsFeedService: NewsFeedService) {
@@ -29,14 +29,13 @@ export class NewsFormComponent implements OnInit {
       return;
     }
 
-    this.newsFeedService.newsFeedPost({
+    const model = {
       content: this.form.get('content').value
-    })
-      .subscribe(
-        resp => {
-          this.form.reset();
-          this.published.emit(resp);
-        }
-      );
+    };
+
+    this.newsFeedService.newsFeedPost(model).subscribe(resp => {
+      this.form.reset();
+      this.OnPublished.emit(resp);
+    });
   }
 }

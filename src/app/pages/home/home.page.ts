@@ -32,6 +32,7 @@ export class HomePage implements OnInit {
 
   public onPublished(publication: NewsFeedPublication): void {
     this.cursor = null;
+    this.news = [];
     this.loadPublications();
   }
 

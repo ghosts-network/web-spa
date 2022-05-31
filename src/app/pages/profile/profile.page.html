@@ -14,7 +14,7 @@
       <button class="action-button" *ngIf="!editable && (!isFriend && !isMySubscription)" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
       <button class="action-button" *ngIf="!editable && isFriend" mat-flat-button color="primary">Your friend</button>
     </div>
-    <mat-expansion-panel 
+    <mat-expansion-panel
       *ngIf="user.city || user.dateOfBirth || user.gender"
       (opened)="bioIsOpened = true"
       (closed)="bioIsOpened = false">
@@ -41,12 +41,12 @@
       </app-profiles-list>
       <br>
       <app-profiles-list
-        [label]="'Followers'"  
+        [label]="'Followers'"
         [(users)]="followers">
       </app-profiles-list>
       <br>
       <app-profiles-list *ngIf="currentUserId == route.params._value.id"
-        [label]="'Outgoing requests'"  
+        [label]="'Outgoing requests'"
         [(users)]="outgoingRequests"
         [removing]="currentUserId == route.params._value.id"
         (removed)="removeOutgoingRequest($event)">
@@ -54,7 +54,7 @@
       <br *ngIf="currentUserId == route.params._value.id">
       <app-profiles-list
         *ngIf="currentUserId == route.params._value.id"
-        [label]="'Incoming requests'"  
+        [label]="'Incoming requests'"
         [approving]="currentUserId == route.params._value.id"
         [(users)]="incomingRequests"
         (approved)="approveFriendRequest($event)"
@@ -64,6 +64,6 @@
   </mat-card-content>
 </mat-card>
 <div class="news-feed">
-  <app-news-list [news]="news" [user]="user" (onEdited)="onEdited($event)" (onDeleted)="onDeleted($event)"></app-news-list>
+  <app-news-list [news]="news" [user]="user" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>
   <mat-spinner style="margin:0 auto;" *ngIf="showLoader"></mat-spinner>
 </div>

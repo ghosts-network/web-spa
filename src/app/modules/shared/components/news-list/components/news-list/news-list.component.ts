@@ -15,17 +15,17 @@ export class NewsListComponent {
   public user: Profile;
 
   @Output()
-  onDeleted = new EventEmitter<NewsFeedPublication>();
+  OnDeleted = new EventEmitter<NewsFeedPublication>();
   @Output()
-  onEdited = new EventEmitter<NewsFeedPublication>();
+  OnEdited = new EventEmitter<NewsFeedPublication>();
 
   constructor() { }
 
-  public deleteEventHandler($event) {
-    this.onDeleted.emit($event);
+  public deleteEventHandler($event): void {
+    this.OnDeleted.emit($event);
   }
 
-  public editEventHandler($event) {
-    this.onEdited.emit($event);
+  public editEventHandler($event): void {
+    this.OnEdited.emit($event);
   }
 }
