@@ -36,18 +36,18 @@
       <app-profiles-list
         [label]="'Friends'"
         [removing]="currentUserId == user.id"
-        [(users)]="friends"
+        [users]="friends"
         (removed)="removeFriend($event)">
       </app-profiles-list>
       <br>
       <app-profiles-list
         [label]="'Followers'"
-        [(users)]="followers">
+        [users]="followers">
       </app-profiles-list>
       <br>
       <app-profiles-list *ngIf="currentUserId == user.id"
         [label]="'Outgoing requests'"
-        [(users)]="outgoingRequests"
+        [users]="outgoingRequests"
         [removing]="currentUserId == user.id"
         (removed)="removeOutgoingRequest($event)">
       </app-profiles-list>
@@ -56,7 +56,7 @@
         *ngIf="currentUserId == user.id"
         [label]="'Incoming requests'"
         [approving]="currentUserId == user.id"
-        [(users)]="incomingRequests"
+        [users]="incomingRequests"
         (approved)="approveFriendRequest($event)"
         (declined)="declineFriendRequest($event)">
       </app-profiles-list>

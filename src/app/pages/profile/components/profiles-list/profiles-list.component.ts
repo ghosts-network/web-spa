@@ -1,8 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Profile, User } from 'oidc-client';
-import { take } from 'rxjs/operators';
-import { RelationsService } from 'src/app/modules/gateway-api';
 import { UserInfo } from 'src/app/modules/gateway-api/model/userInfo';
 import { AuthService } from 'src/app/providers/services/auth/auth.service';
 
@@ -18,9 +14,9 @@ export class ProfilesListComponent implements OnInit {
   @Input()
   public label: string;
   @Input()
-  public approving: boolean = false;
+  public approving = false;
   @Input()
-  public removing: boolean = false;
+  public removing = false;
   @Input()
   public users: UserInfo[];
 
@@ -42,15 +38,15 @@ export class ProfilesListComponent implements OnInit {
       });
   }
 
-  public onApprove(user: UserInfo) : void {
+  public onApprove(user: UserInfo): void {
     this.approved.emit(user);
   }
 
-  public onDecline(user: UserInfo) : void {
+  public onDecline(user: UserInfo): void {
     this.declined.emit(user);
   }
 
-  public onRemove(user: UserInfo) : void {
+  public onRemove(user: UserInfo): void {
     this.removed.emit(user);
   }
 }
