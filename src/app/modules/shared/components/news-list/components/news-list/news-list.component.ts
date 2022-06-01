@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import { Profile } from 'oidc-client';
 import {NewsFeedPublication} from '../../../../../gateway-api';
 
 @Component({
@@ -12,7 +11,7 @@ export class NewsListComponent {
   @Input()
   public news: NewsFeedPublication[];
   @Input()
-  public user: Profile;
+  public currentUserId: string;
 
   @Output()
   OnDeleted = new EventEmitter<NewsFeedPublication>();
@@ -20,6 +19,14 @@ export class NewsListComponent {
   OnEdited = new EventEmitter<NewsFeedPublication>();
 
   constructor() { }
+
+  public deleteEnabled(publication: NewsFeedPublication): boolean {
+    return this.currentUserId === publication.author.id;
+  }
+
+  public editEnabled(publication: NewsFeedPublication): boolean {
+    return this.currentUserId === publication.author.id;
+  }
 
   public deleteEventHandler($event): void {
     this.OnDeleted.emit($event);

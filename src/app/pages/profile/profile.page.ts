@@ -29,7 +29,7 @@ export class ProfilePage implements OnInit {
   public showLoader = false;
 
   private cursor: string;
-  private currentUserId: string;
+  public currentUserId: string;
   private maxScroll: number;
   private currentScroll: number;
 

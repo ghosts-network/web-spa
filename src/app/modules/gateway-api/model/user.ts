@@ -18,5 +18,6 @@ export interface User {
     readonly gender?: string | null;
     readonly dateOfBirth?: string | null;
     readonly profilePicture?: string | null;
+    readonly city?: string | null;
 }
 

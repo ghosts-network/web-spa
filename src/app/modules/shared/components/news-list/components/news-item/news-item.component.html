@@ -16,13 +16,13 @@
 	</button>
 	<mat-menu class="action-menu" #menu="matMenu">
 		<button mat-menu-item
-				[disabled]="currentUser?.sub !== publication.author.id"
+				[disabled]="!deleteEnabled"
 				(click)="deleteClick()">
 			<mat-icon>delete</mat-icon>
 			Delete
 		</button>
     <button mat-menu-item
-			  *ngIf="currentUser?.sub === publication.author.id && editIsEnabled"
+			  *ngIf="editEnabled && !editTimeFinished"
         (click)="editPublication()">
 			<mat-icon>edit</mat-icon>
 			Edit

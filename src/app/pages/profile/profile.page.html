@@ -20,8 +20,8 @@
       (closed)="bioIsOpened = false">
       <mat-expansion-panel-header>
         <mat-panel-description>
-          <span class="bio-label" *ngIf="currentUserId == route.params._value.id">Your info:</span>
-          <span class="bio-label" *ngIf="currentUserId != route.params._value.id">User info:</span>
+          <span class="bio-label" *ngIf="currentUserId == user.id">Your info:</span>
+          <span class="bio-label" *ngIf="currentUserId != user.id">User info:</span>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="bio-content">
@@ -35,7 +35,7 @@
     <div class="user-list">
       <app-profiles-list
         [label]="'Friends'"
-        [removing]="currentUserId == route.params._value.id"
+        [removing]="currentUserId == user.id"
         [(users)]="friends"
         (removed)="removeFriend($event)">
       </app-profiles-list>
@@ -45,17 +45,17 @@
         [(users)]="followers">
       </app-profiles-list>
       <br>
-      <app-profiles-list *ngIf="currentUserId == route.params._value.id"
+      <app-profiles-list *ngIf="currentUserId == user.id"
         [label]="'Outgoing requests'"
         [(users)]="outgoingRequests"
-        [removing]="currentUserId == route.params._value.id"
+        [removing]="currentUserId == user.id"
         (removed)="removeOutgoingRequest($event)">
       </app-profiles-list>
-      <br *ngIf="currentUserId == route.params._value.id">
+      <br *ngIf="currentUserId == user.id">
       <app-profiles-list
-        *ngIf="currentUserId == route.params._value.id"
+        *ngIf="currentUserId == user.id"
         [label]="'Incoming requests'"
-        [approving]="currentUserId == route.params._value.id"
+        [approving]="currentUserId == user.id"
         [(users)]="incomingRequests"
         (approved)="approveFriendRequest($event)"
         (declined)="declineFriendRequest($event)">
@@ -64,6 +64,6 @@
   </mat-card-content>
 </mat-card>
 <div class="news-feed">
-  <app-news-list [news]="news" [user]="user" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>
+  <app-news-list [news]="news" [currentUserId]="currentUserId" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>
   <mat-spinner style="margin:0 auto;" *ngIf="showLoader"></mat-spinner>
 </div>

@@ -1,4 +1,3 @@
-import {Profile} from 'oidc-client';
 import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import {NewsFeedPublication} from '../../../../../gateway-api';
 import {Reactions} from '../../../reactions/reactions.component';
@@ -15,13 +14,15 @@ export class NewsItemComponent implements OnInit {
 
   public isEditNow = false;
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
-  public editIsEnabled = false;
+  public editTimeFinished = false;
   public form: FormGroup;
 
   @Input()
   public publication: NewsFeedPublication;
   @Input()
-  public currentUser: Profile;
+  public deleteEnabled = false;
+  @Input()
+  public editEnabled = false;
 
   @Output()
   public OnDeleted = new EventEmitter<NewsFeedPublication>();
@@ -35,7 +36,7 @@ export class NewsItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.editIsEnabled = this.timeLimitChecker.isPublicationEnabledToEdit(this.publication);
+    this.editTimeFinished = !this.timeLimitChecker.isPublicationEnabledToEdit(this.publication);
   }
 
   public deleteClick(): void {

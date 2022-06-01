@@ -1,3 +1,8 @@
 <div class="news-item" *ngFor="let publication of news">
-  <app-news-item [publication]="publication" [currentUser]="user" (OnDeleted)="deleteEventHandler($event)" (OnEdited)="editEventHandler($event)"></app-news-item>
+  <app-news-item [publication]="publication"
+                 [deleteEnabled]="deleteEnabled(publication)"
+                 [editEnabled]="editEnabled(publication)"
+                 (OnDeleted)="deleteEventHandler($event)"
+                 (OnEdited)="editEventHandler($event)">
+  </app-news-item>
 </div>
