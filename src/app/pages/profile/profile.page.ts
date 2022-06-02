@@ -45,6 +45,7 @@ export class ProfilePage implements OnInit {
     this.route.params.subscribe(params => {
       this.fetchUser(params.id);
       this.cursor = null;
+      this.news = [];
       this.loadPublications(params.id);
       this.loadFriends(params.id);
       this.loadFollowers(params.id);
