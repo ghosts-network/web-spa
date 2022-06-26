@@ -1,13 +1,13 @@
 import {NewsFeedPublication, PublicationComment} from 'src/app/modules/gateway-api';
-import {environment} from '../../../../../../environments/environment';
+declare let config: any;
 
 export class TimeLimitChecker {
     private readonly timeLimitComment: number;
     private readonly timeLimitPublication: number;
 
     constructor() {
-        this.timeLimitComment = environment.time_limit_to_update.comments;
-        this.timeLimitPublication = environment.time_limit_to_update.publications;
+        this.timeLimitComment = config.time_limit_to_update.comments;
+        this.timeLimitPublication = config.time_limit_to_update.publications;
     }
 
     public isCommentEnabledToEdit(comment: PublicationComment): boolean {

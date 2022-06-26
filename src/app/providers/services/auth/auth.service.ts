@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import {UserManagerSettings, UserManager, User, Profile} from 'oidc-client';
-import {environment} from "../../../../environments/environment";
-import {from, Observable} from "rxjs";
+import {from, Observable} from 'rxjs';
+declare let config: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private manager: UserManager;
-
   constructor() {
     this.manager = new UserManager(AuthService.getClientSettings());
+  }
+
+  private manager: UserManager;
+
+  private static getClientSettings(): UserManagerSettings {
+    return config.auth;
   }
 
   getUser(): Observable<User | null> {
@@ -41,9 +45,5 @@ export class AuthService {
 
   completeAuthentication(url): Observable<User> {
     return from(this.manager.signinRedirectCallback(url));
-  }
-
-  private static getClientSettings(): UserManagerSettings {
-    return environment.auth;
   }
 }

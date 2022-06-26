@@ -3,22 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  basePath: 'https://api.ghost-network.boberneprotiv.com',
-  auth: {
-    authority: 'https://accounts.ghost-network.boberneprotiv.com',
-    client_id: 'angular_spa',
-    redirect_uri: 'http://localhost:4200/auth-callback',
-    post_logout_redirect_uri: 'http://localhost:4200/',
-    response_type: "id_token token",
-    scope: "openid profile api",
-    filterProtocolClaims: true,
-    loadUserInfo: true
-  },
-  time_limit_to_update: {
-    publications: 900,
-    comments: 900
-  }
+  production: false
 };
 
 /*
