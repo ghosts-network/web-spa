@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Profile } from 'oidc-client';
 import { PublicationComment } from '../../../../../gateway-api';
 import {TimeLimitChecker} from '../../classes/timeLimitCheker';
@@ -13,7 +13,7 @@ export class NewsCommentItemComponent implements OnInit {
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
 
   public isEditNow = false;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
   public editIsEnabled = false;
 
   @Input()
@@ -28,7 +28,7 @@ export class NewsCommentItemComponent implements OnInit {
 
   private timeLimitChecker: TimeLimitChecker = new TimeLimitChecker();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     this.form = fb.group({
       content: ['', [Validators.required]]
     });

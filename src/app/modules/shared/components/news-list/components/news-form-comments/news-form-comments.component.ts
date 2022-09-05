@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output, Input} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {NewsFeedPublication, NewsFeedService} from '../../../../../gateway-api';
 
 @Component({
@@ -8,7 +8,7 @@ import {NewsFeedPublication, NewsFeedService} from '../../../../../gateway-api';
   styleUrls: ['./news-form-comments.component.scss']
 })
 export class NewsFormCommentsComponent {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   @Input()
   public publication: NewsFeedPublication;
@@ -16,7 +16,7 @@ export class NewsFormCommentsComponent {
   public published = new EventEmitter<NewsFeedPublication>();
 
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private newsFeedService: NewsFeedService) {
       this.form = fb.group({
         content: ['', [Validators.required]]
