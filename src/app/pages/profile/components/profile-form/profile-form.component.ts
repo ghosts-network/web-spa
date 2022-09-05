@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {User} from "../../../../modules/gateway-api";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-profile-form',
@@ -9,9 +9,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./profile-form.component.scss']
 })
 export class ProfileFormComponent implements OnInit {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               public dialogRef: MatDialogRef<ProfileFormComponent>,
               @Inject(MAT_DIALOG_DATA) public user: User) {
     this.form = fb.group({

@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
 import {NewsFeedPublication} from '../../../../../gateway-api';
 import {Reactions} from '../../../reactions/reactions.component';
 import {TimeLimitChecker} from '../../classes/timeLimitCheker';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-news-item',
@@ -15,7 +15,7 @@ export class NewsItemComponent implements OnInit {
   public isEditNow = false;
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
   public editTimeFinished = false;
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   @Input()
   public publication: NewsFeedPublication;
@@ -29,7 +29,7 @@ export class NewsItemComponent implements OnInit {
   @Output()
   public OnEdited = new EventEmitter<NewsFeedPublication>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: UntypedFormBuilder) {
     this.form = fb.group({
       content: ['', [Validators.required]]
     });

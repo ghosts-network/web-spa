@@ -1,5 +1,5 @@
 import {Component, OnInit, EventEmitter, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {NewsFeedPublication, NewsFeedService} from '../../../../modules/gateway-api';
 
 @Component({
@@ -9,12 +9,12 @@ import {NewsFeedPublication, NewsFeedService} from '../../../../modules/gateway-
 })
 export class NewsFormComponent implements OnInit {
 
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   @Output()
   public OnPublished = new EventEmitter<NewsFeedPublication>();
 
-  constructor(private fb: FormBuilder,
+  constructor(private fb: UntypedFormBuilder,
               private newsFeedService: NewsFeedService) {
     this.form = fb.group({
       content: ['', [Validators.required]]
