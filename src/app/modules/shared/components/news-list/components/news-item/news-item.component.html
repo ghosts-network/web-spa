@@ -31,7 +31,7 @@
     </div>
   </mat-card-header>
   <mat-card-content class="content">
-    <p *ngIf="!isEditNow">{{publication.content}}</p>
+    <p class="content-field" *ngIf="!isEditNow">{{publication.content}}</p>
     <form class="edit-form" *ngIf="isEditNow" [formGroup]="form" (ngSubmit)="editSubmitted()">
       <mat-form-field appearance="fill">
       <mat-label>Edit your comment</mat-label>
