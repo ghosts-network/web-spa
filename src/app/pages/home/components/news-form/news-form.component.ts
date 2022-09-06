@@ -13,6 +13,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class NewsFormComponent implements OnInit {
 
   public form: UntypedFormGroup;
+  public urlsMeta = new Map<string, any>();
 
   @Output()
   public OnPublished = new EventEmitter<NewsFeedPublication>();
@@ -27,19 +28,32 @@ export class NewsFormComponent implements OnInit {
     this.form.get('content').valueChanges
       .pipe(debounce(() => interval(1000)))
       .subscribe(s => {
-      console.log(s);
-      const regexp = /(https?):\/\/(www\.)?[a-z0-9\.:].*?(?=\s)/g;
-      console.log([...s.matchAll(regexp)]);
+        const regexp = /(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/g;
+        const parsedUrls = [...s.matchAll(regexp)].map((value, index, array) => value[0]);
 
-      const body = new URLSearchParams();
-      body.set('url', s);
-      const options = {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-      };
-      this.httpClient.post('http://localhost:3001', body, options)
-        .subscribe(response => {
-          console.log(response);
-        });
+        const newUrls = [];
+        for (const parsedUrl of parsedUrls) {
+          if (!this.urlsMeta.has(parsedUrl)) {
+            newUrls.push(parsedUrl);
+          }
+        }
+
+        if (newUrls.length === 0) {
+          return;
+        }
+
+        const body = {
+          urls: newUrls
+        };
+        const options = {
+          headers: new HttpHeaders().set('Content-Type', 'application/json')
+        };
+        this.httpClient.post('http://boberneprotiv.com:3001', body, options)
+          .subscribe(response => {
+            for (const responseKey in response) {
+              this.urlsMeta.set(responseKey, response[responseKey]);
+            }
+          });
     });
   }
 
