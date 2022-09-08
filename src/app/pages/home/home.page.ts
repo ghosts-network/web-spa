@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import {NewsFeedPublication, NewsFeedService} from '../../modules/gateway-api';
-import {AuthService} from '../../providers/services/auth/auth.service';
 import {Profile} from 'oidc-client';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,17 +20,15 @@ export class HomePage implements OnInit {
   private currentScroll: number;
 
   constructor(private newsFeedService: NewsFeedService,
-              private authService: AuthService) { }
+              private route: ActivatedRoute) {
+    this.user = this.route.snapshot.data.user;
+  }
 
   ngOnInit(): void {
     this.loadPublications();
-    this.authService.getUser()
-      .subscribe(user => {
-        this.user = user.profile;
-      });
   }
 
-  public onPublished(publication: NewsFeedPublication): void {
+  public onPublished(): void {
     this.cursor = null;
     this.news = [];
     this.loadPublications();

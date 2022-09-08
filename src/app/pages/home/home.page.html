@@ -1,7 +1,7 @@
 <div class="news-feed">
   <div class="news-form">
-    <app-news-form (OnPublished)="onPublished($event)"></app-news-form>
+    <app-news-form (OnPublished)="onPublished()"></app-news-form>
   </div>
-  <app-news-list [news]="news" [currentUserId]="user.sub" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>
+  <app-news-list *ngIf="user" [news]="news" [currentUserId]="user.sub" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>
   <mat-spinner style="margin:0 auto;" *ngIf="showLoader"></mat-spinner>
 </div>
