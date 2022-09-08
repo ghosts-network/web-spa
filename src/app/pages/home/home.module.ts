@@ -14,34 +14,36 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { HomePage } from './home.page';
 import { NewsFormComponent } from './components/news-form/news-form.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatDialogModule} from "@angular/material/dialog";
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
-import {ReactionsService} from "./entities/reactions.enum";
-import {MatDividerModule} from "@angular/material/divider";
-import {NewsListModule} from "../../modules/shared/components/news-list/news-list.module";
+import {ReactionsService} from './entities/reactions.enum';
+import {MatDividerModule} from '@angular/material/divider';
+import {NewsListModule} from '../../modules/shared/components/news-list/news-list.module';
+import {LinkMetaModule} from '../../modules/shared/components/link-meta/link-meta.module';
 
 @NgModule({
   declarations: [
     HomePage,
     NewsFormComponent
   ],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatCardModule,
-    MatDialogModule,
-    MatProgressSpinnerModule,
-    MatDividerModule,
-    MatMenuModule,
-    NewsListModule
-  ],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatCardModule,
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        MatDividerModule,
+        MatMenuModule,
+        NewsListModule,
+        LinkMetaModule
+    ],
   providers: [
     ReactionsService
   ]

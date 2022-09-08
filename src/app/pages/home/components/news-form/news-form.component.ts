@@ -3,7 +3,8 @@ import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {NewsFeedPublication, NewsFeedService} from '../../../../modules/gateway-api';
 import {interval} from 'rxjs';
 import {debounce} from 'rxjs/operators';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LinkInspectorService} from '../../../../providers/services/link-inspector/link-inspector.service';
+import {LinkMeta} from '../../../../modules/shared/components/link-meta/link-meta';
 
 @Component({
   selector: 'app-news-form',
@@ -13,14 +14,14 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class NewsFormComponent implements OnInit {
 
   public form: UntypedFormGroup;
-  public urlsMeta = new Map<string, any>();
+  urlsMeta = new Map<string, LinkMeta>();
 
   @Output()
   public OnPublished = new EventEmitter<NewsFeedPublication>();
 
   constructor(private fb: UntypedFormBuilder,
               private newsFeedService: NewsFeedService,
-              private httpClient: HttpClient) {
+              private linkInspectorService: LinkInspectorService) {
     this.form = fb.group({
       content: ['', [Validators.required]]
     });
@@ -28,31 +29,20 @@ export class NewsFormComponent implements OnInit {
     this.form.get('content').valueChanges
       .pipe(debounce(() => interval(1000)))
       .subscribe(s => {
-        const regexp = /(http|https)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/g;
-        const parsedUrls = [...s.matchAll(regexp)].map((value, index, array) => value[0]);
-
-        const newUrls = [];
-        for (const parsedUrl of parsedUrls) {
-          if (!this.urlsMeta.has(parsedUrl)) {
-            newUrls.push(parsedUrl);
-          }
-        }
-
-        if (newUrls.length === 0) {
+        const parsedUrls = this.extractLinks(s);
+        if (parsedUrls.length === 0) {
+          this.urlsMeta = new Map<string, LinkMeta>();
           return;
         }
 
-        const body = {
-          urls: newUrls
-        };
-        const options = {
-          headers: new HttpHeaders().set('Content-Type', 'application/json')
-        };
-        this.httpClient.post('http://boberneprotiv.com:3001', body, options)
+        const url = parsedUrls[0];
+        if (this.urlsMeta.has(url)) {
+          return;
+        }
+
+        this.linkInspectorService.getMeta([url])
           .subscribe(response => {
-            for (const responseKey in response) {
-              this.urlsMeta.set(responseKey, response[responseKey]);
-            }
+            this.urlsMeta = new Map<string, LinkMeta>([[url, response[url]]]);
           });
     });
   }
@@ -73,5 +63,14 @@ export class NewsFormComponent implements OnInit {
       this.form.reset();
       this.OnPublished.emit(resp);
     });
+  }
+
+  public get linkMeta(): LinkMeta[] {
+    return Array.from(this.urlsMeta.values());
+  }
+
+  private extractLinks(content: string): string[] {
+    const regexp = /(http|https):\/\/[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,3}(\/\S*)?/g;
+    return [...content.matchAll(regexp)].map((value) => value[0]);
   }
 }
