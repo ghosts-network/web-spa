@@ -1,0 +1,9 @@
+<mat-card *ngFor="let meta of metas">
+  <div class="meta">
+    <img *ngIf="meta.image" src="{{meta.image}}" alt="{{meta.title}}">
+    <div>
+      <h4 class="">{{meta.title}}</h4>
+      <p>{{meta.description}}</p>
+    </div>
+  </div>
+</mat-card>

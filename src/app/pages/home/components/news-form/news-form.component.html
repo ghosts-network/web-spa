@@ -6,6 +6,7 @@
           <textarea matInput formControlName="content"></textarea>
         </mat-form-field>
     </mat-card-content>
+    <app-link-meta [metas]="linkMeta"></app-link-meta>
     <mat-card-actions align="end">
       <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">Post</button>
     </mat-card-actions>
