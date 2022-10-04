@@ -12,11 +12,11 @@
 
 
 export enum ReactionType {
-  Like,
-  Love,
-  Haha,
-  Wow,
-  Sad,
-  Angry
+  Like = 'Like',
+  Love = 'Love',
+  Haha = 'Haha',
+  Wow = 'Wow',
+  Sad = 'Sad',
+  Angry = 'Angry'
 }
 

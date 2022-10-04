@@ -2,16 +2,16 @@
   <button *ngIf="!publication.reactions.user"
           class="btn add-button"
           mat-button
-          (click)="addReaction(0)">
+          (click)="addReaction(ReactionType.Like)">
     {{reactionsService.asIcon(ReactionType.Like)}}
-    {{reactionsService.asText(ReactionType.Like)}}
+    {{ReactionType.Like}}
   </button>
   <button *ngIf="!!publication.reactions.user"
           class="btn"
           mat-button
           (click)="deleteReaction()">
     {{reactionsService.asIcon(publication.reactions.user.type)}}
-    {{reactionsService.asText(publication.reactions.user.type)}}
+    {{publication.reactions.user.type}}
   </button>
   <div class="reactions-div">
       <button *ngFor="let reaction of reactionsService.all" (click)="addReaction(reaction)">

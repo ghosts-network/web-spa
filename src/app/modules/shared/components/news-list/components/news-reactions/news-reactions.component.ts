@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../../gateway-api';
-import {ReactionsService} from "../../../../../../pages/home/entities/reactions.enum";
+import {ReactionsService} from '../../../../../../pages/home/entities/reactions.enum';
 
 @Component({
   selector: 'app-news-reactions',
@@ -30,7 +30,7 @@ export class ReactionsComponent {
   public deleteReaction(): void {
     this.newsFeedService.newsFeedPublicationIdReactionDelete(this.publication.id)
       .subscribe(resp => {
-        this.publication.reactions = resp
+        this.publication.reactions = resp;
       });
   }
 }

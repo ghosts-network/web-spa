@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import {ReactionsService} from '../../../../pages/home/entities/reactions.enum';
 
 @Component({
   selector: 'gn-reactions',
@@ -9,17 +10,7 @@ export class ReactionsComponent {
   @Input()
   public reactions: Reactions;
 
-  public asIcon(reaction: ReactionType): string {
-    const dict = {
-      0: '👍',
-      1: '❤️',
-      2: '😂',
-      3: '😮',
-      4: '😔',
-      5: '😠'
-    }
-
-    return dict[reaction] || dict[0];
+  constructor(public reactionsService: ReactionsService) {
   }
 }
 

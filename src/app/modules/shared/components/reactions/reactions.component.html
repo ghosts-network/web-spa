@@ -1,6 +1,6 @@
 <div class="reactions" *ngIf="!!reactions">
   <div class="reactions-images">
-    <div *ngFor="let reaction of reactions.types">{{ asIcon(reaction) }}</div>
+    <div *ngFor="let reaction of reactions.types">{{ reactionsService.asIcon(reaction) }}</div>
   </div>
   <div *ngIf="reactions.totalCount > 1">{{reactions.totalCount}}</div>
 </div>
