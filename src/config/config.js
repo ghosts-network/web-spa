@@ -1,7 +1,7 @@
 const config = {
   basePath: 'https://api.ghost-network.boberneprotiv.com',
   linkInspector: {
-    basePath: 'https://link-inspector.boberneprotiv.com'
+    basePath: 'https://link-previewer.boberneprotiv.com'
   },
   auth: {
     authority: 'https://accounts.ghost-network.boberneprotiv.com',
