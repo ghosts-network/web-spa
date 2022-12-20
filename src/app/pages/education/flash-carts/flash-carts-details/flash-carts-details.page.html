@@ -1,14 +1,9 @@
 <h1>{{ set.title }}</h1>
 
+<a [routerLink]="['/education', 'flash-cards', set.id, 'test']">Go to test</a>
+
 <ul class="cards">
   <li id="card_{{card.definition}}" *ngFor="let card of set.cards">
-    <div class="card">{{ card.description }}</div>
+    <div class="card">{{ card.description }} <div *ngIf="set.progress">{{set.progress.cardsProgress[card.id]}}%</div></div>
   </li>
 </ul>
-
-<form [formGroup]="form" class="answer-form" (ngSubmit)="onAnswerSubmit($event)">
-  <div class="wrapper">
-    <input formControlName="answer" class="input" type="text">
-    <input class="button" type="submit" value="Submit">
-  </div>
-</form>

@@ -11,6 +11,11 @@ const routes: Routes = [
     path: 'flash-cards/:id',
     loadChildren: () => import('./flash-carts/flash-carts-details/flash-carts-details.module')
       .then(m => m.FlashCartsDetailsModule),
+  },
+  {
+    path: 'flash-cards/:id/test',
+    loadChildren: () => import('./flash-carts/flash-carts-test/flash-carts-test.module')
+      .then(m => m.FlashCartsTestModule),
   }
 ];
 
