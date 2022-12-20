@@ -1,0 +1,14 @@
+<h1>{{ set.title }}</h1>
+
+<ul class="cards">
+  <li id="card_{{card.definition}}" *ngFor="let card of set.cards">
+    <div class="card">{{ card.description }}</div>
+  </li>
+</ul>
+
+<form [formGroup]="form" class="answer-form" (ngSubmit)="onAnswerSubmit($event)">
+  <div class="wrapper">
+    <input formControlName="answer" class="input" type="text">
+    <input class="button" type="submit" value="Submit">
+  </div>
+</form>

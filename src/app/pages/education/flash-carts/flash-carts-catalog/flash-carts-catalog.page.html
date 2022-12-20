@@ -1,0 +1,8 @@
+<ul class="sets-list">
+  <li *ngFor="let set of sets">
+    <a [routerLink]="['/education', 'flash-cards', set.id]">
+      <span class="title">{{ set.title }}</span>
+      <span>{{ set.details.totalCards }}</span>
+    </a>
+  </li>
+</ul>
