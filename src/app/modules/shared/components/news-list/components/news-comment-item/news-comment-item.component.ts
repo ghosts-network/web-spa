@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Profile } from 'oidc-client';
-import { PublicationComment } from '../../../../../gateway-api';
+import { PublicationComment } from '@gn/api';
 import {TimeLimitChecker} from '../../classes/timeLimitCheker';
 
 @Component({

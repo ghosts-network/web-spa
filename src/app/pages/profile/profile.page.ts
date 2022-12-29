@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService, RelationsService} from '../../modules/gateway-api';
+import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService, RelationsService} from '@gn/api';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ProfileFormComponent} from './components/profile-form/profile-form.component';

@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {NewsFeedPublication} from "../../../../../gateway-api";
-import {MatDialog} from "@angular/material/dialog";
-import {NewsCommentsComponent} from "../news-comments/news-comments.component";
+import {NewsFeedPublication} from '@gn/api';
+import {MatDialog} from '@angular/material/dialog';
+import {NewsCommentsComponent} from '../news-comments/news-comments.component';
 
 @Component({
   selector: 'app-publication-actions',

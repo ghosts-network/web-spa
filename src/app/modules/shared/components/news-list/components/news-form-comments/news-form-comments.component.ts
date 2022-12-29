@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output, Input} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {NewsFeedPublication, NewsFeedService} from '../../../../../gateway-api';
+import {NewsFeedPublication, NewsFeedService} from '@gn/api';
 
 @Component({
   selector: 'app-news-form-comments',

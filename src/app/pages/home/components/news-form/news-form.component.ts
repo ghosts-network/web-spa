@@ -1,6 +1,6 @@
 import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {NewsFeedPublication, NewsFeedService} from '../../../../modules/gateway-api';
+import {NewsFeedPublication, NewsFeedService} from '@gn/api';
 import {interval} from 'rxjs';
 import {debounce} from 'rxjs/operators';
 import {LinkInspectorService} from '../../../../providers/services/link-inspector/link-inspector.service';

@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {ApiModule, Configuration} from './modules/gateway-api';
+import {ApiModule, Configuration} from '@gn/api';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import {TokenInterceptor} from './providers/interceptors/token.interceptor';

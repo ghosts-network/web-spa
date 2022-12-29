@@ -4,6 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@gn/api": ["src/app/modules/gateway-api/index.ts"],
+    },
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,

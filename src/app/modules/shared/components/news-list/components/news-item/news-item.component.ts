@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
-import {NewsFeedPublication} from '../../../../../gateway-api';
+import {NewsFeedPublication} from '@gn/api';
 import {Reactions} from '../../../reactions/reactions.component';
 import {TimeLimitChecker} from '../../classes/timeLimitCheker';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';

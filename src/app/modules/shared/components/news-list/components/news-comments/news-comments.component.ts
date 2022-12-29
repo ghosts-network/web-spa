@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Profile} from 'oidc-client';
-import {NewsFeedPublication, NewsFeedService, PublicationComment} from '../../../../../gateway-api';
+import {NewsFeedPublication, NewsFeedService, PublicationComment} from '@gn/api';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {AuthService} from '../../../../../../providers/services/auth/auth.service';
 

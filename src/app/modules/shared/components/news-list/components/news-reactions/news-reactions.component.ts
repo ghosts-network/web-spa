@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NewsFeedPublication, NewsFeedService, ReactionType} from '../../../../../gateway-api';
+import { NewsFeedPublication, NewsFeedService, ReactionType} from '@gn/api';
 import {ReactionsService} from '../../../../../../pages/home/entities/reactions.enum';
 
 @Component({

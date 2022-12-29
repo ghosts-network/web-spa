@@ -1,4 +1,4 @@
-import {NewsFeedPublication, PublicationComment} from 'src/app/modules/gateway-api';
+import {NewsFeedPublication, PublicationComment} from '@gn/api';
 declare let config: any;
 
 export class TimeLimitChecker {

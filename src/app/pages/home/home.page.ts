@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import {NewsFeedPublication, NewsFeedService} from '../../modules/gateway-api';
+import {NewsFeedPublication, NewsFeedService} from '@gn/api';
 import {Profile} from 'oidc-client';
 import {ActivatedRoute} from '@angular/router';
 

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NewsFeedPublication} from '../../../../../gateway-api';
+import {NewsFeedPublication} from '@gn/api';
 
 @Component({
   selector: 'app-news-list',

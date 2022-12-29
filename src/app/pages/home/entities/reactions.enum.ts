@@ -1,4 +1,4 @@
-import {ReactionType} from '../../../modules/gateway-api';
+import {ReactionType} from '@gn/api';
 
 export class ReactionsService {
   public get all(): Array<ReactionType> {

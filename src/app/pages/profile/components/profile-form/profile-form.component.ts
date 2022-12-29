@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {User} from "../../../../modules/gateway-api";
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {User} from '@gn/api';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-profile-form',

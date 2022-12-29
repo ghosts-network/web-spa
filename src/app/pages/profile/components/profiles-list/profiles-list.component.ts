@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UserInfo } from 'src/app/modules/gateway-api/model/userInfo';
+import { UserInfo } from '@gn/api';
 import { AuthService } from 'src/app/providers/services/auth/auth.service';
 
 @Component({
