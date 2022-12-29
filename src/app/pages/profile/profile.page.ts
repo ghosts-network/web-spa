@@ -1,9 +1,11 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {NewsFeedPublication, NewsFeedService, User, UserInfo, UsersService, RelationsService} from '@gn/api';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ProfileFormComponent} from './components/profile-form/profile-form.component';
 import {AuthService} from '../../providers/services/auth/auth.service';
+import {map} from 'rxjs/operators';
+import {HttpEventType} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +13,7 @@ import {AuthService} from '../../providers/services/auth/auth.service';
   styleUrls: ['./profile.page.scss']
 })
 export class ProfilePage implements OnInit {
+  @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
   public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
   public itemsPerRequest = 20;
   public bioIsOpened: boolean;
@@ -180,5 +183,25 @@ export class ProfilePage implements OnInit {
     if (this.currentScroll === this.maxScroll && this.hasMore) {
       this.loadPublications(this.user.id);
     }
+  }
+
+  public onFileSelected(): void {
+    const formData = new FormData();
+    formData.append('file', this.fileInput.nativeElement.files[0]);
+    this.fileInput.nativeElement.value = '';
+
+    this.usersService.uploadAvatar(this.user.id, formData)
+      .pipe(
+        map(event => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              console.log(Math.round(event.loaded * 100 / event.total));
+              break;
+            case HttpEventType.Response:
+
+              return event;
+          }
+        }))
+      .subscribe();
   }
 }

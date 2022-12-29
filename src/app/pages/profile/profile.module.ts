@@ -14,6 +14,7 @@ import {NewsListModule} from "../../modules/shared/components/news-list/news-lis
 import {MatExpansionModule} from "@angular/material/expansion"
 import {ReactionsService} from "../home/entities/reactions.enum";
 import { ProfilesListComponent } from './components/profiles-list/profiles-list.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -21,19 +22,20 @@ import { ProfilesListComponent } from './components/profiles-list/profiles-list.
     ProfileFormComponent,
     ProfilesListComponent
   ],
-  imports: [
-    CommonModule,
-    ProfileRoutingModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatCardModule,
-    MatExpansionModule,
-    NewsListModule
-  ],
+    imports: [
+        CommonModule,
+        ProfileRoutingModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatIconModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatCardModule,
+        MatExpansionModule,
+        NewsListModule,
+        MatProgressSpinnerModule
+    ],
   providers: [
     ReactionsService
   ]
