@@ -4,6 +4,8 @@ export const AppConstants = {
   NewsPerPage: 20,
   CommentsPerPage: 10,
 
+  RelationsOnProfilePage: 6,
+
   Headers: {
     Cursor: 'x-cursor'
   }

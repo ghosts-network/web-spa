@@ -1,34 +1,16 @@
 <mat-card *ngIf="user" class="user-card">
   <mat-card-header>
-    <app-avatar *ngIf="editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}" [size]="'lg'" (click)="fileInput.click()"></app-avatar>
-    <app-avatar *ngIf="!editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}" [size]="'lg'" (click)="fileInput.click()"></app-avatar>
+    <app-avatar mat-card-avatar *ngIf="editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}" (click)="fileInput.click()"></app-avatar>
+    <app-avatar mat-card-avatar *ngIf="!editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}" (click)="fileInput.click()"></app-avatar>
+    <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
     <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-    <span id="user-name">{{user.firstName}} {{user.lastName}}</span>
-    <button id="profile-edit" *ngIf="editable" mat-icon-button>
-      <mat-icon id="icon-edit" [inline]="true" (click)="setupInfo()">edit</mat-icon>
-    </button>
   </mat-card-header>
   <mat-card-content>
     <div class="user-action">
-      <button class="action-button" [disabled]="true" mat-stroked-button color="primary">Send message</button>
-      <button class="action-button" *ngIf="!editable && (!isFriend && !isMySubscription)" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
-      <button class="action-button" *ngIf="!editable && isFriend" mat-flat-button color="primary">Your friend</button>
+      <button class="action-button" *ngIf="!editable" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
+      <button class="action-button" *ngIf="!editable" mat-stroked-button color="warn" (click)="removeFriend()">Remove friend</button>
     </div>
-    <mat-expansion-panel
-      *ngIf="user.city || user.dateOfBirth || user.gender">
-      <mat-expansion-panel-header>
-        <mat-panel-description>
-          <span class="bio-label" *ngIf="currentUserId == user.id">Your info:</span>
-          <span class="bio-label" *ngIf="currentUserId != user.id">User info:</span>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="bio-content">
-        <span class="bio-content-item" *ngIf="user.gender">Gender: {{user.gender}}</span>
-        <span class="bio-content-item" *ngIf="user.city">Location: {{user.city}}</span>
-        <span class="bio-content-item" *ngIf="user.dateOfBirth">Birth date: {{user.dateOfBirth | date : 'longDate'}}</span>
-      </div>
-    </mat-expansion-panel>
-    <br>
 
     <app-profiles-list
       *ngIf="relations?.friends?.length"
@@ -44,13 +26,13 @@
 
     <app-profiles-list
       *ngIf="relations?.incomingRequests?.length"
-      [label]="'Outgoing requests'"
+      [label]="'Incoming requests'"
       [users]="relations?.incomingRequests ?? []">
     </app-profiles-list>
 
     <app-profiles-list
       *ngIf="relations?.outgoingRequests?.length"
-      [label]="'Incoming requests'"
+      [label]="'Outgoing requests'"
       [users]="relations?.outgoingRequests ?? []">
     </app-profiles-list>
 

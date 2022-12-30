@@ -1,6 +1,8 @@
-<h3>{{ label.toLowerCase() }}:</h3>
-<div *ngFor="let user of users">
-  <a [routerLink]="['/', user.id]">
-    <app-avatar [image]="user.avatarUrl" [title]="user.fullName" [size]="'sm'"></app-avatar>
-  </a>
+<div class="list-wrapper">
+  <span class="label">{{ label.toLowerCase() }}</span>
+  <div class="avatars-list">
+    <a *ngFor="let user of users; index as i" [routerLink]="['/', user.id]" style="left: {{i * 20}}px">
+      <app-avatar [image]="user.avatarUrl" [title]="user.fullName" [size]="'sm'"></app-avatar>
+    </a>
+  </div>
 </div>

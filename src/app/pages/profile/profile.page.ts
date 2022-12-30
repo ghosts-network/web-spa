@@ -1,8 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {NewsFeedPublication, NewsFeedService, User, UsersService, RelationsService} from '@gn/api';
 import {ActivatedRoute} from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
-import {ProfileFormComponent} from './components/profile-form/profile-form.component';
 import {map} from 'rxjs/operators';
 import {HttpEventType} from '@angular/common/http';
 import {PublicationsList, Relations} from '@gn/resolvers';
@@ -21,10 +19,7 @@ export class ProfilePage implements OnInit {
 
   public news: PublicationsList | null;
   public relations: Relations | null;
-
   public user: User;
-  public isFriend: boolean;
-  public isMySubscription: boolean;
 
   public showLoader = false;
 
@@ -34,9 +29,7 @@ export class ProfilePage implements OnInit {
   constructor(private usersService: UsersService,
               private newsFeedService: NewsFeedService,
               private relationsService: RelationsService,
-              private route: ActivatedRoute,
-              private dialog: MatDialog) { }
-
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -50,36 +43,14 @@ export class ProfilePage implements OnInit {
     });
   }
 
-  private fetchUser(id: string): void {
-    this.usersService.usersUserIdGet(id).subscribe(user => {
-      this.user = user;
-    });
-  }
-
-  public setupInfo(): void {
-    const dialogRef = this.dialog.open(ProfileFormComponent, {
-      data: this.user
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (!!result) {
-        this.usersService.usersUserIdPut(this.user.id, {
-          gender: result.gender
-        }).subscribe(r => {
-          this.fetchUser(this.user.id);
-        });
-      }
-    });
-  }
-
   public onDeleted(publication: NewsFeedPublication): void {
-    this.newsFeedService.newsFeedPublicationIdDelete(publication.id).subscribe(resp => {
+    this.newsFeedService.newsFeedPublicationIdDelete(publication.id).subscribe(_ => {
       this.news.publications = this.news.publications.filter(pub => pub.id !== publication.id);
     });
   }
 
   public onEdited(publication: NewsFeedPublication): void {
-    this.newsFeedService.newsFeedPublicationIdPut(publication.id, { content : publication.content }).subscribe(resp => {
+    this.newsFeedService.newsFeedPublicationIdPut(publication.id, { content : publication.content }).subscribe(_ => {
 
     });
   }
@@ -104,21 +75,21 @@ export class ProfilePage implements OnInit {
       });
   }
 
-  public loadFollowers(id: string): void {
-    this.relationsService.relationsUserIdFollowersGet(id, 0, 20).subscribe(resp => {
-      this.relations.followers = resp;
-      this.isMySubscription = this.relations.followers.some(f => f.id === this.currentUserId);
-    });
-  }
-
   public get editable(): boolean {
     return this.currentUserId === this.user.id;
   }
 
   addFriend(): void {
     this.relationsService.relationsFriendsToUserPost(this.user.id)
-      .subscribe(resp => {
-        this.loadFollowers(this.user.id);
+      .subscribe(() => {
+        // reload whole relations object
+      });
+  }
+
+  removeFriend(): void {
+    this.relationsService.relationsFriendsFriendDelete(this.user.id)
+      .subscribe(() => {
+        // reload whole relations object
       });
   }
 
