@@ -9,8 +9,6 @@ import {AppConstants} from '@gn/constants';
 })
 export class ProfilesListComponent {
 
-  public readonly DefaultAvatar = AppConstants.DefaultAvatar;
-
   @Input()
   public label: string;
 

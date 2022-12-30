@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { PublicationComment } from '@gn/api';
 import { TimeLimitChecker } from '../../classes/timeLimitCheker';
-import { AppConstants } from '@gn/constants';
 
 @Component({
   selector: 'app-news-comment-item',
@@ -10,8 +9,6 @@ import { AppConstants } from '@gn/constants';
   styleUrls: ['./news-comment-item.component.scss']
 })
 export class NewsCommentItemComponent {
-  public DefaultAvatar = AppConstants.DefaultAvatar;
-
   public isEditNow = false;
   public form: UntypedFormGroup;
 

@@ -3,7 +3,6 @@ import {NewsFeedPublication} from '@gn/api';
 import {Reactions} from '../../../reactions/reactions.component';
 import {TimeLimitChecker} from '../../classes/timeLimitCheker';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {AppConstants} from '@gn/constants';
 
 @Component({
   selector: 'app-news-item',
@@ -15,7 +14,6 @@ export class NewsItemComponent {
   public currentUserId: string;
 
   public isEditNow = false;
-  public DefaultAvatar = AppConstants.DefaultAvatar;
 
   public form: UntypedFormGroup;
 

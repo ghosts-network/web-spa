@@ -22,6 +22,7 @@ import {RouterModule} from "@angular/router";
 import {ReactionsModule} from "../reactions/reactions.module";
 import { NewsCommentItemComponent } from './components/news-comment-item/news-comment-item.component';
 import { DateAgoPipe } from './pipes/date-ago-pipe/date-ago.pipe';
+import {AvatarModule} from "../avatar/avatar.module";
 
 
 @NgModule({
@@ -36,23 +37,24 @@ import { DateAgoPipe } from './pipes/date-ago-pipe/date-ago.pipe';
         DateAgoPipe,
         NewsCommentItemComponent
     ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatCardModule,
-    MatDialogModule,
-    MatProgressSpinnerModule,
-    MatDividerModule,
-    MatMenuModule,
-    ReactionsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatCardModule,
+        MatDialogModule,
+        MatProgressSpinnerModule,
+        MatDividerModule,
+        MatMenuModule,
+        ReactionsModule,
+        AvatarModule
+    ],
   exports: [
     NewsListComponent,
     NewsItemComponent,

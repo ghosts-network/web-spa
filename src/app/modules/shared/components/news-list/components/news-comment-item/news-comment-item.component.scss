@@ -13,12 +13,6 @@
   display: flex;
 }
 
-.avatar {
-  height: 2.5rem;
-  width: 2.5rem;
-  border-radius: 50%;
-}
-
 .user-text {
   margin-top: 1.2%;
   font-weight: 500;
@@ -47,7 +41,7 @@
   mat-form-field {
     flex: 1;
     width: 97%;
-  }  
+  }
 }
 
 .button-submit {

@@ -1,5 +1,6 @@
-.avatar {
-  background-size: cover;
+.mat-card-avatar {
+  width: auto;
+  height: auto;
 }
 
 .link {
@@ -24,7 +25,7 @@
   mat-form-field {
     flex: 1;
     width: 97%;
-  }  
+  }
 }
 
 .total {

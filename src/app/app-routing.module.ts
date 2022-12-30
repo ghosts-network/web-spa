@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {AuthGuardService} from './providers/guards/auth/auth-guard.service';
 import {AuthCallbackComponent} from './components/auth-callback/auth-callback.component';
 import {AuthService} from './providers/services/auth/auth.service';
-import {AuthProfileResolver} from './providers/resolvers/auth-profile-resolver.service';
+import {AuthProfileResolver} from '@gn/resolvers';
 
 const routes: Routes = [
   {
@@ -19,6 +19,18 @@ const routes: Routes = [
   {
     path: ':id',
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
+    canLoad: [AuthGuardService],
+    resolve: { claims: AuthProfileResolver }
+  },
+  {
+    path: ':id/followers',
+    loadChildren: () => import('./pages/followers/followers.module').then(m => m.FollowersModule),
+    canLoad: [AuthGuardService],
+    resolve: { claims: AuthProfileResolver }
+  },
+  {
+    path: ':id/friends',
+    loadChildren: () => import('./pages/friends/friends.module').then(m => m.FriendsModule),
     canLoad: [AuthGuardService],
     resolve: { claims: AuthProfileResolver }
   },

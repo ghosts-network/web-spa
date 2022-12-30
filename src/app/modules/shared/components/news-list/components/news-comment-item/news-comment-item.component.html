@@ -2,7 +2,7 @@
 	<div class="content-section">
 		<div>
 			<div class="user">
-				<img src="{{comment.author.avatarUrl || DefaultAvatar}}" class="avatar"><img/>
+        <app-avatar [image]="comment.author.avatarUrl" [title]="comment.author.fullName" [size]="'sm'"></app-avatar>
 				<h3 class="user-text">{{comment.author.fullName}}</h3>
 				<h3 class="created-on-text">{{comment.createdOn | dateAgo}}</h3>
 			</div>

@@ -1,8 +1,6 @@
 <mat-card class="publication-card">
   <mat-card-header>
-    <div mat-card-avatar
-         class="avatar"
-         style="background-image: url({{publication.author.avatarUrl || DefaultAvatar}})"></div>
+    <app-avatar mat-card-avatar [image]="publication.author.avatarUrl" [title]="publication.author.fullName" [size]="'md'"></app-avatar>
     <mat-card-title class="user-name">
       <a class="link" [routerLink]="['/', publication.author.id]">{{publication.author.fullName}}</a>
     </mat-card-title>

@@ -1,12 +1,7 @@
 <mat-card *ngIf="user" class="user-card">
   <mat-card-header>
-    <div *ngIf="editable" mat-card-avatar
-         class="avatar"
-         style="background-image: url({{user.profilePicture || AppConstants.DefaultAvatar}})"
-         (click)="fileInput.click()"></div>
-    <div *ngIf="!editable" mat-card-avatar
-         class="avatar"
-         style="background-image: url({{user.profilePicture || AppConstants.DefaultAvatar}})"></div>
+    <app-avatar *ngIf="editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}" [size]="'lg'" (click)="fileInput.click()"></app-avatar>
+    <app-avatar *ngIf="!editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}" [size]="'lg'" (click)="fileInput.click()"></app-avatar>
     <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
     <span id="user-name">{{user.firstName}} {{user.lastName}}</span>
     <button id="profile-edit" *ngIf="editable" mat-icon-button>

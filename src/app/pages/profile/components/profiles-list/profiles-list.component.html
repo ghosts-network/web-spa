@@ -1,6 +1,6 @@
 <h3>{{ label.toLowerCase() }}:</h3>
 <div *ngFor="let user of users">
   <a [routerLink]="['/', user.id]">
-    <img src="{{DefaultAvatar}}" alt="{{user.fullName}}" title="{{user.fullName}}" class="avatar">
+    <app-avatar [image]="user.avatarUrl" [title]="user.fullName" [size]="'sm'"></app-avatar>
   </a>
 </div>

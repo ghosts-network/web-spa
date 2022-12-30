@@ -1,0 +1,23 @@
+<div class="list-wrapper">
+  <mat-tab-group animationDuration="0ms" (selectedTabChange)="onTabChanged($event)">
+    <mat-tab label="Friends"></mat-tab>
+    <mat-tab label="Followers"></mat-tab>
+  </mat-tab-group>
+
+  <mat-table [dataSource]="list.followers" class="mat-elevation-z8">
+    <ng-container matColumnDef="info">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let friend">
+        <app-avatar [image]="friend.avatarUrl" [alt]="friend.fullName"></app-avatar>
+        <span class="fullName">{{friend.fullName}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let element"></mat-cell>
+    </ng-container>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

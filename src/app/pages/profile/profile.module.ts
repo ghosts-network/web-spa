@@ -16,6 +16,7 @@ import {ReactionsService} from '../home/entities/reactions.enum';
 import { ProfilesListComponent } from './components/profiles-list/profiles-list.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NewsFormModule} from '../../modules/shared/components/news-form/news-form.module';
+import {AvatarModule} from "../../modules/shared/components/avatar/avatar.module";
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import {NewsFormModule} from '../../modules/shared/components/news-form/news-for
     MatExpansionModule,
     NewsListModule,
     MatProgressSpinnerModule,
-    NewsFormModule
+    NewsFormModule,
+    AvatarModule
   ],
   providers: [
     ReactionsService
