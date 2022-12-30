@@ -2,11 +2,11 @@
   <mat-card-header>
     <div *ngIf="editable" mat-card-avatar
          class="avatar"
-         style="background-image: url({{user.profilePicture || DefaultAvatar}})"
+         style="background-image: url({{user.profilePicture || AppConstants.DefaultAvatar}})"
          (click)="fileInput.click()"></div>
     <div *ngIf="!editable" mat-card-avatar
          class="avatar"
-         style="background-image: url({{user.profilePicture || DefaultAvatar}})"></div>
+         style="background-image: url({{user.profilePicture || AppConstants.DefaultAvatar}})"></div>
     <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
     <span id="user-name">{{user.firstName}} {{user.lastName}}</span>
     <button id="profile-edit" *ngIf="editable" mat-icon-button>
@@ -20,9 +20,7 @@
       <button class="action-button" *ngIf="!editable && isFriend" mat-flat-button color="primary">Your friend</button>
     </div>
     <mat-expansion-panel
-      *ngIf="user.city || user.dateOfBirth || user.gender"
-      (opened)="bioIsOpened = true"
-      (closed)="bioIsOpened = false">
+      *ngIf="user.city || user.dateOfBirth || user.gender">
       <mat-expansion-panel-header>
         <mat-panel-description>
           <span class="bio-label" *ngIf="currentUserId == user.id">Your info:</span>
@@ -36,39 +34,34 @@
       </div>
     </mat-expansion-panel>
     <br>
-    <br>
-    <div class="user-list">
-      <app-profiles-list
-        [label]="'Friends'"
-        [removing]="currentUserId == user.id"
-        [users]="friends"
-        (removed)="removeFriend($event)">
-      </app-profiles-list>
-      <br>
-      <app-profiles-list
-        [label]="'Followers'"
-        [users]="followers">
-      </app-profiles-list>
-      <br>
-      <app-profiles-list *ngIf="currentUserId == user.id"
-        [label]="'Outgoing requests'"
-        [users]="outgoingRequests"
-        [removing]="currentUserId == user.id"
-        (removed)="removeOutgoingRequest($event)">
-      </app-profiles-list>
-      <br *ngIf="currentUserId == user.id">
-      <app-profiles-list
-        *ngIf="currentUserId == user.id"
-        [label]="'Incoming requests'"
-        [approving]="currentUserId == user.id"
-        [users]="incomingRequests"
-        (approved)="approveFriendRequest($event)"
-        (declined)="declineFriendRequest($event)">
-      </app-profiles-list>
-    </div>
+
+    <app-profiles-list
+      *ngIf="relations?.friends?.length"
+      [label]="'Friends'"
+      [users]="relations?.friends ?? []">
+    </app-profiles-list>
+
+    <app-profiles-list
+      *ngIf="relations?.followers?.length"
+      [label]="'Followers'"
+      [users]="relations?.followers ?? []">
+    </app-profiles-list>
+
+    <app-profiles-list
+      *ngIf="relations?.incomingRequests?.length"
+      [label]="'Outgoing requests'"
+      [users]="relations?.incomingRequests ?? []">
+    </app-profiles-list>
+
+    <app-profiles-list
+      *ngIf="relations?.outgoingRequests?.length"
+      [label]="'Incoming requests'"
+      [users]="relations?.outgoingRequests ?? []">
+    </app-profiles-list>
+
   </mat-card-content>
 </mat-card>
 <div class="news-feed">
-  <app-news-list [news]="news" [currentUserId]="currentUserId" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>
+  <app-news-list [news]="news.publications" [currentUserId]="currentUserId" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>
   <mat-spinner style="margin:0 auto;" *ngIf="showLoader"></mat-spinner>
 </div>

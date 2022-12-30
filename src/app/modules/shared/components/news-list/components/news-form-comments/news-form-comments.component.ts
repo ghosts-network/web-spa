@@ -15,7 +15,6 @@ export class NewsFormCommentsComponent {
   @Output()
   public published = new EventEmitter<NewsFeedPublication>();
 
-
   constructor(private fb: UntypedFormBuilder,
               private newsFeedService: NewsFeedService) {
       this.form = fb.group({

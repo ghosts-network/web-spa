@@ -1,23 +1,22 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { Profile } from 'oidc-client';
 import { PublicationComment } from '@gn/api';
-import {TimeLimitChecker} from '../../classes/timeLimitCheker';
+import { TimeLimitChecker } from '../../classes/timeLimitCheker';
+import { AppConstants } from '@gn/constants';
 
 @Component({
   selector: 'app-news-comment-item',
   templateUrl: './news-comment-item.component.html',
   styleUrls: ['./news-comment-item.component.scss']
 })
-export class NewsCommentItemComponent implements OnInit {
-  public DefaultAvatar = 'https://material.angular.io/assets/img/examples/shiba1.jpg';
+export class NewsCommentItemComponent {
+  public DefaultAvatar = AppConstants.DefaultAvatar;
 
   public isEditNow = false;
   public form: UntypedFormGroup;
-  public editIsEnabled = false;
 
   @Input()
-  public currentUser: Profile;
+  public currentUserId: string;
   @Input()
   public comment: PublicationComment;
 
@@ -26,16 +25,11 @@ export class NewsCommentItemComponent implements OnInit {
   @Output()
   public OnEdited = new EventEmitter<PublicationComment>();
 
-  private timeLimitChecker: TimeLimitChecker = new TimeLimitChecker();
-
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private timeLimitChecker: TimeLimitChecker,
+              private fb: UntypedFormBuilder) {
     this.form = fb.group({
       content: ['', [Validators.required]]
     });
-  }
-
-  ngOnInit(): void {
-    this.editIsEnabled = this.timeLimitChecker.isCommentEnabledToEdit(this.comment);
   }
 
   public deleteComment(): void {
@@ -61,5 +55,14 @@ export class NewsCommentItemComponent implements OnInit {
       this.OnEdited.emit(this.comment);
       this.isEditNow = false;
     }
+  }
+
+  public get deletable(): boolean {
+    return this.currentUserId === this.comment.author.id;
+  }
+
+  public get editable(): boolean {
+    return this.currentUserId === this.comment.author.id
+      && this.timeLimitChecker.isCommentEnabledToEdit(this.comment);
   }
 }

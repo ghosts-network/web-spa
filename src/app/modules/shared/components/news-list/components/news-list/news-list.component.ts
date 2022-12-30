@@ -20,19 +20,11 @@ export class NewsListComponent {
 
   constructor() { }
 
-  public deleteEnabled(publication: NewsFeedPublication): boolean {
-    return this.currentUserId === publication.author.id;
-  }
-
-  public editEnabled(publication: NewsFeedPublication): boolean {
-    return this.currentUserId === publication.author.id;
-  }
-
-  public deleteEventHandler($event): void {
+  public deleteEventHandler($event: NewsFeedPublication): void {
     this.OnDeleted.emit($event);
   }
 
-  public editEventHandler($event): void {
+  public editEventHandler($event: NewsFeedPublication): void {
     this.OnEdited.emit($event);
   }
 }

@@ -4,7 +4,7 @@
     <div class="comments" *ngFor="let comment of comments">
       <app-news-comment-item
         [comment]="comment"
-        [currentUser]="currentUser"
+        [currentUserId]="currentUserId"
         (OnEdited)="onEdit(comment)"
         (OnDeleted)="onDelete(comment)">
       </app-news-comment-item>

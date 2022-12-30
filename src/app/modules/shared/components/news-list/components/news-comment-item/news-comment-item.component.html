@@ -15,25 +15,23 @@
 				<button id="button-submit"
 						type="submit"
 						mat-stroked-button
-						(click)="editSubmitted()" 
+						(click)="editSubmitted()"
 						color="primary">
 					Submit
 				</button>
 			</form>
 		</div>
 	</div>
-	<button mat-button [matMenuTriggerFor]="menu">
+	<button *ngIf="editable || deletable" mat-button [matMenuTriggerFor]="menu">
 		<mat-icon>more_vert</mat-icon>
 	</button>
 	<mat-menu class="action-menu" #menu="matMenu">
-		<button mat-menu-item
-				[disabled]="!(currentUser?.sub === comment.author.id && editIsEnabled)"
+		<button *ngIf="editable" mat-menu-item
 				(click)="editComment()">
 			<mat-icon>edit</mat-icon>
 			Edit
 		</button>
-		<button mat-menu-item
-				[disabled]="currentUser?.sub !== comment.author.id"
+		<button *ngIf="deletable" mat-menu-item
 				(click)="deleteComment()">
 			<mat-icon>delete</mat-icon>
 			Delete

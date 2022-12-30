@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Profile} from 'oidc-client';
 import {NewsFeedPublication, NewsFeedService, PublicationComment} from '@gn/api';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {AppConstants} from '@gn/constants';
 import {AuthService} from '../../../../../../providers/services/auth/auth.service';
 
 @Component({
@@ -12,30 +12,29 @@ import {AuthService} from '../../../../../../providers/services/auth/auth.servic
 export class NewsCommentsComponent implements OnInit {
 
   private cursor: string;
-  private take = 10;
   private index: number;
 
   public comments = new Array<PublicationComment>();
 
-  public currentUser: Profile;
+  public currentUserId: string;
 
   constructor(private newsFeedService: NewsFeedService,
-              @Inject(MAT_DIALOG_DATA) public publication: NewsFeedPublication,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              @Inject(MAT_DIALOG_DATA) public publication: NewsFeedPublication) { }
 
   ngOnInit(): void {
-    this.authService.getProfile()
-      .subscribe(user => {
-        this.currentUser = user;
-      });
+    this.authService.getProfile().subscribe(user => {
+      this.currentUserId = user.sub;
+    });
+
     this.loadComments();
   }
 
   public loadComments(): void {
-    this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, null, this.take, this.cursor, 'response')
+    this.newsFeedService.newsFeedPublicationIdCommentsGet(this.publication.id, null, AppConstants.CommentsPerPage, this.cursor, 'response')
     .subscribe(resp => {
       this.comments = this.comments.concat(resp.body);
-      this.cursor = resp.headers.get('x-cursor');
+      this.cursor = resp.headers.get(AppConstants.Headers.Cursor);
     });
   }
 

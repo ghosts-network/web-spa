@@ -25,16 +25,17 @@ import { DateAgoPipe } from './pipes/date-ago-pipe/date-ago.pipe';
 
 
 @NgModule({
-  declarations: [
-    NewsListComponent,
-    NewsItemComponent,
-    NewsFormCommentsComponent,
-    ReactionsComponent,
-    NewsCommentsComponent,
-    NewsCommentItemComponent,
-    PublicationActionsComponent,
-    DateAgoPipe
-  ],
+    declarations: [
+        NewsListComponent,
+        NewsItemComponent,
+        NewsFormCommentsComponent,
+        ReactionsComponent,
+        NewsCommentsComponent,
+        NewsCommentItemComponent,
+        PublicationActionsComponent,
+        DateAgoPipe,
+        NewsCommentItemComponent
+    ],
   imports: [
     CommonModule,
     RouterModule,

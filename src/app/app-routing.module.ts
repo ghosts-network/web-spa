@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {AuthGuardService} from './providers/guards/auth/auth-guard.service';
 import {AuthCallbackComponent} from './components/auth-callback/auth-callback.component';
 import {AuthService} from './providers/services/auth/auth.service';
-import {UserResolver} from './providers/resolvers/user.resolver';
+import {AuthProfileResolver} from './providers/resolvers/auth-profile-resolver.service';
 
 const routes: Routes = [
   {
@@ -14,19 +14,19 @@ const routes: Routes = [
     path: 'education',
     loadChildren: () => import('./pages/education/education.module').then(m => m.EducationModule),
     canLoad: [AuthGuardService],
-    resolve: { user: UserResolver }
+    resolve: { claims: AuthProfileResolver }
   },
   {
     path: ':id',
     loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
     canLoad: [AuthGuardService],
-    resolve: { user: UserResolver }
+    resolve: { claims: AuthProfileResolver }
   },
   {
     path: '',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
     canLoad: [AuthGuardService],
-    resolve: { user: UserResolver }
+    resolve: { claims: AuthProfileResolver }
   }
 ];
 

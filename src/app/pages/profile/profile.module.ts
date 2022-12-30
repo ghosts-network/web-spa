@@ -17,11 +17,12 @@ import { ProfilesListComponent } from './components/profiles-list/profiles-list.
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
-  declarations: [
-    ProfilePage,
-    ProfileFormComponent,
-    ProfilesListComponent
-  ],
+    declarations: [
+        ProfilePage,
+        ProfileFormComponent,
+        ProfilesListComponent,
+        ProfilesListComponent
+    ],
     imports: [
         CommonModule,
         ProfileRoutingModule,

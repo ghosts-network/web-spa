@@ -12,7 +12,7 @@ import {Profile} from 'oidc-client';
 @Injectable({
   providedIn: 'root'
 })
-export class UserResolver implements Resolve<Profile> {
+export class AuthProfileResolver implements Resolve<Profile> {
   constructor(private authService: AuthService) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Profile> {

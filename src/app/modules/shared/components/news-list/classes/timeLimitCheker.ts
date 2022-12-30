@@ -1,6 +1,10 @@
 import {NewsFeedPublication, PublicationComment} from '@gn/api';
+import {Injectable} from '@angular/core';
 declare let config: any;
 
+@Injectable({
+  providedIn: 'root'
+})
 export class TimeLimitChecker {
     private readonly timeLimitComment: number;
     private readonly timeLimitPublication: number;

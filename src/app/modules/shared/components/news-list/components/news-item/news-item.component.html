@@ -10,19 +10,18 @@
       <p *ngIf="publication.updatedOn == publication.createdOn">{{publication.createdOn | dateAgo : 'publication'}}</p>
       <p *ngIf="publication.updatedOn != publication.createdOn">{{publication.updatedOn | dateAgo : 'publication'}}</p>
     </div>
-    <div class="postMenu">
+    <div *ngIf="deletable || editable" class="postMenu">
       <button mat-button [matMenuTriggerFor]="menu">
 		<mat-icon>more_vert</mat-icon>
 	</button>
 	<mat-menu class="action-menu" #menu="matMenu">
-		<button mat-menu-item
-				[disabled]="!deleteEnabled"
+		<button *ngIf="deletable" mat-menu-item
 				(click)="deleteClick()">
 			<mat-icon>delete</mat-icon>
 			Delete
 		</button>
     <button mat-menu-item
-			  *ngIf="editEnabled && !editTimeFinished"
+			  *ngIf="editable"
         (click)="editPublication()">
 			<mat-icon>edit</mat-icon>
 			Edit
