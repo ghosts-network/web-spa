@@ -27,11 +27,6 @@ export class HomePage implements OnInit {
     });
   }
 
-  public onPublished(): void {
-    this.news.cursor = null;
-    this.news.publications = [];
-  }
-
   public loadPublications(): void {
     this.showLoader = true;
     this.newsFeedService.newsFeedGet(null, AppConstants.NewsPerPage, this.news.cursor,  'response').subscribe(resp => {

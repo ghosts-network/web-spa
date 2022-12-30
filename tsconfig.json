@@ -7,7 +7,8 @@
     "paths": {
       "@gn/api": ["src/app/modules/gateway-api/index.ts"],
       "@gn/resolvers": ["src/app/providers/resolvers/index.ts"],
-      "@gn/constants": ["src/app/constants.ts"]
+      "@gn/constants": ["src/app/constants.ts"],
+      "@ng/link-inspector": ["src/app/providers/services/link-inspector/link-inspector.service"]
     },
     "sourceMap": true,
     "declaration": false,

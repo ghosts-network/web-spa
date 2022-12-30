@@ -62,6 +62,9 @@
   </mat-card-content>
 </mat-card>
 <div class="news-feed">
+  <div class="news-form-wrapper">
+    <app-news-form (OnPublishClicked)="OnPublishClicked($event)"></app-news-form>
+  </div>
   <app-news-list [news]="news.publications" [currentUserId]="currentUserId" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>
   <mat-spinner style="margin:0 auto;" *ngIf="showLoader"></mat-spinner>
 </div>

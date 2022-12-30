@@ -1,26 +1,24 @@
-import {Component, OnInit, EventEmitter, Output} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {NewsFeedPublication, NewsFeedService} from '@gn/api';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {interval} from 'rxjs';
 import {debounce} from 'rxjs/operators';
-import {LinkInspectorService} from '../../../../providers/services/link-inspector/link-inspector.service';
-import {LinkMeta} from '../../../../modules/shared/components/link-meta/link-meta';
+import {LinkInspectorService} from '@ng/link-inspector';
+import {LinkMeta} from '../link-meta/link-meta';
 
 @Component({
   selector: 'app-news-form',
   templateUrl: './news-form.component.html',
   styleUrls: ['./news-form.component.scss']
 })
-export class NewsFormComponent implements OnInit {
+export class NewsFormComponent {
 
-  public form: UntypedFormGroup;
+  public form: FormGroup;
   urlsMeta = new Map<string, LinkMeta>();
 
   @Output()
-  public OnPublished = new EventEmitter<NewsFeedPublication>();
+  public OnPublishClicked = new EventEmitter<NewPublication>();
 
-  constructor(private fb: UntypedFormBuilder,
-              private newsFeedService: NewsFeedService,
+  constructor(private fb: FormBuilder,
               private linkInspectorService: LinkInspectorService) {
     this.form = fb.group({
       content: ['', [Validators.required]]
@@ -47,22 +45,13 @@ export class NewsFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
-
   public formSubmitted(): void {
     if (!this.form.valid) {
       return;
     }
 
-    const model = {
-      content: this.form.get('content').value
-    };
-
-    this.newsFeedService.newsFeedPost(model).subscribe(resp => {
-      this.form.reset();
-      this.OnPublished.emit(resp);
-    });
+    this.OnPublishClicked.emit(this.form.value);
+    this.form.get('content').reset('');
   }
 
   public get linkMeta(): LinkMeta[] {
@@ -73,4 +62,8 @@ export class NewsFormComponent implements OnInit {
     const regexp = /(http|https):\/\/[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,3}(\/\S*)?/g;
     return [...content.matchAll(regexp)].map((value) => value[0]);
   }
+}
+
+export interface NewPublication {
+  content: string;
 }

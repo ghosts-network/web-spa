@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {HttpEventType} from '@angular/common/http';
 import {PublicationsList, Relations} from '@gn/resolvers';
 import {AppConstants} from '@gn/constants';
+import {NewPublication} from '../../modules/shared/components/news-form/news-form.component';
 
 @Component({
   selector: 'app-profile',
@@ -83,6 +84,12 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  public reloadPublications(id: string): void {
+    this.news.publications = [];
+    this.news.cursor = null;
+    this.loadPublications(id);
+  }
+
   public loadPublications(id: string): void {
     this.showLoader = true;
     this.newsFeedService.newsFeedUsersUserIdGet(id, null, AppConstants.NewsPerPage, this.news.cursor, 'response')
@@ -143,5 +150,11 @@ export class ProfilePage implements OnInit {
           }
         }))
       .subscribe();
+  }
+
+  public OnPublishClicked(model: NewPublication): void {
+    this.newsFeedService.newsFeedPost(model).subscribe(_ => {
+      this.reloadPublications(this.user.id);
+    });
   }
 }

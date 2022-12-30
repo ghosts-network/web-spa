@@ -1,7 +1,4 @@
 <div class="news-feed">
-  <div class="news-form">
-    <app-news-form (OnPublished)="onPublished()"></app-news-form>
-  </div>
   <app-news-list [news]="news?.publications ?? []" [currentUserId]="currentUserId"></app-news-list>
   <mat-spinner style="margin:0 auto;" *ngIf="showLoader"></mat-spinner>
 </div>
