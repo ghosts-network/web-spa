@@ -1,16 +1,18 @@
 <mat-card *ngIf="user" class="user-card">
   <mat-card-header>
     <app-avatar mat-card-avatar *ngIf="editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}" (click)="fileInput.click()"></app-avatar>
-    <app-avatar mat-card-avatar *ngIf="!editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}" (click)="fileInput.click()"></app-avatar>
+    <app-avatar mat-card-avatar *ngIf="!editable" [image]="user.profilePicture" title="{{user.firstName}} {{user.lastName}}"></app-avatar>
     <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
     <mat-card-subtitle></mat-card-subtitle>
     <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
   </mat-card-header>
   <mat-card-content>
     <div class="user-action">
-      <button class="action-button" *ngIf="!editable" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
-      <button class="action-button" *ngIf="!editable" mat-stroked-button color="warn" (click)="removeFriend()">Remove friend</button>
+      <button class="action-button" *ngIf="relations?.actions.addToFriends" mat-stroked-button color="primary" (click)="addFriend()">Add friend</button>
+      <button class="action-button" *ngIf="relations?.actions.cancelOutgoingRequest" mat-stroked-button color="warn" (click)="cancelRequest()">Cancel Request</button>
     </div>
+
+    <mat-divider></mat-divider>
 
     <app-profiles-list
       *ngIf="relations?.friends?.length"
@@ -39,7 +41,7 @@
   </mat-card-content>
 </mat-card>
 <div class="news-feed">
-  <div class="news-form-wrapper">
+  <div *ngIf="editable" class="news-form-wrapper">
     <app-news-form (OnPublishClicked)="OnPublishClicked($event)"></app-news-form>
   </div>
   <app-news-list [news]="news.publications" [currentUserId]="currentUserId" (OnEdited)="onEdited($event)" (OnDeleted)="onDeleted($event)"></app-news-list>

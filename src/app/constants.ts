@@ -5,6 +5,7 @@ export const AppConstants = {
   CommentsPerPage: 10,
 
   RelationsOnProfilePage: 6,
+  RelationsPerPage: 20,
 
   Headers: {
     Cursor: 'x-cursor'

@@ -27,23 +27,19 @@ export class HomePage implements OnInit {
     });
   }
 
-  public loadPublications(): void {
-    this.showLoader = true;
-    this.newsFeedService.newsFeedGet(null, AppConstants.NewsPerPage, this.news.cursor,  'response').subscribe(resp => {
-        this.news.cursor = resp.headers.get(AppConstants.Headers.Cursor);
-        this.news.hasMore = resp.body.length === AppConstants.NewsPerPage;
-        this.news.publications = [].concat(this.news.publications, resp.body);
-        this.showLoader = false;
-    });
-  }
-
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const currentScroll = (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.offsetHeight;
     this.maxScroll = document.documentElement.scrollHeight;
 
     if (currentScroll === this.maxScroll && this.news.hasMore) {
-      this.loadPublications();
+      this.showLoader = true;
+      this.newsFeedService.newsFeedGet(null, AppConstants.NewsPerPage, this.news.cursor,  'response').subscribe(resp => {
+        this.news.cursor = resp.headers.get(AppConstants.Headers.Cursor);
+        this.news.hasMore = resp.body.length === AppConstants.NewsPerPage;
+        this.news.publications = [].concat(this.news.publications, resp.body);
+        this.showLoader = false;
+      });
     }
   }
 }

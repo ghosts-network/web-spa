@@ -16,19 +16,17 @@ export class FollowersResolver implements Resolve<FollowersList> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FollowersList> {
     const profileId = route.paramMap.get('id');
-    return this.relationsService.relationsUserIdFollowersGet(profileId, 0, 20, 'response')
-      .pipe(map(response => {
+    return this.relationsService.relationsUserIdFollowersGet(profileId, 0, AppConstants.RelationsPerPage)
+      .pipe(map(body => {
         return {
-          cursor: response.headers.get(AppConstants.Headers.Cursor),
-          hasMore: response.body.length === AppConstants.NewsPerPage,
-          followers: response.body
+          hasMore: body.length === AppConstants.RelationsPerPage,
+          followers: body
         };
       }));
   }
 }
 
 export interface FollowersList {
-  cursor: string | null;
   hasMore: boolean;
   followers: Array<UserInfo>;
 }

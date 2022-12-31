@@ -11,3 +11,13 @@
     font-weight: 400;
   }
 }
+
+.actions-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+
+  button {
+    margin: 15px 0 15px 15px;
+  }
+}

@@ -6,6 +6,8 @@ import { FriendsPage } from './friends.page';
 import {MatTableModule} from '@angular/material/table';
 import {AvatarModule} from '../../modules/shared/components/avatar/avatar.module';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import {MatTabsModule} from '@angular/material/tabs';
     FriendsRoutingModule,
     MatTableModule,
     AvatarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class FriendsModule { }

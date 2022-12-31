@@ -3,7 +3,7 @@ import {NewsFeedPublication, NewsFeedService, User, UsersService, RelationsServi
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {HttpEventType} from '@angular/common/http';
-import {PublicationsList, Relations} from '@gn/resolvers';
+import {PublicationsList, RelationsSummary} from '@gn/resolvers';
 import {AppConstants} from '@gn/constants';
 import {NewPublication} from '../../modules/shared/components/news-form/news-form.component';
 
@@ -18,7 +18,7 @@ export class ProfilePage implements OnInit {
   public AppConstants = AppConstants;
 
   public news: PublicationsList | null;
-  public relations: Relations | null;
+  public relations: RelationsSummary | null;
   public user: User;
 
   public showLoader = false;
@@ -86,8 +86,8 @@ export class ProfilePage implements OnInit {
       });
   }
 
-  removeFriend(): void {
-    this.relationsService.relationsFriendsFriendDelete(this.user.id)
+  cancelRequest(): void {
+    this.relationsService.relationsOutgoingRequestDelete(this.user.id)
       .subscribe(() => {
         // reload whole relations object
       });

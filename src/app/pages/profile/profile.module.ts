@@ -17,6 +17,7 @@ import { ProfilesListComponent } from './components/profiles-list/profiles-list.
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NewsFormModule} from '../../modules/shared/components/news-form/news-form.module';
 import {AvatarModule} from "../../modules/shared/components/avatar/avatar.module";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import {AvatarModule} from "../../modules/shared/components/avatar/avatar.module
     NewsListModule,
     MatProgressSpinnerModule,
     NewsFormModule,
-    AvatarModule
+    AvatarModule,
+    MatListModule
   ],
   providers: [
     ReactionsService

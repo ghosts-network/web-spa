@@ -6,18 +6,22 @@
 
   <mat-table [dataSource]="list.friends" class="mat-elevation-z8">
     <ng-container matColumnDef="info">
-      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
       <mat-cell *matCellDef="let friend">
-        <app-avatar [image]="friend.avatarUrl" [alt]="friend.fullName"></app-avatar>
+        <app-avatar [image]="friend.avatarUrl"></app-avatar>
         <span class="fullName">{{friend.fullName}}</span>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-      <mat-cell *matCellDef="let element"></mat-cell>
+      <mat-cell *matCellDef="let element">
+        <div class="actions-wrapper">
+          <button mat-mini-fab color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-cell>
     </ng-container>
 
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let user; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
