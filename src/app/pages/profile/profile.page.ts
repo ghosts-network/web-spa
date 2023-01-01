@@ -1,11 +1,12 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {NewsFeedPublication, NewsFeedService, User, UsersService, RelationsService} from '@gn/api';
+import {NewsFeedPublication, NewsFeedService, User, UsersService} from '@gn/api';
 import {ActivatedRoute} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {HttpEventType} from '@angular/common/http';
-import {PublicationsList, RelationsSummary} from '@gn/resolvers';
+import {PublicationsList} from '@gn/resolvers';
 import {AppConstants} from '@gn/constants';
 import {NewPublication} from '../../modules/shared/components/news-form/news-form.component';
+import {RelationsService, RelationsSummary} from '../../providers/services/api';
 
 @Component({
   selector: 'app-profile',
@@ -80,16 +81,22 @@ export class ProfilePage implements OnInit {
   }
 
   addFriend(): void {
-    this.relationsService.relationsFriendsToUserPost(this.user.id)
+    this.relationsService.sendFriendRequest(this.user.id)
       .subscribe(() => {
-        // reload whole relations object
+        this.relationsService.getSummary(this.user.id)
+          .subscribe(response => {
+            this.relations = response;
+          });
       });
   }
 
   cancelRequest(): void {
-    this.relationsService.relationsOutgoingRequestDelete(this.user.id)
+    this.relationsService.cancelOutgoingRequest(this.user.id)
       .subscribe(() => {
-        // reload whole relations object
+        this.relationsService.getSummary(this.user.id)
+          .subscribe(response => {
+            this.relations = response;
+          });
       });
   }
 
