@@ -16,12 +16,14 @@
 
     <app-profiles-list
       *ngIf="relations?.friends?.length"
+      [routerLink]="['/', user.id, 'friends']"
       [label]="'Friends'"
       [users]="relations?.friends ?? []">
     </app-profiles-list>
 
     <app-profiles-list
       *ngIf="relations?.followers?.length"
+      [routerLink]="['/', user.id, 'followers']"
       [label]="'Followers'"
       [users]="relations?.followers ?? []">
     </app-profiles-list>

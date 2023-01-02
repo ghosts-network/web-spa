@@ -3,14 +3,20 @@ h3 {
   margin: 0 0 5px 0;
 }
 
-a {
+.avatars-list a {
   position: relative;
   border: 2px solid #5a68ba;
   border-radius: 50%;
 }
 
 .label {
+  cursor: default;
+  color: black;
+}
 
+a.label {
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .list-wrapper {

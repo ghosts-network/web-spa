@@ -35,6 +35,18 @@ const routes: Routes = [
     resolve: { claims: AuthProfileResolver }
   },
   {
+    path: ':id/outgoing-requests',
+    loadChildren: () => import('./pages/outgoing-requests/outgoing-requests.module').then(m => m.OutgoingRequestsModule),
+    canLoad: [AuthGuardService],
+    resolve: { claims: AuthProfileResolver }
+  },
+  {
+    path: ':id/incoming-requests',
+    loadChildren: () => import('./pages/incoming-requests/incoming-requests.module').then(m => m.IncomingRequestsModule),
+    canLoad: [AuthGuardService],
+    resolve: { claims: AuthProfileResolver }
+  },
+  {
     path: '',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
     canLoad: [AuthGuardService],

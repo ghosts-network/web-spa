@@ -1,9 +1,11 @@
 <div class="list-wrapper">
-  <span class="label">{{ label.toLowerCase() }}</span>
+  <a *ngIf="routerLink" class="label" [routerLink]="routerLink">{{ label.toLowerCase() }}</a>
+  <span *ngIf="!routerLink" class="label">{{ label.toLowerCase() }}</span>
   <div class="avatars-list">
     <a *ngFor="let user of users; index as i" [routerLink]="['/', user.id]" style="left: {{i * 20}}px">
       <app-avatar [image]="user.avatarUrl" [title]="user.fullName" [size]="'sm'"></app-avatar>
     </a>
   </div>
 </div>
+
 <mat-divider></mat-divider>

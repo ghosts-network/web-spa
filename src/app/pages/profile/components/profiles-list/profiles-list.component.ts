@@ -14,4 +14,7 @@ export class ProfilesListComponent {
 
   @Input()
   public users: UserInfo[];
+
+  @Input()
+  public routerLink: any[] | string | null | undefined;
 }

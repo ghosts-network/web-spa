@@ -1,20 +1,21 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FriendsList} from '@gn/resolvers';
 import {AppConstants} from '@gn/constants';
+import {IncomingRequestsList} from '@gn/resolvers';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatTabChangeEvent} from '@angular/material/tabs';
-import {RelationsService, User, UserInfo} from '@gn/api';
+import {RelationsService, User} from '@gn/api';
 import {IDTokenClaims} from 'oidc-client';
 
 @Component({
-  selector: 'app-friends',
-  templateUrl: './friends.page.html',
-  styleUrls: ['./friends.page.scss']
+  selector: 'app-outgoing-requests',
+  templateUrl: './incoming-requests.page.html',
+  styleUrls: ['./incoming-requests.page.scss']
 })
-export class FriendsPage implements OnInit {
+export class IncomingRequestsPage implements OnInit {
+
   displayedColumns: string[] = ['info', 'actions'];
 
-  list: FriendsList | null;
+  list: IncomingRequestsList | null;
   user: User;
   claims: IDTokenClaims;
 
@@ -26,19 +27,19 @@ export class FriendsPage implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      this.list = data.friends;
+      this.list = data.incomingRequests;
       this.user = data.user;
       this.claims = data.claims;
     });
   }
 
   onTabChanged(event: MatTabChangeEvent): void {
-    if (event.index === 1) {
+    if (event.index === 0) {
+      this.router.navigate([this.user.id, 'friends']);
+    } else if (event.index === 1) {
       this.router.navigate([this.user.id, 'followers']);
-    } else if (event.index === 2) {
-      this.router.navigate([this.user.id, 'outgoing-requests']);
     } else {
-      this.router.navigate([this.user.id, 'incoming-requests']);
+      this.router.navigate([this.user.id, 'outgoing-requests']);
     }
   }
 
@@ -48,10 +49,10 @@ export class FriendsPage implements OnInit {
 
     if (currentScroll === document.documentElement.scrollHeight && this.list.hasMore) {
       this.showLoader = true;
-      this.relationsService.relationsUserIdFriendsGet(this.user.id, this.list.friends.length, AppConstants.RelationsPerPage)
+      this.relationsService.relationsFriendsIncomingRequestsGet(this.list.incomingRequests.length, AppConstants.RelationsPerPage)
         .subscribe(resp => {
           this.list.hasMore = resp.length === AppConstants.RelationsPerPage;
-          this.list.friends = [].concat(this.list.friends, resp);
+          this.list.incomingRequests = [].concat(this.list.incomingRequests, resp);
           this.showLoader = false;
         });
     }
@@ -61,13 +62,25 @@ export class FriendsPage implements OnInit {
     return this.claims.sub === this.user.id;
   }
 
-  deleteClick(friend: UserInfo): void {
-    this.relationsService.relationsFriendsFriendDelete(friend.id)
+  declineRequest(friend): void {
+    this.relationsService.relationsFriendsRequesterDeclinePost(friend.id)
       .subscribe(() => {
-        this.relationsService.relationsUserIdFriendsGet(this.user.id, 0, AppConstants.RelationsPerPage)
+        this.relationsService.relationsFriendsIncomingRequestsGet(0, AppConstants.RelationsPerPage)
           .subscribe(resp => {
             this.list.hasMore = resp.length === AppConstants.RelationsPerPage;
-            this.list.friends = resp;
+            this.list.incomingRequests = resp;
+            this.showLoader = false;
+          });
+      });
+  }
+
+  approveRequest(friend): void {
+    this.relationsService.relationsFriendsRequesterApprovePut(friend.id)
+      .subscribe(() => {
+        this.relationsService.relationsFriendsIncomingRequestsGet(0, AppConstants.RelationsPerPage)
+          .subscribe(resp => {
+            this.list.hasMore = resp.length === AppConstants.RelationsPerPage;
+            this.list.incomingRequests = resp;
             this.showLoader = false;
           });
       });

@@ -1,21 +1,21 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {AppConstants} from '@gn/constants';
-import {FollowersList} from '@gn/resolvers';
+import {OutgoingRequestsList} from '@gn/resolvers';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatTabChangeEvent} from '@angular/material/tabs';
-import {RelationsService, User} from '@gn/api';
-import {IDTokenClaims} from "oidc-client";
+import {RelationsService, User, UserInfo} from '@gn/api';
+import {IDTokenClaims} from 'oidc-client';
 
 @Component({
-  selector: 'app-followers',
-  templateUrl: './followers.page.html',
-  styleUrls: ['./followers.page.scss']
+  selector: 'app-outgoing-requests',
+  templateUrl: './outgoing-requests.page.html',
+  styleUrls: ['./outgoing-requests.page.scss']
 })
-export class FollowersPage implements OnInit {
+export class OutgoingRequestsPage implements OnInit {
 
   displayedColumns: string[] = ['info', 'actions'];
 
-  list: FollowersList | null;
+  list: OutgoingRequestsList | null;
   user: User;
   claims: IDTokenClaims;
 
@@ -27,7 +27,7 @@ export class FollowersPage implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      this.list = data.followers;
+      this.list = data.outgoingRequests;
       this.user = data.user;
       this.claims = data.claims;
     });
@@ -36,8 +36,8 @@ export class FollowersPage implements OnInit {
   onTabChanged(event: MatTabChangeEvent): void {
     if (event.index === 0) {
       this.router.navigate([this.user.id, 'friends']);
-    } else if (event.index === 2) {
-      this.router.navigate([this.user.id, 'outgoing-requests']);
+    } else if (event.index === 1) {
+      this.router.navigate([this.user.id, 'followers']);
     } else {
       this.router.navigate([this.user.id, 'incoming-requests']);
     }
@@ -49,10 +49,10 @@ export class FollowersPage implements OnInit {
 
     if (currentScroll === document.documentElement.scrollHeight && this.list.hasMore) {
       this.showLoader = true;
-      this.relationsService.relationsUserIdFriendsGet(this.user.id, this.list.followers.length, AppConstants.RelationsPerPage)
+      this.relationsService.relationsFriendsOutgoingRequestsGet(this.list.outgoingRequests.length, AppConstants.RelationsPerPage)
         .subscribe(resp => {
           this.list.hasMore = resp.length === AppConstants.RelationsPerPage;
-          this.list.followers = [].concat(this.list.followers, resp);
+          this.list.outgoingRequests = [].concat(this.list.outgoingRequests, resp);
           this.showLoader = false;
         });
     }
@@ -60,5 +60,17 @@ export class FollowersPage implements OnInit {
 
   public get editable(): boolean {
     return this.claims.sub === this.user.id;
+  }
+
+  cancelRequest(friend: UserInfo): void {
+    this.relationsService.relationsOutgoingRequestDelete(friend.id)
+      .subscribe(() => {
+        this.relationsService.relationsFriendsOutgoingRequestsGet(0, AppConstants.RelationsPerPage)
+          .subscribe(resp => {
+            this.list.hasMore = resp.length === AppConstants.RelationsPerPage;
+            this.list.outgoingRequests = resp;
+            this.showLoader = false;
+          });
+      });
   }
 }

@@ -14,6 +14,10 @@ export class RelationsService {
     return this.httpClient.get<RelationsSummary>(`${config.basePath}/relations/${userId}`);
   }
 
+  public removeFriendRequest(toUser: string): Observable<any> {
+    return this.httpClient.delete<any>(`${config.basePath}/relations/friends/${encodeURIComponent(toUser)}`, null);
+  }
+
   public sendFriendRequest(toUser: string): Observable<any> {
     return this.httpClient.post<any>(`${config.basePath}/relations/friends/${encodeURIComponent(toUser)}`, null);
   }

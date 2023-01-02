@@ -5,3 +5,5 @@ export * from './relations-resolver.service';
 export * from './news-feed-resolver.service';
 export * from './friends-resolver.service';
 export * from './followers-resolver.service';
+export * from './incoming-requests-resolver.service';
+export * from './outgoing-requests-resolver.service';

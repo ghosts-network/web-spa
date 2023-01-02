@@ -1,12 +1,12 @@
 <div class="list-wrapper">
-  <mat-tab-group [selectedIndex]="0" animationDuration="0ms" (selectedTabChange)="onTabChanged($event)">
+  <mat-tab-group [selectedIndex]="3" animationDuration="0ms" (selectedTabChange)="onTabChanged($event)" >
     <mat-tab label="Friends"></mat-tab>
     <mat-tab label="Followers"></mat-tab>
-    <mat-tab *ngIf="editable" label="Outgoing Requests"></mat-tab>
-    <mat-tab *ngIf="editable" label="Incoming Requests"></mat-tab>
+    <mat-tab label="Outgoing Requests"></mat-tab>
+    <mat-tab label="Incoming Requests"></mat-tab>
   </mat-tab-group>
 
-  <mat-table [dataSource]="list.friends" class="mat-elevation-z8">
+  <mat-table [dataSource]="list.incomingRequests" class="mat-elevation-z8">
     <ng-container matColumnDef="info">
       <mat-cell *matCellDef="let friend">
         <app-avatar [image]="friend.avatarUrl"></app-avatar>
@@ -17,8 +17,11 @@
     <ng-container matColumnDef="actions">
       <mat-cell *matCellDef="let friend">
         <div class="actions-wrapper">
-          <button *ngIf="editable" mat-mini-fab color="warn" (click)="deleteClick(friend)">
-            <mat-icon>delete</mat-icon>
+          <button *ngIf="editable" mat-mini-fab color="warn" (click)="declineRequest(friend)">
+            <mat-icon>close</mat-icon>
+          </button>
+          <button *ngIf="editable" mat-mini-fab color="primary" (click)="approveRequest(friend)">
+            <mat-icon>check</mat-icon>
           </button>
         </div>
       </mat-cell>
