@@ -30,12 +30,14 @@
 
     <app-profiles-list
       *ngIf="relations?.incomingRequests?.length"
+      [routerLink]="['/', user.id, 'incoming-requests']"
       [label]="'Incoming requests'"
       [users]="relations?.incomingRequests ?? []">
     </app-profiles-list>
 
     <app-profiles-list
       *ngIf="relations?.outgoingRequests?.length"
+      [routerLink]="['/', user.id, 'outgoing-requests']"
       [label]="'Outgoing requests'"
       [users]="relations?.outgoingRequests ?? []">
     </app-profiles-list>
