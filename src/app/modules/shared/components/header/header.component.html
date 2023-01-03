@@ -8,6 +8,11 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
+  <a mat-menu-item target="_blank" href="https://accounts.ghost-network.boberneprotiv.com/settings/secrets">
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </a>
+  <mat-divider></mat-divider>
   <button mat-menu-item (click)="logout()">
     <mat-icon>logout</mat-icon>
     <span>Logout</span>

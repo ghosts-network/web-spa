@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Profile} from "oidc-client";
-import {AuthService} from "../../../../providers/services/auth/auth.service";
+import {Component, OnInit} from '@angular/core';
+import {Profile} from 'oidc-client';
+import {AuthService} from '../../../../providers/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
   }
 
